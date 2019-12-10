@@ -22,9 +22,7 @@
         <div class="row">
             <div class="col s12">
                 <div class="card-panel teal">
-                    <span class="white-text center-align">
-                        <h2>Skriv inn registreringsnummeret (AA12345)</h2>
-                    </span>
+                    <h2 class="center-align white-text">Skriv inn registreringsnummeret (AA12345)</h2>
                 </div>
             </div>
         </div>
@@ -35,15 +33,15 @@
 
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="bilinformasjon" class="validate center-align inputfield" data-length="7" length="7"
-                        type="text" onKeyUp="checkValidText()" />
+                    <input id="bilinformasjon" class="validate center-align inputfield" data-length="7" type="text"
+                        onKeyUp="checkValidText()" />
                     <label for="bilinformasjon">Registreringsnummer</label>
                     <span id="feilMelding" class="helper-text" data-error="Feil lengde på registreringsnummer"></span>
                 </div>
                 <div class="col s12 center-align">
-                    <a id="submitButton" class="waves-effect waves-light btn-large center-align" type="submit"
-                        onclick="sendForm()" disabled="true">Hent
-                        informasjon</a>
+                    <button id="submitButton" class="waves-effect waves-light btn-large center-align" type="submit"
+                        onclick="sendForm()" disabled>Hent
+                        informasjon</button>
                 </div>
             </div>
 
