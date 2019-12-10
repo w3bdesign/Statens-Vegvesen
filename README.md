@@ -1,6 +1,8 @@
-# Displaying vehicle information from Statens Vegvesen (Norway)
+# Vehicle information from Statens Vegvesen (Norway)
 
  Fetching vehicle information from https://www.vegvesen.no and displaying it.
+ 
+ Example: https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/AA12345 
  
  ## Features
  
