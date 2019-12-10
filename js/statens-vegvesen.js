@@ -1,6 +1,6 @@
 function checkValidText() {
-  var bilInformasjon = document.getElementById("bilinformasjon").value;
-  var letters = /[A-Z]{2}[0-9]{5}/gi;
+  const bilInformasjon = document.getElementById("bilinformasjon").value;
+  const letters = /[A-Z]{2}[0-9]{5}/gi;
   if (
     bilInformasjon.match(letters) &&
     bilInformasjon &&
@@ -15,10 +15,9 @@ function checkValidText() {
 function sendForm() {
   // We utilize http://www.whateverorigin.org to get around CORS.
   // An alternate solution could be to create our own proxy in Express
-  var bilInformasjon = document.getElementById("bilinformasjon").value;
-  var regNummer = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${bilInformasjon}`;
-  //document.getElementById("tableElement").classList.remove("scale-out");
-
+  const bilInformasjon = document.getElementById("bilinformasjon").value;
+  const regNummer = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${bilInformasjon}`;
+  
   $.getJSON(
     "http://www.whateverorigin.org/get?url=" +
       encodeURIComponent(regNummer) +
@@ -27,7 +26,6 @@ function sendForm() {
       // We receive a JSON object and need to parse it as an object
       var jsonParsedData = JSON.parse(data.contents);
       // Display the table for displaying data
-
       document.getElementById(
         "kjenne"
       ).innerHTML = `<td>${jsonParsedData.kjennemerke}</td>`;
