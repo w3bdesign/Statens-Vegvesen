@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bilinformasjon - Statens Vegvesen</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <style>
+        .validate.center-align.inputfield {
+            font-size: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel teal">
+                    <span class="white-text center-align">
+                        <h2>Skriv inn registreringsnummeret (AA12345)</h2>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="bilinformasjon" class="validate center-align inputfield" data-length="7" length="7"
+                        type="text" onKeyUp="checkValidText()" />
+                    <label for="bilinformasjon">Registreringsnummer</label>
+                    <span id="feilMelding" class="helper-text" data-error="Feil lengde på registreringsnummer"></span>
+                </div>
+                <div class="col s12 center-align">
+                    <a id="submitButton" class="waves-effect waves-light btn-large center-align" type="submit"
+                        onclick="sendForm()" disabled="true">Hent
+                        informasjon</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="tableElement" class="container scale-transition scale-out">
+        <table>
+            <thead>
+                <tr>
+                    <th>Kjennemerke</th>
+                    <th>Førstegangsregistrering Norge</th>
+                    <th>Førstegangsregistrering eier</th>
+                    <th>Siste EU kontroll</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr id="trInfo">
+                    <td id="kjenne">&nbsp;</td>
+                    <td id="forstenorge">&nbsp;</td>
+                    <td id="forsteeier">&nbsp;</td>
+                    <td id="periodiskKjoretoykontroll">&nbsp;</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/statens-vegvesen.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+        // This is the only part that is jQuery
+        $(document).ready(function () {
+            var textNeedCount = document.querySelectorAll('.validate.center-align.inputfield');
+            M.CharacterCounter.init(textNeedCount);
+        });
+    </script>
+
+</body>
+
+</html>
