@@ -17,7 +17,7 @@ function sendForm() {
   // An alternate solution could be to create our own proxy in Express
   const bilInformasjon = document.getElementById("bilinformasjon").value;
   const regNummer = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${bilInformasjon}`;
-  
+
   $.getJSON(
     "http://www.whateverorigin.org/get?url=" +
       encodeURIComponent(regNummer) +
@@ -40,9 +40,15 @@ function sendForm() {
       ).innerHTML = `<td>${jsonParsedData.periodiskKjoretoykontroll.sistKontrollert}</td>`;
     }
   )
-    .fail(function() {
+    /*.fail(function() {
       document.getElementById("feilMelding").innerHTML =
-        "En feil har oppstått under henting av informasjon</h2>";
+        "En feil har oppstått under henting av informasjon";
+    })*/
+
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      document.getElementById("feilMelding").innerHTML =
+        "En feil har oppstått under henting av informasjon. Feilmelding: " +
+        textStatus;
     })
     .done(function() {
       document.getElementById("tableElement").classList.remove("scale-out");
