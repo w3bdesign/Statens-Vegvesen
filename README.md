@@ -1,5 +1,7 @@
 # Vehicle information from Statens Vegvesen (Norway)
 
+Note: This is currently not working on mobile. I am working on this issue.
+
 Fetching vehicle information from the REST API on https://www.vegvesen.no and displaying it.
 
 Example: https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/AA12345
