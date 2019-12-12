@@ -13,44 +13,45 @@ function checkValidText() {
 }
 
 function sendForm() {
-  // We utilize http://www.whateverorigin.org to get around CORS.
-  // An alternate solution could be to create our own proxy in Express
+  // https://jsonplaceholder.typicode.com/posts
   const bilInformasjon = document.getElementById("bilinformasjon").value;
-  const regNummer = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${bilInformasjon}`;
+  //const regNummer = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${bilInformasjon}`;
+  //const regNummer = `http://localhost:8080/bil/${bilInformasjon}`;
 
-  $.getJSON(
-    "http://www.whateverorigin.org/get?url=" +
-      encodeURIComponent(regNummer) +
-      "&callback=?",
-    function(data) {
-      // We receive a JSON object and need to parse it as an object
-      var jsonParsedData = JSON.parse(data.contents);
-      // Display the table for displaying data
+  const regNummer = `https://statens-vegvesen-express.herokuapp.com/bil/${bilInformasjon}`;
+
+  // Show loading spinner
+  document.getElementById("loadingSpinner").classList.remove("hide");
+
+  fetch(regNummer)
+    .then(async response => {
+      const text = await response.text();
+      const informasjonBil = JSON.parse(text);
+      // Hide loading spinner
+      document.getElementById("loadingSpinner").classList.add("hide");
+      document.getElementById("tableElement").classList.remove("scale-out");
+
       document.getElementById(
         "kjenne"
-      ).innerHTML = `<td>${jsonParsedData.kjennemerke}</td>`;
+      ).innerHTML = `<td>${informasjonBil.kjennemerke}</td>`;
       document.getElementById(
         "forstenorge"
-      ).innerHTML = `<td>${jsonParsedData.registrering.forstegangsregistrering}</td>`;
+      ).innerHTML = `<td>${informasjonBil.registrering.forstegangsregistrering}</td>`;
       document.getElementById(
         "forsteeier"
-      ).innerHTML = `<td>${jsonParsedData.registrering.forstegangsregistreringEier}</td>`;
+      ).innerHTML = `<td>${informasjonBil.registrering.forstegangsregistreringEier}</td>`;
       document.getElementById(
         "periodiskKjoretoykontroll"
-      ).innerHTML = `<td>${jsonParsedData.periodiskKjoretoykontroll.sistKontrollert}</td>`;
-    }
-  )
-    /*.fail(function() {
-      document.getElementById("feilMelding").innerHTML =
-        "En feil har oppstått under henting av informasjon";
-    })*/
-
-    .fail(function(jqXHR, textStatus, errorThrown) {
-      document.getElementById("feilMelding").innerHTML =
-        "En feil har oppstått under henting av informasjon. Feilmelding: " +
-        textStatus;
+      ).innerHTML = `<td>${informasjonBil.periodiskKjoretoykontroll.sistKontrollert}</td>`;
     })
-    .done(function() {
-      document.getElementById("tableElement").classList.remove("scale-out");
+    .catch(function(error) {
+      // If there is any error you will catch them here
+      // Hide loading spinner
+      document.getElementById("loadingSpinner").classList.add("hide");
+      document.getElementById(
+        "feilMelding"
+      ).innerHTML = `En feil har oppstått under henting av informasjon.
+        <br/>Feilmelding: 
+        ${error}`;
     });
 }
