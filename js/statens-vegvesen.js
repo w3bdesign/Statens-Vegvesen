@@ -1,6 +1,8 @@
 function sendForm() {
   const bilInformasjon = document.getElementById("bilinformasjon").value;
   const regNummer = `https://statens-vegvesen-express.herokuapp.com/bil/${bilInformasjon}`;
+  // Hide error message when try to fetch a new number
+  document.getElementById("feilMelding").innerHTML = ``;
   // Show loading spinner
   document.getElementById("loadingSpinner").classList.remove("hide");
   fetch(regNummer)
