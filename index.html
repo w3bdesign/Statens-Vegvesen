@@ -19,7 +19,7 @@
 
   <body>
     <!-- Start Div for entering registration number -->
-    <div class="container section">
+    <div id="usingie" class="container section">
       <div class="row">
         <div class="col s12 ">
           <div class="card-panel teal">
@@ -40,7 +40,7 @@
     <!-- End Div for entering registration number -->
 
     <!-- Start Div for input field -->
-    <div class="container">
+    <div id="hideifie" class="container">
       <div class="row">
         <div class="row">
           <div class="input-field col s12">
@@ -130,11 +130,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/statens-vegvesen.js"></script>
     <script src="js/checkvalidtext.js"></script>
+    <script src="js/checkifie11.js"></script>
     <script>
       // This is the only part that is jQuery
       // We could instead do document.addEventListener("DOMContentLoaded") but we need jQuery anyways
       $(document).ready(function() {
         $(".validate.center-align.inputfield").characterCounter();
+        // If using IE11, display a warning
+        checkIfIE();
       });
     </script>
   </body>
