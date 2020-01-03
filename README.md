@@ -12,7 +12,7 @@ You can find the source code for it on https://github.com/w3bdesign/statens-vegv
 
 ## Features
 
-- Javascript
+- Vanilla Javascript
 - jQuery
 - Materialize CSS framework
 - Responsive design
