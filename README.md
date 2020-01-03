@@ -20,3 +20,4 @@ You can find the source code for it on https://github.com/w3bdesign/statens-vegv
 - Input validation
 - Animations
 - Loading spinner
+- Check if user uses Internet Explorer and display warning
