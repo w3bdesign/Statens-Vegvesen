@@ -21,3 +21,7 @@ You can find the source code for it on https://github.com/w3bdesign/statens-vegv
 - Animations
 - Loading spinner
 - Check if user uses Internet Explorer and display warning
+
+## TODO
+
+- Utilize Docker for deployment?
