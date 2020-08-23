@@ -1,0 +1,25 @@
+{
+  "name": "statensvegvesen",
+  "version": "1.0.0",
+  "description": "Fetching vehicle information from the REST API on https://www.vegvesen.no and displaying it.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html --global index",
+    "build": "parcel build index.html --global index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w3bdesign/Statens-Vegvesen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/w3bdesign/Statens-Vegvesen/issues"
+  },
+  "homepage": "https://github.com/w3bdesign/Statens-Vegvesen#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^4.0.2"
+  }
+}
