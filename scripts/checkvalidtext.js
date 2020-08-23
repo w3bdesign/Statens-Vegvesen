@@ -1,4 +1,4 @@
-function checkValidText() {
+export function checkValidText() {
   const bilInformasjon = document.getElementById('bilinformasjon').value;
   const letters = /[A-Z]{2}[0-9]{5}/gi;
   if (

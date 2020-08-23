@@ -18,6 +18,10 @@
   </head>
 
   <body>
+ 
+
+
+
     <!-- Start Div for entering registration number -->
     <div id="usingie" class="container section">
       <div class="row">
@@ -49,7 +53,7 @@
               class="validate center-align inputfield"
               data-length="7"
               type="text"
-              onKeyUp="checkValidText()"
+              onKeyUp="index.checkValidText()"
             />
             <label for="bilinformasjon">Registreringsnummer</label>
             <span
@@ -64,7 +68,7 @@
               id="submitButton"
               class="waves-effect waves-light btn-large center-align"
               type="submit"
-              onclick="sendForm()"
+              onclick="index.sendForm()"
               disabled
             >
               Hent informasjon
@@ -119,19 +123,14 @@
         </tbody>
       </table>
     </div>
-    <!-- End Div information table  -->    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="ts/statens-vegvesen.ts"></script>
-    <script src="ts/checkvalidtext.ts"></script>
-    <script src="ts/checkifie11.ts"></script>
-    <script>
-      // This is the only part that is jQuery
-      // We could instead do document.addEventListener("DOMContentLoaded") but we need jQuery anyways
-      $(document).ready(function () {
-        $('.validate.center-align.inputfield').characterCounter();
-        // If using IE11, display a warning
-        checkIfIE();
-      });
-    </script>
+    <!-- End Div information table  -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+      defer
+    ></script>
+    <script src="./scripts/statens-vegvesen.js" defer></script>
+    <script src="./scripts/checkvalidtext.js" defer></script>
+    <script src="./scripts/checkifie11.js" defer></script>
+
   </body>
 </html>
