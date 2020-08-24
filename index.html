@@ -18,10 +18,6 @@
   </head>
 
   <body>
- 
-
-
-
     <!-- Start Div for entering registration number -->
     <div id="usingie" class="container section">
       <div class="row">
@@ -52,8 +48,7 @@
               id="bilinformasjon"
               class="validate center-align inputfield"
               data-length="7"
-              type="text"
-              onKeyUp="index.checkValidText()"
+              type="text"           
             />
             <label for="bilinformasjon">Registreringsnummer</label>
             <span
@@ -68,7 +63,7 @@
               id="submitButton"
               class="waves-effect waves-light btn-large center-align"
               type="submit"
-              onclick="index.sendForm()"
+              onclick="globalWindow.sendForm()"
               disabled
             >
               Hent informasjon
@@ -128,9 +123,12 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
       defer
     ></script>
-    <script src="./scripts/statens-vegvesen.js" defer></script>
-    <script src="./scripts/checkvalidtext.js" defer></script>
-    <script src="./scripts/checkifie11.js" defer></script>
+   
+    <!--<script src="./scripts/statens-vegvesen.js"></script> -->
+    <!-- <script src="./scripts/checkvalidtext.js"></script> -->
+     <!-- <script src="./scripts/checkifie11.js"></script> -->
+    
+     <script src="./scripts/main.ts" ></script>
 
   </body>
 </html>
