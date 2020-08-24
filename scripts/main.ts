@@ -9,8 +9,7 @@ class MainClass {
   #textInput = <HTMLInputElement>(
     window.document.getElementById('bilinformasjon')
   );
-  #textForm = <HTMLFormElement>window.document.getElementById('regnrform');
-  #submitButton = window.document.getElementById('submitButton');
+  #textForm = window.document.getElementById('regnrform');
 
   constructor() {
     this.initialize();
@@ -22,18 +21,13 @@ class MainClass {
 
   private addEventHandlers(): void {
     this.#textInput!.addEventListener('input', CheckValidText.checkValidText);
+    this.#textForm!.addEventListener('submit', SendForm.sendForm);
 
-    //this.#textForm!.addEventListener('submit', SendForm.sendForm);
-    this.#textForm!.addEventListener('submit', (e) => {
+    /*this.#textForm!.addEventListener('submit', (e) => {
       alert('submitting');
-      e.preventDefault();
-    });
-
-    this.#submitButton!.addEventListener('click', (e) => {
-      console.log('Button clicked');
       console.log(this.#textInput!.value);
       e.preventDefault();
-    });
+    });*/
   }
 }
 

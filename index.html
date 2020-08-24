@@ -44,33 +44,30 @@
       <div class="row">
         <div class="row">
           <div class="input-field col s12">
-            <form id="regnrform" >
-            <input
-              id="bilinformasjon"
-              class="validate center-align inputfield"
-              data-length="7"
-              type="text"           
-            />
+            <form id="regnrform">
+              <input
+                id="bilinformasjon"
+                class="validate center-align inputfield"
+                type="text"
+              />              
+              <div class="col s12 center-align">
+                <br />               
+                <button
+                  id="submitButton"
+                  class="waves-effect waves-light btn-large center-align"
+                  type="submit"
+                  disabled
+                >
+                  Hent informasjon
+                </button>
+              </div>
+            </form>
             <label for="bilinformasjon">Registreringsnummer</label>
             <span
               id="feilMelding"
               class="helper-text"
               data-error="Feil lengde på registreringsnummer"
             ></span>
-          </div>
-          <div class="col s12 center-align">
-            <!-- Button for submitting -->
-            <input type="submit" value="Send meg"/>
-            <button
-              id="submitButton"
-              class="waves-effect waves-light btn-large center-align"
-              type="submit"             
-              disabled
-            >
-              Hent informasjon
-            </button>
-
-          </form>
           </div>
         </div>
       </div>
@@ -126,12 +123,11 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
       defer
     ></script>
-   
+
     <!--<script src="./scripts/statens-vegvesen.js"></script> -->
     <!-- <script src="./scripts/checkvalidtext.js"></script> -->
-     <!-- <script src="./scripts/checkifie11.js"></script> -->
-    
-     <script src="./scripts/main.ts" ></script>
+    <!-- <script src="./scripts/checkifie11.js"></script> -->
 
+    <script src="./scripts/main.ts"></script>
   </body>
 </html>
