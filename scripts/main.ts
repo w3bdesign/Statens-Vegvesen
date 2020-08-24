@@ -6,8 +6,11 @@ import CheckValidText from './classes/CheckValidText';
 import SendForm from './classes/SendForm';
 
 class MainClass {
-  #textInput = window.document.getElementById('bilinformasjon');
-  #textForm = window.document.getElementById('regnrform');
+  #textInput = <HTMLInputElement>(
+    window.document.getElementById('bilinformasjon')
+  );
+  #textForm = <HTMLFormElement>window.document.getElementById('regnrform');
+  #submitButton = window.document.getElementById('submitButton');
 
   constructor() {
     this.initialize();
@@ -22,8 +25,14 @@ class MainClass {
 
     //this.#textForm!.addEventListener('submit', SendForm.sendForm);
     this.#textForm!.addEventListener('submit', (e) => {
-      e.preventDefault()
-      alert('xxxxxxxxx');
+      alert('submitting');
+      e.preventDefault();
+    });
+
+    this.#submitButton!.addEventListener('click', (e) => {
+      console.log('Button clicked');
+      console.log(this.#textInput!.value);
+      e.preventDefault();
     });
   }
 }
