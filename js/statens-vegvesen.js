@@ -1,4 +1,4 @@
-export function sendForm() {
+function sendForm() {
   const bilInformasjon = document.getElementById('bilinformasjon').value;
   const regNummer = `https://statens-vegvesen-express.vercel.app/bil/${bilInformasjon}`;
   // Hide error message when try to fetch a new number
