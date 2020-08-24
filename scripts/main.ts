@@ -2,10 +2,12 @@
 import { checkValidText } from './checkvalidtext';
 import { isIE, checkIfIE } from './checkifie11';*/
 
-import CheckValidText from "./classes/CheckValidText"
+import CheckValidText from './classes/CheckValidText';
+import SendForm from './classes/SendForm';
 
-class Main {
+class MainClass {
   #textInput = window.document.getElementById('bilinformasjon');
+  #textForm = window.document.getElementById('regnrform');
 
   constructor() {
     this.initialize();
@@ -16,24 +18,14 @@ class Main {
   }
 
   private addEventHandlers(): void {
-    this.#textInput!.addEventListener('input', this.checkValidText);
-  }
+    this.#textInput!.addEventListener('input', CheckValidText.checkValidText);
 
-  public checkValidText(event: Event): void {
-    const bilInformasjon = (<HTMLInputElement>event.target).value;
-    const submitButton = window.document.getElementById('submitButton');
-    const letters = /[A-Z]{2}[0-9]{5}/gi;
-
-    if (
-      bilInformasjon.match(letters) &&
-      bilInformasjon &&
-      bilInformasjon.length === 7
-    ) {
-      submitButton!.removeAttribute('disabled');
-    } else {
-      submitButton!.setAttribute('disabled', 'true');
-    }
+    //this.#textForm!.addEventListener('submit', SendForm.sendForm);
+    this.#textForm!.addEventListener('submit', (e) => {
+      e.preventDefault()
+      alert('xxxxxxxxx');
+    });
   }
 }
 
-const Test = new ACheckValidText();
+const Main = new MainClass();

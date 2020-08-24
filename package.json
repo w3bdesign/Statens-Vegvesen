@@ -4,8 +4,8 @@
   "description": "Fetching vehicle information from the REST API on https://www.vegvesen.no and displaying it.",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel index.html --global globalWindow",
-    "build": "parcel build index.html --global globalWindow"
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
