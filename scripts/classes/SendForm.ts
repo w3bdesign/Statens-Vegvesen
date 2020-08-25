@@ -1,12 +1,13 @@
 export default class SendForm {
   static bilInformasjon: string;
   static regNummer: string;
+  static remoteBilData: object;
 
   constructor() {
     SendForm.bilInformasjon = (<HTMLInputElement>(
       window.document.getElementById('bilinformasjon')
     )).value;
-    SendForm.regNummer = `https://statens-vegvesen-express.vercel.appx/bil/${SendForm.bilInformasjon}`;
+    SendForm.regNummer = `https://statens-vegvesen-express.vercel.app/bil/${SendForm.bilInformasjon}`;
   }
 
   public sendForm(e: Event) {
@@ -21,26 +22,34 @@ export default class SendForm {
   }
 
   static fetchRemoteData() {
+    // ax58675 = Avregistrert
+
     fetch(SendForm.regNummer)
       .then(async (response) => {
-        const text = await response.text();
-        const informasjonBil = JSON.parse(text);
+        const informasjonBil = await response.text();
+        SendForm.remoteBilData = JSON.parse(informasjonBil);
+        SendForm.processRemoteData();
 
         // We have an error
-        if (informasjonBil.melding) {
+        /*if (informasjonBil.melding) {
           window.document.getElementById('feilMelding')!.innerHTML =
             informasjonBil.melding;
           window.document
             .getElementById('loadingSpinner')!
             .classList.add('hide');
-        }
+        }*/
       })
-      .catch(function (error) {
+      .catch(function () {
         window.document.getElementById('loadingSpinner')!.classList.add('hide');
-
         window.document.getElementById('feilMelding')!.innerHTML =
           'En feil har oppstått, vennligst prøv igjen.';
       });
+  }
+
+  static processRemoteData() {
+    // TODO Gjør noe med data vi har hentet
+    console.log('processRemoteData: ');
+    console.log(SendForm.remoteBilData);
   }
 
   static setDefaults(informasjonBil: any): any {
