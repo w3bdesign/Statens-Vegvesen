@@ -1,7 +1,7 @@
 export default class SendForm {
   static bilInformasjon: string;
   static regNummer: string;
-  static remoteBilData: object;
+  static remoteBilData: any;
 
   constructor() {
     SendForm.bilInformasjon = (<HTMLInputElement>(
@@ -29,15 +29,6 @@ export default class SendForm {
         const informasjonBil = await response.text();
         SendForm.remoteBilData = JSON.parse(informasjonBil);
         SendForm.processRemoteData();
-
-        // We have an error
-        /*if (informasjonBil.melding) {
-          window.document.getElementById('feilMelding')!.innerHTML =
-            informasjonBil.melding;
-          window.document
-            .getElementById('loadingSpinner')!
-            .classList.add('hide');
-        }*/
       })
       .catch(function () {
         window.document.getElementById('loadingSpinner')!.classList.add('hide');
@@ -50,6 +41,13 @@ export default class SendForm {
     // TODO Gjør noe med data vi har hentet
     console.log('processRemoteData: ');
     console.log(SendForm.remoteBilData);
+    SendForm.remoteBilData.melding && SendForm.displayErrorFromAPI();
+  }
+
+  static displayErrorFromAPI() {
+    window.document.getElementById('feilMelding')!.innerHTML =
+      SendForm.remoteBilData.melding;
+    window.document.getElementById('loadingSpinner')!.classList.add('hide');
   }
 
   static setDefaults(informasjonBil: any): any {
