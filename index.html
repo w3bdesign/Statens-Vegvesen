@@ -49,9 +49,14 @@
                 id="bilinformasjon"
                 class="validate center-align inputfield"
                 type="text"
-              />              
+              />
               <div class="col s12 center-align">
-                <br />               
+                <span
+                  id="feilMelding"
+                  class="helper-text"
+                  data-error="Feil lengde på registreringsnummer"
+                ></span>
+                <br />
                 <button
                   id="submitButton"
                   class="waves-effect waves-light btn-large center-align"
@@ -63,11 +68,6 @@
               </div>
             </form>
             <label for="bilinformasjon">Registreringsnummer</label>
-            <span
-              id="feilMelding"
-              class="helper-text"
-              data-error="Feil lengde på registreringsnummer"
-            ></span>
           </div>
         </div>
       </div>

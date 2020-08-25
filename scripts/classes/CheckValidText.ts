@@ -1,7 +1,5 @@
 export default class CheckValidText {
   public checkValidText(event: Event) {
-    console.log('Checking text ...');
-
     const bilInformasjon = (<HTMLInputElement>event.target).value;
     const submitButton = window.document.getElementById('submitButton');
     const letters = /[A-Z]{2}[0-9]{5}/gi;
