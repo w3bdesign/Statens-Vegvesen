@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "target": "es2015",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -11,8 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    //"isolatedModules": true,
+    "resolveJsonModule": true,    
     "noEmit": true,
     "jsx": "react"
   },

@@ -4,8 +4,6 @@ export default class CheckValidText {
     const submitButton = window.document.getElementById('submitButton');
     const letters = /[A-Z]{2}[0-9]{5}/gi;
 
-    console.log("Checking letters ...")
-
     if (
       bilInformasjon.match(letters) &&
       bilInformasjon &&

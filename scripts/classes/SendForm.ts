@@ -1,11 +1,19 @@
 export default class SendForm {
-  static sendForm(e: Event): void {
-    const bilInformasjon = (<HTMLInputElement>(
-      window.document.getElementById('bilinformasjon')
-    )).value;
-    const regNummer = `https://statens-vegvesen-express.vercel.app/bil/${bilInformasjon}`;
-    console.log(bilInformasjon);
-    alert('Form submit!');
+  #bilInformasjon = (<HTMLInputElement>(
+    window.document.getElementById('bilinformasjon')
+  )).value;
+  #regNummer = `https://statens-vegvesen-express.vercel.app/bil/${
+    this.#bilInformasjon
+  }`;
+
+  static sendForm(e: Event) {
     e.preventDefault();
+    this.showLoadingSpinner();
+    console.log('Fetching ...');
+  }
+
+  static showLoadingSpinner() {
+    // Show loading spinner
+    window.document.getElementById('loadingSpinner')!.classList.remove('hide');
   }
 }
