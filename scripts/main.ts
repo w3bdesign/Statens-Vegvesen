@@ -1,7 +1,3 @@
-/*import { sendForm } from './statens-vegvesen';
-import { checkValidText } from './checkvalidtext';
-import { isIE, checkIfIE } from './checkifie11';*/
-
 import CheckValidText from './classes/CheckValidText';
 import SendForm from './classes/SendForm';
 
@@ -15,19 +11,19 @@ class MainClass {
     this.initialize();
   }
 
-  private initialize(): void {
-    this.addEventHandlers();
+  private initialize() {
+    this.addEventHandlers();   
   }
 
-  private addEventHandlers(): void {
-    this.#textInput!.addEventListener('input', CheckValidText.checkValidText);
-    this.#textForm!.addEventListener('submit', SendForm.sendForm);
+  private addEventHandlers() {
+    const formSend = new SendForm()
+    const checkValidText = new CheckValidText()
 
-    /*this.#textForm!.addEventListener('submit', (e) => {
-      alert('submitting');
-      console.log(this.#textInput!.value);
-      e.preventDefault();
-    });*/
+    console.log(formSend)
+
+    this.#textInput!.addEventListener('input', checkValidText.checkValidText);
+    this.#textForm!.addEventListener('submit', formSend.sendForm);
+    
   }
 }
 
