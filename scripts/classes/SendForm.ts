@@ -10,8 +10,8 @@ export default class SendForm {
     this.#regNummer = `https://statens-vegvesen-express.vercel.app/bil/${this.#bilInformasjon}`;
   }
 
-  public sendForm(e: Event) {
-    e.preventDefault();
+  public sendForm(event: Event) {
+    event.preventDefault();
     this.showLoadingSpinner();
     this.fetchRemoteData();
   }
