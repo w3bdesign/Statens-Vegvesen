@@ -1,34 +1,34 @@
-export default class SendForm {
-  #bilInformasjon: string;
-  #regNummer: string;
-  #remoteBilData: any;
+class SendForm {
+  static bilInformasjon: string;
+  static regNummer: string;
+  static remoteBilData: any;
 
   constructor() {
-    this.#bilInformasjon = (<HTMLInputElement>(
+    SendForm.bilInformasjon = (<HTMLInputElement>(
       window.document.getElementById('bilinformasjon')
     )).value;
-    this.#regNummer = `https://statens-vegvesen-express.vercel.app/bil/${this.#bilInformasjon}`;
+    SendForm.regNummer = `https://statens-vegvesen-express.vercel.app/bil/${SendForm.bilInformasjon}`;
   }
 
   public sendForm(e: Event) {
     e.preventDefault();
-    this.showLoadingSpinner();
-    this.fetchRemoteData();
+    SendForm.showLoadingSpinner();
+    SendForm.fetchRemoteData();
   }
 
-  private showLoadingSpinner() {
+  static showLoadingSpinner() {
     // Show loading spinner
     window.document.getElementById('loadingSpinner')!.classList.remove('hide');
   }
 
-  private fetchRemoteData() {
+  static fetchRemoteData() {
     // ax58675 = Avregistrert
 
-    fetch(this.#regNummer)
+    fetch(SendForm.regNummer)
       .then(async (response) => {
         const informasjonBil = await response.text();
-        this.#remoteBilData = JSON.parse(informasjonBil);
-        this.processRemoteData();
+        SendForm.remoteBilData = JSON.parse(informasjonBil);
+        SendForm.processRemoteData();
       })
       .catch(function () {
         window.document.getElementById('loadingSpinner')!.classList.add('hide');
@@ -37,20 +37,20 @@ export default class SendForm {
       });
   }
 
-  private processRemoteData() {
+  static processRemoteData() {
     // TODO Gjør noe med data vi har hentet
     console.log('processRemoteData: ');
-    console.log(this.#remoteBilData);
-    this.#remoteBilData.melding && this.displayErrorFromAPI();
+    console.log(SendForm.remoteBilData);
+    SendForm.remoteBilData.melding && SendForm.displayErrorFromAPI();
   }
 
-  private displayErrorFromAPI() {
+  static displayErrorFromAPI() {
     window.document.getElementById('feilMelding')!.innerHTML =
-      this.#remoteBilData.melding;
+      SendForm.remoteBilData.melding;
     window.document.getElementById('loadingSpinner')!.classList.add('hide');
   }
 
-  private setDefaults(informasjonBil: any): any {
+  static setDefaults(informasjonBil: any): any {
     // TODO Gjør noe mer her
     if (informasjonBil === undefined) {
       informasjonBil = '(Ingen informasjon om kjøretøy er registrert)';
