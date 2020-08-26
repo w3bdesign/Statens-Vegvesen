@@ -3,7 +3,7 @@ import classProcessInputForm from './classes/ProcessInputForm/classProcessInputF
 
 class MainClass {
   /**
-   * Private fields for the input and form. 
+   * Private fields for the input and form.
    * Necessary to add the required event handlers
    */
   #textInput = window.document.getElementById('bilinformasjon');
@@ -15,7 +15,7 @@ class MainClass {
 
   /**
    * Initialize the class and add the event handlers
-   * @returns void     
+   * @returns void
    */
   private initialize() {
     this.addEventHandlers();

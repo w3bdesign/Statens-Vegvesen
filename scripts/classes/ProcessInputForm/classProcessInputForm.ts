@@ -1,5 +1,3 @@
-import classFetchRemoteData from './classFetchRemoteData';
-
 type TStatensVegvesenBilData = {
   melding: string;
   kjennemerke: string;
@@ -13,8 +11,7 @@ type TStatensVegvesenBilData = {
 export default class classProcessInputForm {
   private static bilInformasjon: string;
   private static regNummer: string;
-  //private static remoteBilData: TStatensVegvesenBilData;
-  private static remoteBilData: any;
+  private static remoteBilData: TStatensVegvesenBilData;
 
   constructor() {
     // Assign variables to an empty string
@@ -30,19 +27,6 @@ export default class classProcessInputForm {
     event.preventDefault();
     classProcessInputForm.showLoadingSpinner();
     classProcessInputForm.fetchRemoteData();
-
-    /*classFetchRemoteData.fetchRemoteData().then(async (response) => {
-      await console.log(response);
-     
-    });*/
-
-    /*classProcessInputForm.remoteBilData = await classFetchRemoteData.fetchRemoteData();
-
-    if (classProcessInputForm.remoteBilData) {
-      classProcessInputForm.processRemoteData();
-    }*/
-
-    //classProcessInputForm.fetchRemoteData();
   }
 
   /**
@@ -74,7 +58,6 @@ export default class classProcessInputForm {
         this.processRemoteData();
       })
       .catch(function (error) {
-        console.log(error.toString());
         classProcessInputForm.hideDataTable();
         window.document.getElementById('loadingSpinner')!.classList.add('hide');
         window.document.getElementById('feilMelding')!.innerHTML =
