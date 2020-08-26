@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "ES2017"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
