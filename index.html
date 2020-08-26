@@ -14,6 +14,11 @@
       .validate.center-align.inputfield {
         font-size: 30px;
       }
+
+      #feilMelding {
+        font-size: 18px;
+        color: red;
+      }
     </style>
   </head>
 
@@ -44,31 +49,30 @@
       <div class="row">
         <div class="row">
           <div class="input-field col s12">
-            <input
-              id="bilinformasjon"
-              class="validate center-align inputfield"
-              data-length="7"
-              type="text"
-              onKeyUp="checkValidText()"
-            />
+            <form id="regnrform">
+              <input
+                id="bilinformasjon"
+                class="validate center-align inputfield"
+                type="text"
+              />
+              <div class="col s12 center-align">
+                <span
+                  id="feilMelding"
+                  class="helper-text"
+                  data-error="Feil lengde på registreringsnummer"
+                ></span>
+                <br />
+                <button
+                  id="submitButton"
+                  class="waves-effect waves-light btn-large center-align"
+                  type="submit"
+                  disabled
+                >
+                  Hent informasjon
+                </button>
+              </div>
+            </form>
             <label for="bilinformasjon">Registreringsnummer</label>
-            <span
-              id="feilMelding"
-              class="helper-text"
-              data-error="Feil lengde på registreringsnummer"
-            ></span>
-          </div>
-          <div class="col s12 center-align">
-            <!-- Button for submitting -->
-            <button
-              id="submitButton"
-              class="waves-effect waves-light btn-large center-align"
-              type="submit"
-              onclick="sendForm()"
-              disabled
-            >
-              Hent informasjon
-            </button>
           </div>
         </div>
       </div>
@@ -111,10 +115,10 @@
 
         <tbody>
           <tr id="trInfo">
-            <td id="kjenne">&nbsp;</td>
-            <td id="forstenorge">&nbsp;</td>
-            <td id="forsteeier">&nbsp;</td>
-            <td id="periodiskKjoretoykontroll">&nbsp;</td>
+            <td id="kjennemerke">&nbsp;</td>
+            <td id="forstegangsregistrering">&nbsp;</td>
+            <td id="forstegangsregistreringEier">&nbsp;</td>
+            <td id="sistKontrollert">&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -126,18 +130,6 @@
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="js/statens-vegvesen.js"></script>
-    <script src="js/checkvalidtext.js"></script>
-    <script src="js/checkifie11.js"></script>
-    <script>
-      // This is the only part that is jQuery
-      // We could instead do document.addEventListener("DOMContentLoaded") but we need jQuery anyways
-      $(document).ready(function () {
-        $('.validate.center-align.inputfield').characterCounter();
-        // If using IE11, display a warning
-        checkIfIE();
-      });
-    </script>
+    <script src="./scripts/main.ts"></script>
   </body>
 </html>
