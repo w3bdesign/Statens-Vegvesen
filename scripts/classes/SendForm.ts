@@ -51,6 +51,7 @@ export default class SendForm {
   }
 
   static setDefaults(informasjonBil: any): any {
+    // TODO Gjør noe mer her
     if (informasjonBil === undefined) {
       informasjonBil = '(Ingen informasjon om kjøretøy er registrert)';
     }
