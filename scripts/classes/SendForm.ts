@@ -42,6 +42,8 @@ export default class SendForm {
     console.log('processRemoteData: ');
     console.log(this.#remoteBilData);
     this.#remoteBilData.melding && this.displayErrorFromAPI();
+
+    
   }
 
   private displayErrorFromAPI() {
