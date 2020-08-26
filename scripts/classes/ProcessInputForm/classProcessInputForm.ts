@@ -1,3 +1,5 @@
+import classFetchRemoteData from './classFetchRemoteData';
+
 type TStatensVegvesenBilData = {
   melding: string;
   kjennemerke: string;
@@ -11,7 +13,8 @@ type TStatensVegvesenBilData = {
 export default class classProcessInputForm {
   private static bilInformasjon: string;
   private static regNummer: string;
-  private static remoteBilData: TStatensVegvesenBilData;
+  //private static remoteBilData: TStatensVegvesenBilData;
+  private static remoteBilData: any;
 
   constructor() {
     // Assign variables to an empty string
@@ -19,16 +22,41 @@ export default class classProcessInputForm {
     classProcessInputForm.regNummer = '';
   }
 
-  public sendForm(event: Event) {
+  /**
+   * Send the form, show the loading spinner and fetch remote data
+   * @param event Event Used to prevent default form submit action
+   */
+  public async sendForm(event: Event) {
     event.preventDefault();
     classProcessInputForm.showLoadingSpinner();
     classProcessInputForm.fetchRemoteData();
+
+    /*classFetchRemoteData.fetchRemoteData().then(async (response) => {
+      await console.log(response);
+     
+    });*/
+
+    /*classProcessInputForm.remoteBilData = await classFetchRemoteData.fetchRemoteData();
+
+    if (classProcessInputForm.remoteBilData) {
+      classProcessInputForm.processRemoteData();
+    }*/
+
+    //classProcessInputForm.fetchRemoteData();
   }
 
+  /**
+   * Show the loading spinner
+   * @returns void
+   */
   private static showLoadingSpinner() {
     window.document.getElementById('loadingSpinner')!.classList.remove('hide');
   }
 
+  /**
+   * Hide the loading spinner
+   * @returns void
+   */
   private static hideLoadingSpinner() {
     window.document.getElementById('loadingSpinner')!.classList.add('hide');
   }
@@ -46,6 +74,7 @@ export default class classProcessInputForm {
         this.processRemoteData();
       })
       .catch(function (error) {
+        console.log(error.toString());
         classProcessInputForm.hideDataTable();
         window.document.getElementById('loadingSpinner')!.classList.add('hide');
         window.document.getElementById('feilMelding')!.innerHTML =
@@ -64,10 +93,10 @@ export default class classProcessInputForm {
   }
 
   private static processRemoteData() {
-    this.remoteBilData.melding && this.displayErrorFromAPI();
+    classProcessInputForm.remoteBilData.melding && this.displayErrorFromAPI();
+
     this.hideLoadingSpinner();
     this.showDataTable();
-    this.checkIfDataIsNotNull();
     this.addDataToTable();
   }
 
@@ -89,8 +118,10 @@ export default class classProcessInputForm {
     )!.innerHTML = this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert;
   }
 
-  private static checkIfDataIsNotNull() {}
-
+  /**
+   * Display error from API if the registration number was not found
+   * @returns void
+   */
   private static displayErrorFromAPI() {
     window.document.getElementById(
       'feilMelding'
