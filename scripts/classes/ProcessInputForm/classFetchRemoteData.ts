@@ -28,6 +28,7 @@ export default class classFetchRemoteData {
 
   /**
    * Hide loading spinner and data table
+   * @returns void
    */
   private static hideElements() {
     window.document.getElementById('tableElement')!.classList.add('scale-out');
