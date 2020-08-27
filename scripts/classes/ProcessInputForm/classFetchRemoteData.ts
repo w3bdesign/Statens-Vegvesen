@@ -1,5 +1,6 @@
 // Class imports
 import classShowHideElements from './classShowHideElements';
+import classErrorHandler from '../ErrorHandler/classErrorHandler';
 
 /**
  * Class responsible for fetching the remote data
@@ -24,8 +25,7 @@ export default class classFetchRemoteData {
       .catch(function (error) {
         // Hide elements if we have an error
         classShowHideElements.hideElements();
-        window.document.getElementById('feilMelding')!.innerHTML =
-          'En feil har oppstått, vennligst prøv igjen.';
+        classErrorHandler.showErrorFetchingRegNr();
       });
   }
 }

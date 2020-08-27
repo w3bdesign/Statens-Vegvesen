@@ -7,7 +7,7 @@ import { TStatensVegvesenBilData } from '../../types/typeDefinitions';
  */
 export default class classErrorHandler {
   /**
-   * Display error from API if the registration number was not found
+   * Display error (fieldname melding) from API if the registration number was not found
    * Also hide the loading spinner
    * @returns void
    */
@@ -23,5 +23,14 @@ export default class classErrorHandler {
    */
   static resetErrorText() {
     window.document.getElementById('feilMelding')!.innerHTML = '';
+  }
+
+  /**
+   * Notify user that an error has happened when fetching data from API
+   * @returns void
+   */
+  static showErrorFetchingRegNr() {
+    window.document.getElementById('feilMelding')!.innerHTML =
+      'En feil har oppstått, vennligst prøv igjen.';
   }
 }
