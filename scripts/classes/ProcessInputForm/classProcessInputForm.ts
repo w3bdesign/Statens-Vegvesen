@@ -1,67 +1,47 @@
 import classFetchRemoteData from './classFetchRemoteData';
+import classShowHideElements from './classShowHideElements';
 
+/**
+ * Type definition based on data returned from API
+ */
 type TStatensVegvesenBilData = {
+  // Will return error message if the car was not found
   melding: string;
+  /**
+   * Registration number for personalised number plate)
+   * @see https://www.vegvesen.no/en/vehicles/own-and-maintain/number-plates/personalised-number-plates
+   */
   kjennemerke: string;
   registrering: {
+    // Details about when car was registered for the first time
     forstegangsregistrering: string;
+    // Details about when car was registered on owner
     forstegangsregistreringEier: string;
   };
+  // Last time the car had a mandatory roadworthiness test
   periodiskKjoretoykontroll: { sistKontrollert: string };
 };
 
 /**
- *
+ * Class that processes the input from the form
+ * @property {TStatensVegvesenBilData} remoteBilData Object with the remote data that was fetched from the API
  */
 export default class classProcessInputForm {
   private static remoteBilData: TStatensVegvesenBilData;
 
   /**
    * Send the form, show the loading spinner and fetch remote data
-   * @param event Event Used to prevent default form submit action
+   * @param {Event} event Used to prevent default form submit action
    * @returns void
    */
   public async sendForm(event: Event) {
     event.preventDefault();
-    classProcessInputForm.showLoadingSpinner();
+
+    classShowHideElements.showLoadingSpinner();
     classFetchRemoteData.fetchRemoteData().then((response) => {
       classProcessInputForm.remoteBilData = response;
       classProcessInputForm.processRemoteData();
     });
-  }
-
-  /**
-   * Show the loading spinner
-   * @returns void
-   */
-  private static showLoadingSpinner() {
-    window.document.getElementById('loadingSpinner')!.classList.remove('hide');
-  }
-
-  /**
-   * Hide the loading spinner
-   * @returns void
-   */
-  private static hideLoadingSpinner() {
-    window.document.getElementById('loadingSpinner')!.classList.add('hide');
-  }
-
-  /**
-   * Display the table and add animation class
-   * @returns void
-   */
-  private static showDataTable() {
-    window.document
-      .getElementById('tableElement')!
-      .classList.remove('scale-out');
-  }
-
-  /**
-   * Hide the table. Usually caused by an error
-   * @returns void
-   */
-  private static hideDataTable() {
-    window.document.getElementById('tableElement')!.classList.add('scale-out');
   }
 
   /**
@@ -72,11 +52,11 @@ export default class classProcessInputForm {
   private static processRemoteData() {
     if (classProcessInputForm.remoteBilData.melding !== undefined) {
       this.displayErrorFromAPI();
-      this.hideDataTable();
+      classShowHideElements.hideDataTable();
       return;
     }
-    this.hideLoadingSpinner();
-    this.showDataTable();
+    classShowHideElements.hideLoadingSpinner();
+    classShowHideElements.showDataTable();
     this.addDataToTable();
     this.resetErrorText();
   }

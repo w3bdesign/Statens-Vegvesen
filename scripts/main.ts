@@ -3,8 +3,8 @@ import classProcessInputForm from './classes/ProcessInputForm/classProcessInputF
 
 /**
  * Main class
- * @property #textInput Value from text input in form. Used to add event listener for when we type text.
- * @property #textForm Reference to form on page. Used to add event listener for form submit.
+ * @property {HTMLElement} #textInput Value from text input in form. Used to add event listener for when we type text.
+ * @property {HTMLElement} #textForm Reference to form on page. Used to add event listener for form submit.
  */
 class MainClass {
   #textInput = window.document.getElementById('bilinformasjon');
