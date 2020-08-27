@@ -66,7 +66,7 @@ export default class classProcessInputForm {
 
   /**
    * Check if we get any errors from the API, if we do, display the error and return
-   * Otherwise we hide the loading spinner, show the data table and add the data
+   * Otherwise we hide the loading spinner, show the data table, add the data and reset the error text
    * @returns void
    */
   private static processRemoteData() {
@@ -113,6 +113,7 @@ export default class classProcessInputForm {
 
   /**
    * Display error from API if the registration number was not found
+   * Also hide the loading spinner
    * @returns void
    */
   private static displayErrorFromAPI() {
