@@ -1,6 +1,6 @@
 /**
  * classValidText is where we check if the text input is valid
- * If it is, we set the button to be enabled
+ * If it is, we enable the submit button
  */
 export default class classValidText {
   /**
