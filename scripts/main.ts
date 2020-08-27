@@ -1,28 +1,32 @@
 import classValidText from './classes/ValidText/classValidText';
 import classProcessInputForm from './classes/ProcessInputForm/classProcessInputForm';
 
+/**
+ * Main class
+ * @property #textInput Value from text input in form. Used to add event listener for when we type text.
+ * @property #textForm Reference to form on page. Used to add event listener for form submit.
+ */
 class MainClass {
-  /**
-   * Private fields for the input and form.
-   * Necessary to add the required event handlers
-   */
   #textInput = window.document.getElementById('bilinformasjon');
   #textForm = window.document.getElementById('regnrform');
 
+  /**
+   * Call the initialize method which sets up the event handlers
+   */
   constructor() {
     this.initialize();
   }
 
   /**
    * Initialize the class and add the event handlers
-   * @returns void
+   * @return void
    */
   private initialize() {
     this.addEventHandlers();
   }
 
   /**
-   * Add the event handlers
+   * Add the event handlers to textInput and textForm
    */
   private addEventHandlers() {
     const sendForm = new classProcessInputForm();

@@ -24,6 +24,7 @@ export default class classProcessInputForm {
   /**
    * Send the form, show the loading spinner and fetch remote data
    * @param event Event Used to prevent default form submit action
+   * @returns void
    */
   public async sendForm(event: Event) {
     event.preventDefault();
@@ -50,43 +51,44 @@ export default class classProcessInputForm {
     window.document.getElementById('loadingSpinner')!.classList.add('hide');
   }
 
-  private static fetchRemoteData() {
-    this.bilInformasjon = (<HTMLInputElement>(
-      window.document.getElementById('bilinformasjon')
-    )).value;
-    this.regNummer = `https://statens-vegvesen-express.vercel.app/bil/${classProcessInputForm.bilInformasjon}`;
-
-    fetch(this.regNummer)
-      .then(async (response) => {
-        const informasjonBil = await response.text();
-        this.remoteBilData = JSON.parse(informasjonBil);
-        this.processRemoteData();
-      })
-      .catch(function (error) {
-        classProcessInputForm.hideDataTable();
-        window.document.getElementById('loadingSpinner')!.classList.add('hide');
-        window.document.getElementById('feilMelding')!.innerHTML =
-          'En feil har oppstått, vennligst prøv igjen.';
-      });
-  }
-
+  /**
+   * Display the table and add animation class
+   * @returns void
+   */
   private static showDataTable() {
     window.document
       .getElementById('tableElement')!
       .classList.remove('scale-out');
   }
 
+  /**
+   * Hide the table. Usually caused by an error
+   * @returns void
+   */
   private static hideDataTable() {
     window.document.getElementById('tableElement')!.classList.add('scale-out');
   }
 
+  /**
+   * Check if we get any errors from the API, if we do, display the error and return
+   * Otherwise we hide the loading spinner, show the data table and add the data
+   * @returns void
+   */
   private static processRemoteData() {
-    classProcessInputForm.remoteBilData.melding && this.displayErrorFromAPI();
+    if (classProcessInputForm.remoteBilData.melding !== undefined) {
+      this.displayErrorFromAPI();
+      this.hideDataTable();
+      return;
+    }
     this.hideLoadingSpinner();
     this.showDataTable();
     this.addDataToTable();
   }
 
+  /**
+   * Set the content of the table <td>s to the fetched remote data
+   * @returns void
+   */
   private static addDataToTable() {
     window.document.getElementById(
       'kjennemerke'

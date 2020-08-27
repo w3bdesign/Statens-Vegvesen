@@ -3,7 +3,8 @@ export default class classFetchRemoteData {
     const bilInformasjon = (<HTMLInputElement>(
       window.document.getElementById('bilinformasjon')
     )).value;
-    const regNummer = `https://statens-vegvesen-express.vercel.app/bil/${bilInformasjon}`;
+    const regNummer = `${process.env.API_URL}${bilInformasjon}`;
+    console.log(process.env.API_URL)
 
     return fetch(regNummer)
       .then(async (response) => {
