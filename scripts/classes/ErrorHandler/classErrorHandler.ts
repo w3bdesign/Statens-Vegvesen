@@ -6,20 +6,14 @@ import { TStatensVegvesenBilData } from '../../types/typeDefinitions';
  * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
  */
 export default class classErrorHandler {
-  private static remoteBilData: TStatensVegvesenBilData;
-
-  constructor(remoteBilData: TStatensVegvesenBilData) {
-    classErrorHandler.remoteBilData = remoteBilData;
-  }
-
   /**
    * Display error from API if the registration number was not found
    * Also hide the loading spinner
    * @returns void
    */
-  public displayErrorFromAPI() {
+  static displayErrorFromAPI(remoteBilData: TStatensVegvesenBilData) {
     window.document.getElementById('feilMelding')!.innerHTML =
-      classErrorHandler.remoteBilData.melding;
+      remoteBilData.melding;
     window.document.getElementById('loadingSpinner')!.classList.add('hide');
   }
 

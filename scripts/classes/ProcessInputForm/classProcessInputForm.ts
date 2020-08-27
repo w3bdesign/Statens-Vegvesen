@@ -34,7 +34,9 @@ export default class classProcessInputForm {
    */
   private static processRemoteData() {
     if (classProcessInputForm.remoteBilData.melding !== undefined) {
-      this.displayErrorFromAPI();
+      classErrorHandler.displayErrorFromAPI(
+        classProcessInputForm.remoteBilData
+      );
       classShowHideElements.hideDataTable();
       return;
     }
@@ -74,17 +76,5 @@ export default class classProcessInputForm {
       'sistKontrollert',
       this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert
     );
-  }
-
-  /**
-   * Display error from API if the registration number was not found
-   * Also hide the loading spinner
-   * @returns void
-   */
-  private static displayErrorFromAPI() {
-    window.document.getElementById(
-      'feilMelding'
-    )!.innerHTML = this.remoteBilData.melding;
-    window.document.getElementById('loadingSpinner')!.classList.add('hide');
   }
 }
