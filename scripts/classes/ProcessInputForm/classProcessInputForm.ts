@@ -24,6 +24,7 @@ export default class classProcessInputForm {
   /**
    * Send the form, show the loading spinner and fetch remote data
    * @param event Event Used to prevent default form submit action
+   * @returns void
    */
   public async sendForm(event: Event) {
     event.preventDefault();

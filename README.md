@@ -15,6 +15,7 @@ You can find the source code for it on https://github.com/w3bdesign/statens-vegv
 - Javascript with OOP and Typescript
 - Materialize CSS framework
 - Responsive design
+- Fetch API URL through dotenv and environment variables instead of being hardcoded
 - Passes HTML5 standards - https://validator.w3.org/nu/
 - Input validation
 - Animations
