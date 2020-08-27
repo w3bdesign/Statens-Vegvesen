@@ -27,6 +27,7 @@ class MainClass {
 
   /**
    * Add the event handlers to textInput and textForm
+   * @return void
    */
   private addEventHandlers() {
     const sendForm = new classProcessInputForm();
