@@ -1,3 +1,5 @@
+import classFetchRemoteData from './classFetchRemoteData';
+
 type TStatensVegvesenBilData = {
   melding: string;
   kjennemerke: string;
@@ -26,7 +28,10 @@ export default class classProcessInputForm {
   public async sendForm(event: Event) {
     event.preventDefault();
     classProcessInputForm.showLoadingSpinner();
-    classProcessInputForm.fetchRemoteData();
+    classFetchRemoteData.fetchRemoteData().then((response) => {
+      classProcessInputForm.remoteBilData = response;
+      classProcessInputForm.processRemoteData();
+    });
   }
 
   /**
@@ -77,7 +82,6 @@ export default class classProcessInputForm {
 
   private static processRemoteData() {
     classProcessInputForm.remoteBilData.melding && this.displayErrorFromAPI();
-
     this.hideLoadingSpinner();
     this.showDataTable();
     this.addDataToTable();
