@@ -2,6 +2,10 @@
  * Class responsible for fetching the remote data
  */
 export default class classFetchRemoteData {
+  /**
+   * The method responsible for fetching the remote data
+   * @returns Promise Returns a promise with the data fetched. Implements a catch that hides elements and shows error message if there is an error
+   */
   static fetchRemoteData() {
     const bilInformasjon = (<HTMLInputElement>(
       window.document.getElementById('bilinformasjon')
@@ -10,8 +14,8 @@ export default class classFetchRemoteData {
 
     return fetch(regNummer)
       .then(async (response) => {
-        const informasjonBil = await response.text();
-        const bilData = JSON.parse(informasjonBil);
+        const bilResponse = await response.text();
+        const bilData = JSON.parse(bilResponse);
         return bilData;
       })
       .catch(function (error) {
