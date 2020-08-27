@@ -20,8 +20,4 @@ You can find the source code for it on https://github.com/w3bdesign/statens-vegv
 - Input validation
 - Animations
 - Loading spinner
-
-## TODO
-
-- Move classes into smaller subclasses based on functionality for better readability
-- Add comments to all functions (TSDoc / JSDoc)
+- JSDoc comments wherever possible
