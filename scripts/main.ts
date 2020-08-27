@@ -33,4 +33,4 @@ class MainClass {
   }
 }
 
-const Main = new MainClass(); 
+const Main = new MainClass();
