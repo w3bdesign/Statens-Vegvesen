@@ -1,3 +1,6 @@
+// Class imports
+import classShowHideElements from './classShowHideElements';
+
 /**
  * Class responsible for fetching the remote data
  */
@@ -20,18 +23,9 @@ export default class classFetchRemoteData {
       })
       .catch(function (error) {
         // Hide elements if we have an error
-        classFetchRemoteData.hideElements();
+        classShowHideElements.hideElements();
         window.document.getElementById('feilMelding')!.innerHTML =
           'En feil har oppstått, vennligst prøv igjen.';
       });
-  }
-
-  /**
-   * Hide loading spinner and data table
-   * @returns void
-   */
-  private static hideElements() {
-    window.document.getElementById('tableElement')!.classList.add('scale-out');
-    window.document.getElementById('loadingSpinner')!.classList.add('hide');
   }
 }

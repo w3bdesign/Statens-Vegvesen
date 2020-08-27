@@ -1,5 +1,6 @@
 /**
- * Type definition based on data returned from API
+ * Type definition for data returned from API. 
+ * Returns an object with strings.
  */
 export type TStatensVegvesenBilData = {
     // Will return error message if the car was not found
