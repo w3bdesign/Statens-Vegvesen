@@ -1,6 +1,8 @@
+// Class imports
 import classFetchRemoteData from './classFetchRemoteData';
 import classShowHideElements from './classShowHideElements';
 
+// Type definition imports
 import { TStatensVegvesenBilData } from '../../types/typeDefinitions';
 
 /**

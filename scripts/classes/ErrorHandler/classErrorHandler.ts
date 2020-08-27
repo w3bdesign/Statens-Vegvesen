@@ -1,10 +1,12 @@
+import { TStatensVegvesenBilData } from '../../types/typeDefinitions';
 /**
  * Class responsible for handling errors
+ * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
  */
 export default class classErrorHandler {
   private static remoteBilData: any;
 
-  constructor(remoteBilData: { melding: string; kjennemerke: string; registrering: { forstegangsregistrering: string; forstegangsregistreringEier: string; }; periodiskKjoretoykontroll: { sistKontrollert: string; }; }) {
+  constructor(remoteBilData: TStatensVegvesenBilData) {
     classErrorHandler.remoteBilData = remoteBilData;
   }
 

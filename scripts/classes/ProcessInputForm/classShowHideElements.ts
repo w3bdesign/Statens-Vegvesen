@@ -35,4 +35,13 @@ export default class classShowHideElements {
   static hideDataTable() {
     window.document.getElementById('tableElement')!.classList.add('scale-out');
   }
+
+  /**
+   * Hide loading spinner and data table
+   * @returns void
+   */
+  static hideElements() {
+    window.document.getElementById('tableElement')!.classList.add('scale-out');
+    window.document.getElementById('loadingSpinner')!.classList.add('hide');
+  }
 }
