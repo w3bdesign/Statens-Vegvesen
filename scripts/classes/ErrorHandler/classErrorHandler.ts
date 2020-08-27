@@ -1,10 +1,12 @@
+// Type definition imports
 import { TStatensVegvesenBilData } from '../../types/typeDefinitions';
+
 /**
  * Class responsible for handling errors
  * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
  */
 export default class classErrorHandler {
-  private static remoteBilData: any;
+  private static remoteBilData: TStatensVegvesenBilData;
 
   constructor(remoteBilData: TStatensVegvesenBilData) {
     classErrorHandler.remoteBilData = remoteBilData;
