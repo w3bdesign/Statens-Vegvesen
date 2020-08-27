@@ -10,16 +10,11 @@ type TStatensVegvesenBilData = {
   periodiskKjoretoykontroll: { sistKontrollert: string };
 };
 
+/**
+ *
+ */
 export default class classProcessInputForm {
-  private static bilInformasjon: string;
-  private static regNummer: string;
   private static remoteBilData: TStatensVegvesenBilData;
-
-  constructor() {
-    // Assign variables to an empty string
-    classProcessInputForm.bilInformasjon = '';
-    classProcessInputForm.regNummer = '';
-  }
 
   /**
    * Send the form, show the loading spinner and fetch remote data
@@ -71,7 +66,7 @@ export default class classProcessInputForm {
 
   /**
    * Check if we get any errors from the API, if we do, display the error and return
-   * Otherwise we hide the loading spinner, show the data table and add the data
+   * Otherwise we hide the loading spinner, show the data table, add the data and reset the error text
    * @returns void
    */
   private static processRemoteData() {
@@ -83,6 +78,15 @@ export default class classProcessInputForm {
     this.hideLoadingSpinner();
     this.showDataTable();
     this.addDataToTable();
+    this.resetErrorText();
+  }
+
+  /**
+   * Remove the error text if we fetch new data
+   * @returns void
+   */
+  private static resetErrorText() {
+    window.document.getElementById('feilMelding')!.innerHTML = '';
   }
 
   /**
@@ -109,6 +113,7 @@ export default class classProcessInputForm {
 
   /**
    * Display error from API if the registration number was not found
+   * Also hide the loading spinner
    * @returns void
    */
   private static displayErrorFromAPI() {
