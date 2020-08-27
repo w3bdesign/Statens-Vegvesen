@@ -4,7 +4,7 @@
 export default class classErrorHandler {
   private static remoteBilData: any;
 
-  constructor(remoteBilData: any) {
+  constructor(remoteBilData: { melding: string; kjennemerke: string; registrering: { forstegangsregistrering: string; forstegangsregistreringEier: string; }; periodiskKjoretoykontroll: { sistKontrollert: string; }; }) {
     classErrorHandler.remoteBilData = remoteBilData;
   }
 

@@ -1,42 +1,22 @@
 import classFetchRemoteData from './classFetchRemoteData';
 import classShowHideElements from './classShowHideElements';
 
-/**
- * Type definition based on data returned from API
- */
-type TStatensVegvesenBilData = {
-  // Will return error message if the car was not found
-  melding: string;
-  /**
-   * Registration number for personalised number plate)
-   * @see https://www.vegvesen.no/en/vehicles/own-and-maintain/number-plates/personalised-number-plates
-   */
-  kjennemerke: string;
-  registrering: {
-    // Details about when car was registered for the first time
-    forstegangsregistrering: string;
-    // Details about when car was registered on owner
-    forstegangsregistreringEier: string;
-  };
-  // Last time the car had a mandatory roadworthiness test
-  periodiskKjoretoykontroll: { sistKontrollert: string };
-};
+import { TStatensVegvesenBilData } from '../../types/typeDefinitions';
 
 /**
- * Class that processes the input from the form
- * @property {TStatensVegvesenBilData} remoteBilData Object with the remote data that was fetched from the API
+ * Class responsible for fetching the remote data
+ * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
  */
 export default class classProcessInputForm {
   private static remoteBilData: TStatensVegvesenBilData;
 
   /**
    * Send the form, show the loading spinner and fetch remote data
-   * @param {Event} event Used to prevent default form submit action
+   * @param event Event Used to prevent default form submit action
    * @returns void
    */
   public async sendForm(event: Event) {
     event.preventDefault();
-
     classShowHideElements.showLoadingSpinner();
     classFetchRemoteData.fetchRemoteData().then((response) => {
       classProcessInputForm.remoteBilData = response;
