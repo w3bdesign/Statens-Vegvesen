@@ -1,6 +1,7 @@
 // Class imports
 import classFetchRemoteData from './classFetchRemoteData';
 import classShowHideElements from './classShowHideElements';
+import classErrorHandler from '../ErrorHandler/classErrorHandler';
 
 // Type definition imports
 import { TStatensVegvesenBilData } from '../../types/typeDefinitions';
@@ -40,15 +41,16 @@ export default class classProcessInputForm {
     classShowHideElements.hideLoadingSpinner();
     classShowHideElements.showDataTable();
     this.addDataToTable();
-    this.resetErrorText();
+    classErrorHandler.resetErrorText();
   }
 
   /**
-   * Remove the error text if we fetch new data
-   * @returns void
+   * Helper function to set the innerHTML attribute for each element
+   * @param {string} elementId ID of element that we need to modify
+   * @param {string} value Value that we modify with
    */
-  private static resetErrorText() {
-    window.document.getElementById('feilMelding')!.innerHTML = '';
+  private static setInnerHTML(elementId: string, value: string) {
+    window.document.getElementById(elementId)!.innerHTML = value;
   }
 
   /**
@@ -56,21 +58,22 @@ export default class classProcessInputForm {
    * @returns void
    */
   private static addDataToTable() {
-    window.document.getElementById(
-      'kjennemerke'
-    )!.innerHTML = this.remoteBilData.kjennemerke;
-
-    window.document.getElementById(
-      'forstegangsregistrering'
-    )!.innerHTML = this.remoteBilData.registrering.forstegangsregistrering;
-
-    window.document.getElementById(
-      'forstegangsregistreringEier'
-    )!.innerHTML = this.remoteBilData.registrering.forstegangsregistreringEier;
-
-    window.document.getElementById(
-      'sistKontrollert'
-    )!.innerHTML = this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert;
+    classProcessInputForm.setInnerHTML(
+      'kjennemerke',
+      this.remoteBilData.kjennemerke
+    );
+    classProcessInputForm.setInnerHTML(
+      'forstegangsregistrering',
+      this.remoteBilData.registrering.forstegangsregistrering
+    );
+    classProcessInputForm.setInnerHTML(
+      'forstegangsregistreringEier',
+      this.remoteBilData.registrering.forstegangsregistreringEier
+    );
+    classProcessInputForm.setInnerHTML(
+      'sistKontrollert',
+      this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert
+    );
   }
 
   /**

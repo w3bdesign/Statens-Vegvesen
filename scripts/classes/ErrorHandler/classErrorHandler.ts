@@ -22,4 +22,12 @@ export default class classErrorHandler {
       classErrorHandler.remoteBilData.melding;
     window.document.getElementById('loadingSpinner')!.classList.add('hide');
   }
+
+  /**
+   * Remove the error text if we fetch new data
+   * @returns void
+   */
+  static resetErrorText() {
+    window.document.getElementById('feilMelding')!.innerHTML = '';
+  }
 }
