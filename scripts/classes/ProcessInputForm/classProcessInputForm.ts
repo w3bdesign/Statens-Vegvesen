@@ -10,16 +10,11 @@ type TStatensVegvesenBilData = {
   periodiskKjoretoykontroll: { sistKontrollert: string };
 };
 
+/**
+ *
+ */
 export default class classProcessInputForm {
-  private static bilInformasjon: string;
-  private static regNummer: string;
   private static remoteBilData: TStatensVegvesenBilData;
-
-  constructor() {
-    // Assign variables to an empty string
-    classProcessInputForm.bilInformasjon = '';
-    classProcessInputForm.regNummer = '';
-  }
 
   /**
    * Send the form, show the loading spinner and fetch remote data
@@ -83,6 +78,15 @@ export default class classProcessInputForm {
     this.hideLoadingSpinner();
     this.showDataTable();
     this.addDataToTable();
+    this.resetErrorText();
+  }
+
+  /**
+   * Remove the error text if we fetch new data
+   * @returns void
+   */
+  private static resetErrorText() {
+    window.document.getElementById('feilMelding')!.innerHTML = '';
   }
 
   /**

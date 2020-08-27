@@ -1,10 +1,13 @@
+/**
+ * Class responsible for fetching the remote data
+ */
 export default class classFetchRemoteData {
   static fetchRemoteData() {
     const bilInformasjon = (<HTMLInputElement>(
       window.document.getElementById('bilinformasjon')
     )).value;
     const regNummer = `${process.env.API_URL}${bilInformasjon}`;
-    console.log(process.env.API_URL)
+    console.log(process.env.API_URL);
 
     return fetch(regNummer)
       .then(async (response) => {
@@ -20,6 +23,9 @@ export default class classFetchRemoteData {
       });
   }
 
+  /**
+   * Hide loading spinner and data table
+   */
   private static hideElements() {
     window.document.getElementById('tableElement')!.classList.add('scale-out');
     window.document.getElementById('loadingSpinner')!.classList.add('hide');
