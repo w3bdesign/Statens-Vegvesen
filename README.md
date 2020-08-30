@@ -6,13 +6,14 @@ Fetching vehicle information from the REST API on https://www.vegvesen.no and di
 
 Example: https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/AA12345
 
-This application uses Express with CORS as the backend.
+This application uses Serverless with Typescript for the backend.
 
 You can find the source code for it on https://github.com/w3bdesign/statens-vegvesen-express
 
 ## Features
 
 - Javascript with OOP and Typescript
+- Serverless backend with Typescript
 - Materialize CSS framework
 - Responsive design
 - Fetch API URL through dotenv and environment variables instead of being hardcoded
