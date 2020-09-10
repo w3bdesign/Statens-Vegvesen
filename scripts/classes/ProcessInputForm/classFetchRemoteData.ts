@@ -20,7 +20,6 @@ export default class classFetchRemoteData {
       .then(async (response) => {
         const bilResponse = await response.text();
         const bilData = JSON.parse(bilResponse);
-        console.log(bilData)
         return bilData;
       })
       .catch(function (error) {
