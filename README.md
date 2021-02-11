@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/w3bdesign/Statens-Vegvesen/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/w3bdesign/Statens-Vegvesen/?branch=master)
+
 # Vehicle information from Statens Vegvesen (Norway)
 
 ## Description
