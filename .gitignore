@@ -52,7 +52,7 @@ typings/
 *.tgz
 
 # dotenv environment variable files
-.env*
+.env
 
 # Mac files
 .DS_Store
@@ -65,5 +65,5 @@ yarn-error.log
 .yarn-integrity
 
 #Custom additions
-.cache
+.parcel-cache
 dist
