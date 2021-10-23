@@ -22,7 +22,7 @@ export default class classFetchRemoteData {
         const bilData = JSON.parse(bilResponse);
         return bilData;
       })
-      .catch(function (error) {
+      .catch(function (_error) {
         // Hide elements if we have an error
         classShowHideElements.hideElements();
         classErrorHandler.showErrorFetchingRegNr();
