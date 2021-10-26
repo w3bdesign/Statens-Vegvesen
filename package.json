@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/w3bdesign/Statens-Vegvesen#readme",
   "devDependencies": {
-    "@types/node": "^16.11.4",
+    "@types/node": "^16.11.6",
     "parcel": "^2.0.0",
     "typescript": "^4.4.4",
     "node-forge": "0.10.0"
