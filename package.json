@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/node": "^16.11.4",
     "parcel": "^2.0.0",
-    "typescript": "^4.4.4",
+    "typescript": "^4.5.2",
     "node-forge": "0.10.0"
   },
   "browserslist": "> 0.5%, last 3 versions, not dead",
