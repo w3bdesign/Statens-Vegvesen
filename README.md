@@ -10,8 +10,6 @@ Example: https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjen
 
 This application uses Serverless with Typescript for the backend.
 
-You can find the source code for it on https://github.com/w3bdesign/statens-vegvesen-express
-
 ## Features
 
 - Javascript with OOP and Typescript
