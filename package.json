@@ -31,6 +31,6 @@
     "node-forge": "0.10.0"
   },
   "engines": {
-    "node": "14.0"
+    "node": "v14.18.1"
   }
 }
