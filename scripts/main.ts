@@ -39,4 +39,4 @@ class MainClass {
   }
 }
 
-const Main = new MainClass();
+new MainClass();
