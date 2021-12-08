@@ -1,4 +1,4 @@
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/w3bdesign/Statens-Vegvesen.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/w3bdesign/Statens-Vegvesen/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/w3bdesign/Statens-Vegvesen.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/w3bdesign/Statens-Vegvesen/context:javascript)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/w3bdesign/Statens-Vegvesen/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/w3bdesign/Statens-Vegvesen/?branch=master)
 
 # Vehicle information from Statens Vegvesen (Norway)
