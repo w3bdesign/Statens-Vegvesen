@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/w3bdesign/Statens-Vegvesen#readme",
   "devDependencies": {
-    "@types/node": "^16.11.18",
+    "@types/node": "^16.11.19",
     "@vercel/node": "^1.12.1",
     "node-fetch": "2.6.6",
     "node-forge": "0.10.0",
