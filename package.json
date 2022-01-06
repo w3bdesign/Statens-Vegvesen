@@ -1,6 +1,6 @@
 {
   "name": "statensvegvesen",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Fetching vehicle information from the REST API on https://www.vegvesen.no and displaying it.",
   "scripts": {
     "dev": "parcel index.html",
@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/w3bdesign/Statens-Vegvesen#readme",
   "devDependencies": {
-    "@types/node": "^16.11.19",
+    "@types/node": "^17.0.8",
     "@vercel/node": "^1.12.1",
     "node-fetch": "2.6.6",
     "node-forge": "1.0.0",
-    "parcel": "^2.1.0",
+    "parcel": "^2.1.1",
     "typescript": "^4.5.4"
   },
   "type": "module",
