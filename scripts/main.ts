@@ -1,3 +1,6 @@
+// Import for animations
+import 'animate.css';
+
 // Class imports
 import classValidText from './classes/ValidText/classValidText';
 import classProcessInputForm from './classes/ProcessInputForm/classProcessInputForm';
