@@ -5,64 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Bilinformasjon - Statens Vegvesen</title>
-    <!-- Compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <style>
-      .validate.center-align.inputfield {
-        font-size: 30px;
-      }
-
-      #feilMelding {
-        font-size: 18px;
-        color: red;
-      }
-
-      label {
-        margin-top: -40px;
-      }
-
-      caption {
-        font-size: 18px;
-        font-weight: bold;
-        color: #000;
-      }
-    </style>
+    <link rel="stylesheet" href="./scss/bootstrap.scss" />
   </head>
   <body>
     <!-- Start Div for entering registration number -->
-    <div id="usingie" class="container section">
-      <div class="row">
-        <div class="col s12">
-          <div class="card-panel teal">
+    <div class="container d-flex justify-content-center">
+      <div class="">
+        <div class="">
+
+
+         
+
+
+
+
+
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="alert alert-primary" role="alert">
             <div class="show-on-medium-and-up hide-on-small-only">
-              <h2 class="center-align white-text">
+              <h2 class="text-center">
                 Skriv inn registreringsnummeret (AA12345)
               </h2>
             </div>
             <div class="show-on-small hide-on-med-and-up">
-              <h6 class="center-align white-text">
+              <h6 class="text-center">
                 Skriv inn registreringsnummeret (AA12345)
               </h6>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Div for entering registration number -->
-    <!-- Start Div for input field -->
-    <div id="hideifie" class="container">
-      <div class="row">
-        <div class="row">
-          <div class="input-field col s12">
+          <!-- End Div for entering registration number -->
+          <!-- Start Div for input field -->
+          <div class="d-flex justify-content-center">
             <form id="regnrform">
-              <input
-                id="bilinformasjon"
-                class="validate center-align inputfield"
-                type="text"
-              />
+              <br />
+              <input id="bilinformasjon" class="form-control" type="text" />
+              <br />
               <div class="col s12 center-align">
                 <span
                   id="feilMelding"
@@ -72,7 +79,7 @@
                 <br />
                 <button
                   id="submitButton"
-                  class="waves-effect waves-light btn-large center-align"
+                  class="btn btn-primary"
                   type="submit"
                   disabled
                 >
@@ -80,55 +87,61 @@
                 </button>
               </div>
             </form>
-            <label for="bilinformasjon">Registreringsnummer</label>
+            <label for="bilinformasjon" class="form-text"
+              >Registreringsnummer</label
+            >
+          </div>
+
+          <!-- End Div for input field -->
+          <!-- Start Div Loading spinner  -->
+          <div id="loadingSpinner" class="container center-align hide">
+            <h5>Henter informasjon, vennligst vent ...</h5>
+            <div class="row">
+              <div class="preloader-wrapper small active">
+                <div class="spinner-layer spinner-teal-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Div Loading spinner  -->
+          <!-- Start Div information table  -->
+          <div
+            id="tableElement"
+            class="container scale-transition section scale-out"
+          >
+            <table class="responsive-table">
+              <caption>
+                Kjøretøyinformasjon
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Kjennemerke</th>
+                  <th scope="col">Registrering Norge</th>
+                  <th scope="col">Registrering eier</th>
+                  <th scope="col">Sist EU kontroll</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="trInfo">
+                  <td id="kjennemerke">&nbsp;</td>
+                  <td id="forstegangsregistrering">&nbsp;</td>
+                  <td id="forstegangsregistreringEier">&nbsp;</td>
+                  <td id="sistKontrollert">&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-    </div>
-    <!-- End Div for input field -->
-    <!-- Start Div Loading spinner  -->
-    <div id="loadingSpinner" class="container center-align hide">
-      <h5>Henter informasjon, vennligst vent ...</h5>
-      <div class="row">
-        <div class="preloader-wrapper small active">
-          <div class="spinner-layer spinner-teal-only">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-              <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-              <div class="circle"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Div Loading spinner  -->
-    <!-- Start Div information table  -->
-    <div id="tableElement" class="container scale-transition section scale-out">
-      <table class="responsive-table">
-        <caption>
-          Kjøretøyinformasjon
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Kjennemerke</th>
-            <th scope="col">Registrering Norge</th>
-            <th scope="col">Registrering eier</th>
-            <th scope="col">Sist EU kontroll</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="trInfo">
-            <td id="kjennemerke">&nbsp;</td>
-            <td id="forstegangsregistrering">&nbsp;</td>
-            <td id="forstegangsregistreringEier">&nbsp;</td>
-            <td id="sistKontrollert">&nbsp;</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
     <!-- End Div information table  -->
     <!-- Compiled and minified JavaScript -->
