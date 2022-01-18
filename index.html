@@ -11,30 +11,36 @@
     <!-- Start Div for entering registration number -->
     <div class="container d-flex justify-content-center mt-5">
       <div class="">
-        <div class="bg-primary text-white p-5 mb-4 rounded shadow">
+        <div class="bg-primary text-white p-5 mb-4 rounded shadow-sm">
           <div class="show-on-medium-and-up hide-on-small-only">
-            <h2 class="text-center">
+            <h1 class="text-center">
               Skriv inn registreringsnummeret (AA12345)
-            </h2>
+            </h1>
           </div>
           <div class="show-on-small hide-on-med-and-up">
-            <h6 class="text-center">
+            <h4 class="text-center">
               Skriv inn registreringsnummeret (AA12345)
-            </h6>
+            </h4>
           </div>
         </div>
         <!-- End Div for entering registration number -->
         <!-- Start Div for input field -->
         <div>
           <form id="regnrform">
-            <input id="bilinformasjon" class="form-control shadow-sm" type="text" />
+            <label for="bilinformasjon" class="form-label"
+              >Registreringsnummer</label
+            >
+            <input
+              id="bilinformasjon"
+              class="form-control shadow-sm"
+              type="text"
+            />
             <div class="d-flex justify-content-center">
               <span
                 id="feilMelding"
                 class="helper-text"
                 data-error="Feil lengde på registreringsnummer"
               ></span>
-              <br />
               <button
                 id="submitButton"
                 class="btn btn-primary mt-2"
@@ -45,15 +51,18 @@
               </button>
             </div>
           </form>
-          <label for="bilinformasjon" class="form-text"
-            >Registreringsnummer</label
-          >
         </div>
-
         <!-- End Div for input field -->
         <!-- Start Div Loading spinner  -->
-        <div id="loadingSpinner" class="container center-align hide">
-          <h5>Henter informasjon, vennligst vent ...</h5>
+        <div id="loadingSpinner" class="container mt-4 text-center hide">
+          <h4>Henter informasjon, vennligst vent ...</h4>
+          <br />
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden"
+              >Henter informasjon, vennligst vent ...</span
+            >
+          </div>
+
           <div class="row">
             <div class="preloader-wrapper small active">
               <div class="spinner-layer spinner-teal-only">
