@@ -9,15 +9,15 @@
   </head>
   <body>
     <!-- Start Div for entering registration number -->
-    <div class="container d-flex justify-content-center mt-5">
+    <div class="container d-flex justify-content-center mt-5 sm-m-5">
       <div class="">
-        <div class="bg-primary text-white p-5 mb-4 rounded shadow-sm">
-          <div class="show-on-medium-and-up hide-on-small-only">
-            <h1 class="text-center">
+        <div class="bg-primary text-white p-4 mb-4 rounded shadow-sm">
+          <div class="d-none d-lg-block">
+            <h3 class="text-center">
               Skriv inn registreringsnummeret (AA12345)
-            </h1>
+            </h3>
           </div>
-          <div class="show-on-small hide-on-med-and-up">
+          <div class="d-sm-block d-md-block d-lg-none">
             <h4 class="text-center">
               Skriv inn registreringsnummeret (AA12345)
             </h4>
@@ -43,7 +43,7 @@
               ></span>
               <button
                 id="submitButton"
-                class="btn btn-primary mt-2"
+                class="btn btn-primary mt-4"
                 type="submit"
                 disabled
               >
@@ -62,7 +62,6 @@
               >Henter informasjon, vennligst vent ...</span
             >
           </div>
-
           <div class="row">
             <div class="preloader-wrapper small active">
               <div class="spinner-layer spinner-teal-only">
