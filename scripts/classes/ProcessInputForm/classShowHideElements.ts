@@ -15,7 +15,7 @@ export default class classShowHideElements {
    * @returns void
    */
   static hideLoadingSpinner() {
-    window.document.getElementById('loadingSpinner')!.classList.add('hide');
+    window.document.getElementById('loadingSpinner')!.classList.add('d-none');
   }
 
   /**
