@@ -14,7 +14,7 @@ export default class classErrorHandler {
   static displayErrorFromAPI(remoteBilData: TStatensVegvesenBilData) {
     window.document.getElementById('feilMelding')!.innerHTML =
       remoteBilData.melding;
-    window.document.getElementById('loadingSpinner')!.classList.add('hide');
+    window.document.getElementById('loadingSpinner')!.classList.add('d-none');
   }
 
   /**
