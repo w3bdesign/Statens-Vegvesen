@@ -28,19 +28,15 @@ export default class classShowHideElements {
     window.document.getElementById("tableElement")!.classList.remove("d-none");
   }
 
-  static fadeOutDataTable() {
-    const bilInformasjon = (<HTMLInputElement>(
-      window.document.getElementById("bilinformasjon")
-    )).value;
-    
-    if (bilInformasjon.length > 0) {
-      window.document
-        .getElementById("tableElement")!
-        .classList.remove("animate__fadeIn");
-      window.document
-        .getElementById("tableElement")!
-        .classList.add("animate__fadeOut");
-    }
+  static async fadeOutDataTable() {
+    window.document
+      .getElementById("tableElement")!
+      .classList.remove("animate__fadeIn");
+    window.document
+      .getElementById("tableElement")!
+      .classList.add("animate__fadeOut");
+
+    await new Promise((r) => setTimeout(r, 5000));
   }
 
   /**

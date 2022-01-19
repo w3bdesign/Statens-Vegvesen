@@ -21,7 +21,6 @@ export default class classProcessInputForm {
   public async sendForm(event: Event) {
     event.preventDefault();
     classShowHideElements.fadeOutDataTable();
-    await new Promise(r => setTimeout(r, 5000));
     classShowHideElements.showLoadingSpinner();
     classFetchRemoteData.fetchRemoteData().then((response) => {
       classProcessInputForm.remoteBilData = response;
