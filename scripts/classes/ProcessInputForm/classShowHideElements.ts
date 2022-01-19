@@ -32,6 +32,7 @@ export default class classShowHideElements {
     const bilInformasjon = (<HTMLInputElement>(
       window.document.getElementById("bilinformasjon")
     )).value;
+    
     if (bilInformasjon.length > 0) {
       window.document
         .getElementById("tableElement")!
