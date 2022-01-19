@@ -28,17 +28,6 @@ export default class classShowHideElements {
     window.document.getElementById("tableElement")!.classList.remove("d-none");
   }
 
-  static async fadeOutDataTable() {
-    window.document
-      .getElementById("tableElement")!
-      .classList.remove("animate__fadeIn");
-    window.document
-      .getElementById("tableElement")!
-      .classList.add("animate__fadeOut");
-
-    await new Promise((r) => setTimeout(r, 5000));
-  }
-
   /**
    * Hide the table. Usually caused by an error
    * @returns void
