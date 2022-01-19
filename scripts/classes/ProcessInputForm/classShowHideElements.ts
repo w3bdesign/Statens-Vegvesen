@@ -35,6 +35,9 @@ export default class classShowHideElements {
   static hideDataTable() {
     window.document
       .getElementById("tableElement")!
+      .classList.remove("animate__fadeIn");
+    window.document
+      .getElementById("tableElement")!
       .classList.add("animate__fadeOut");
   }
 
