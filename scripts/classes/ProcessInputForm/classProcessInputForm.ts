@@ -40,7 +40,7 @@ export default class classProcessInputForm {
       classShowHideElements.hideDataTable();
       return;
     }
-    classShowHideElements.hideDataTable();
+    classShowHideElements.fadeOutDataTable();
     classShowHideElements.hideLoadingSpinner();
     classShowHideElements.showDataTable();
     this.addDataToTable();

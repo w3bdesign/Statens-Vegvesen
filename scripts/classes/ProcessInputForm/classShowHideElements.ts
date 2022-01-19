@@ -28,14 +28,25 @@ export default class classShowHideElements {
     window.document.getElementById("tableElement")!.classList.remove("d-none");
   }
 
+  static fadeOutDataTable() {
+    const bilInformasjon = (<HTMLInputElement>(
+      window.document.getElementById("bilinformasjon")
+    )).value;
+    if (bilInformasjon.length > 0) {
+      window.document
+        .getElementById("tableElement")!
+        .classList.remove("animate__fadeIn");
+      window.document
+        .getElementById("tableElement")!
+        .classList.add("animate__fadeOut");
+    }
+  }
+
   /**
    * Hide the table. Usually caused by an error
    * @returns void
    */
   static hideDataTable() {
-    window.document
-      .getElementById("tableElement")!
-      .classList.remove("animate__fadeIn");
     window.document
       .getElementById("tableElement")!
       .classList.add("animate__fadeOut");
