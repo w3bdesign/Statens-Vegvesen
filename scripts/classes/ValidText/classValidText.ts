@@ -10,7 +10,7 @@ export default class classValidText {
   public checkValidText(event: Event) {
     // Need to cast this to <HTMLInputElement> or Typescript gives us an error
     const bilInformasjon = (<HTMLInputElement>event.target).value;
-    const submitButton = window.document.getElementById('submitButton');
+    const submitButton = window.document.getElementById("submitButton");
     const letters = /[A-Z]{2}[0-9]{5}/gi;
 
     if (
@@ -18,9 +18,9 @@ export default class classValidText {
       bilInformasjon !== undefined &&
       bilInformasjon.length === 7
     ) {
-      submitButton!.removeAttribute('disabled');
+      submitButton!.removeAttribute("disabled");
     } else {
-      submitButton!.setAttribute('disabled', 'true');
+      submitButton!.setAttribute("disabled", "true");
     }
   }
 }

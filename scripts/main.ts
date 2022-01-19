@@ -1,9 +1,9 @@
 // Import for animations
-import 'animate.css';
+import "animate.css";
 
 // Class imports
-import classValidText from './classes/ValidText/classValidText';
-import classProcessInputForm from './classes/ProcessInputForm/classProcessInputForm';
+import classValidText from "./classes/ValidText/classValidText";
+import classProcessInputForm from "./classes/ProcessInputForm/classProcessInputForm";
 
 /**
  * Main class
@@ -11,8 +11,8 @@ import classProcessInputForm from './classes/ProcessInputForm/classProcessInputF
  * @property {HTMLElement} #textForm Reference to form on page. Used to add event listener for form submit.
  */
 class MainClass {
-  #textInput = window.document.getElementById('bilinformasjon');
-  #textForm = window.document.getElementById('regnrform');
+  #textInput = window.document.getElementById("bilinformasjon");
+  #textForm = window.document.getElementById("regnrform");
 
   /**
    * Call the initialize method which sets up the event handlers
@@ -37,8 +37,8 @@ class MainClass {
     const sendForm = new classProcessInputForm();
     const checkValidText = new classValidText();
 
-    this.#textInput!.addEventListener('input', checkValidText.checkValidText);
-    this.#textForm!.addEventListener('submit', sendForm.sendForm);
+    this.#textInput!.addEventListener("input", checkValidText.checkValidText);
+    this.#textForm!.addEventListener("submit", sendForm.sendForm);
   }
 }
 
