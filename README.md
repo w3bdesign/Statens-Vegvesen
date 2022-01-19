@@ -17,6 +17,7 @@ This application uses Serverless with Typescript for the backend.
 - Javascript with OOP and Typescript
 - Serverless backend with Typescript
 - Bootstrap 5
+- Animate.css for animations
 - Responsive design
 - Passes HTML5 standards - https://validator.w3.org/nu/
 - Input validation
