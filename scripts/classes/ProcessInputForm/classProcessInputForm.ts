@@ -1,10 +1,10 @@
 // Class imports
-import classFetchRemoteData from './classFetchRemoteData';
-import classShowHideElements from './classShowHideElements';
-import classErrorHandler from '../ErrorHandler/classErrorHandler';
+import classFetchRemoteData from "./classFetchRemoteData";
+import classShowHideElements from "./classShowHideElements";
+import classErrorHandler from "../ErrorHandler/classErrorHandler";
 
 // Type definition imports
-import { TStatensVegvesenBilData } from '../../types/typeDefinitions';
+import { TStatensVegvesenBilData } from "../../types/typeDefinitions";
 
 /**
  * Class responsible for fetching the remote data
@@ -20,6 +20,7 @@ export default class classProcessInputForm {
    */
   public async sendForm(event: Event) {
     event.preventDefault();
+    //classShowHideElements.fadeOutDataTable();
     classShowHideElements.showLoadingSpinner();
     classFetchRemoteData.fetchRemoteData().then((response) => {
       classProcessInputForm.remoteBilData = response;
@@ -61,19 +62,19 @@ export default class classProcessInputForm {
    */
   private static addDataToTable() {
     classProcessInputForm.setInnerHTML(
-      'kjennemerke',
+      "kjennemerke",
       this.remoteBilData.kjennemerke
     );
     classProcessInputForm.setInnerHTML(
-      'forstegangsregistrering',
+      "forstegangsregistrering",
       this.remoteBilData.registrering.forstegangsregistrering
     );
     classProcessInputForm.setInnerHTML(
-      'forstegangsregistreringEier',
+      "forstegangsregistreringEier",
       this.remoteBilData.registrering.forstegangsregistreringEier
     );
     classProcessInputForm.setInnerHTML(
-      'sistKontrollert',
+      "sistKontrollert",
       this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert
     );
   }

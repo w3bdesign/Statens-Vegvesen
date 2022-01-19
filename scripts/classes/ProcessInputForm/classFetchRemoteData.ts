@@ -1,6 +1,6 @@
 // Class imports
-import classShowHideElements from './classShowHideElements';
-import classErrorHandler from '../ErrorHandler/classErrorHandler';
+import classShowHideElements from "./classShowHideElements";
+import classErrorHandler from "../ErrorHandler/classErrorHandler";
 
 /**
  * Class responsible for fetching the remote data
@@ -12,9 +12,10 @@ export default class classFetchRemoteData {
    */
   static fetchRemoteData() {
     const bilInformasjon = (<HTMLInputElement>(
-      window.document.getElementById('bilinformasjon')
+      window.document.getElementById("bilinformasjon")
     )).value;
-    const API_URL = `${process.env.API_URL}` || '/api/getRegNummer?regNummer=';
+
+    const API_URL = `${process.env.API_URL}` || "/api/getRegNummer?regNummer=";
     const regNummer = `${API_URL}${bilInformasjon}`;
 
     return fetch(regNummer)
