@@ -16,9 +16,8 @@ This application uses Serverless with Typescript for the backend.
 
 - Javascript with OOP and Typescript
 - Serverless backend with Typescript
-- Materialize CSS framework
+- Bootstrap 5
 - Responsive design
-- Fetch API URL through dotenv and environment variables instead of being hardcoded
 - Passes HTML5 standards - https://validator.w3.org/nu/
 - Input validation
 - Animations
