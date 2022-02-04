@@ -6,20 +6,20 @@
 
 ## Description
 
-Fetching vehicle information from the REST API on https://www.vegvesen.no and displaying it.
+Fetching vehicle information from the REST API on <https://www.vegvesen.no> and displaying it.
 
-Example: https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/AA12345
+Example: <https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/AA12345>
 
 This application uses Serverless with Typescript for the backend.
 
 ## Features
 
-- Javascript with OOP and Typescript 
-- Serverless backend with Typescript
-- Bootstrap 5
-- Animate.css for animations
-- Responsive design
-- Passes HTML5 standards - https://validator.w3.org/nu/
-- Input validation
-- Loading spinner
-- JSDoc comments wherever possible
+-   Javascript with OOP and Typescript 
+-   Serverless backend with Typescript
+-   Bootstrap 5
+-   Animate.css for animations
+-   Responsive design
+-   Passes HTML5 standards - <https://validator.w3.org/nu/>
+-   Input validation
+-   Loading spinner
+-   JSDoc comments wherever possible
