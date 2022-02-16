@@ -1,8 +1,6 @@
 import fetch from "node-fetch";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
-import escapeHtml from "../scripts/utils/escapeHtml";
-
 export default function getRegNummer(
   req: VercelRequest,
   res: VercelResponse
@@ -13,11 +11,7 @@ export default function getRegNummer(
     fetch(urlToFetch)
       .then((response) => response.json())
       .then((data: VercelResponse) => {
-
-
-        //escapeHtml(res.send(data));
-        res.send(data)
-
+        res.send(data);
       })
       .catch(() => {
         return;
