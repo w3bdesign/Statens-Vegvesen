@@ -11,7 +11,7 @@ export default class classValidText {
     // Need to cast this as <HTMLInputElement> or Typescript gives us an error
     const bilInformasjon = (<HTMLInputElement>event.target).value;
     const submitButton = window.document.getElementById("submitButton");
-    const letters = /[A-Z]{2}[0-9]{5}/gi;
+    const letters = /[A-Z]{2}\d{5}/gi;
 
     if (
       bilInformasjon.match(letters) &&
