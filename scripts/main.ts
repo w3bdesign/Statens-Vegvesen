@@ -15,17 +15,10 @@ class MainClass {
   #textForm = window.document.getElementById("regnrform");
 
   /**
-   * Call the initialize method which sets up the event handlers
-   */
-  constructor() {
-    this.initialize();
-  }
-
-  /**
    * Initialize the class and add the event handlers
    * @return void
    */
-  private initialize() {
+  public initialize() {
     this.addEventHandlers();
   }
 
@@ -43,3 +36,5 @@ class MainClass {
 }
 
 const main = new MainClass();
+
+main.initialize();
