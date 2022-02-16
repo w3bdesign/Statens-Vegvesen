@@ -27,7 +27,9 @@ export default class classProcessInputForm {
         classProcessInputForm.remoteBilData = response;
         classProcessInputForm.processRemoteData();
       })
-      .catch((error) => console.log(error));
+      .catch(() => {
+        return;
+      });
   }
 
   /**
