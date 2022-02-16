@@ -18,7 +18,7 @@ export default class classProcessInputForm {
    * @param event Event Used to prevent default form submit action
    * @returns void
    */
-  public sendForm(event: Event) {
+  public sendForm(event: Event): void  {
     event.preventDefault();
     classShowHideElements.showLoadingSpinner();
     classFetchRemoteData
