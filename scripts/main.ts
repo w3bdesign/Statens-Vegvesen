@@ -42,4 +42,4 @@ class MainClass {
   }
 }
 
-// new MainClass();
+new MainClass();
