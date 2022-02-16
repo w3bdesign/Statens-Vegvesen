@@ -9,7 +9,7 @@ export default function getRegNummer(req: VercelRequest, res: VercelResponse) {
   if (regNummer !== undefined) {
     fetch(urlToFetch)
       .then((response) => response.json())
-      .then((data: any) => {
+      .then((data: unknown) => {
         escapeHtml(res.send(data));
       })
       .catch((error) => res.send(error));
