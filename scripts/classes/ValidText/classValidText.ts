@@ -7,11 +7,11 @@ export default class classValidText {
    * Check if the entered text is either in the format "XX12345", is not undefined and length is 7
    * @param {Event} event Used to fetch the value from the text input
    */
-  public checkValidText(event: Event) {
-    // Need to cast this to <HTMLInputElement> or Typescript gives us an error
+  public checkValidText(event: Event): void  {
+    // Need to cast this as <HTMLInputElement> or Typescript gives us an error
     const bilInformasjon = (<HTMLInputElement>event.target).value;
     const submitButton = window.document.getElementById("submitButton");
-    const letters = /[A-Z]{2}[0-9]{5}/gi;
+    const letters = /[A-Z]{2}\d{5}/gi;
 
     if (
       bilInformasjon.match(letters) &&

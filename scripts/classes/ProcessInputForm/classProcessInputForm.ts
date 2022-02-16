@@ -18,14 +18,18 @@ export default class classProcessInputForm {
    * @param event Event Used to prevent default form submit action
    * @returns void
    */
-  public async sendForm(event: Event) {
+  public sendForm(event: Event): void  {
     event.preventDefault();
-    //classShowHideElements.fadeOutDataTable();
     classShowHideElements.showLoadingSpinner();
-    classFetchRemoteData.fetchRemoteData().then((response) => {
-      classProcessInputForm.remoteBilData = response;
-      classProcessInputForm.processRemoteData();
-    });
+    classFetchRemoteData
+      .fetchRemoteData()
+      .then((response) => {
+        classProcessInputForm.remoteBilData = response;
+        classProcessInputForm.processRemoteData();
+      })
+      .catch(() => {
+        return;
+      });
   }
 
   /**
