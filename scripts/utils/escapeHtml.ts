@@ -1,4 +1,4 @@
-function escapeHtml(unsafe: any) {
+function escapeHtml(unsafe: string) {
   return unsafe
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
