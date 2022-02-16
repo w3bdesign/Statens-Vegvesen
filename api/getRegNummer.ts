@@ -1,5 +1,7 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
 import fetch from "node-fetch";
+import { VercelRequest, VercelResponse } from "@vercel/node";
+
+import escapeHtml from "../scripts/utils/escapeHtml";
 
 export default function getRegNummer(req: VercelRequest, res: VercelResponse) {
   const { regNummer = "" } = req.query;
@@ -7,8 +9,8 @@ export default function getRegNummer(req: VercelRequest, res: VercelResponse) {
   if (regNummer !== undefined) {
     fetch(urlToFetch)
       .then((response) => response.json())
-      .then((data) => {
-        res.send(data);
+      .then((data: any) => {
+        escapeHtml(res.send(data));
       })
       .catch((error) => res.send(error));
   }
