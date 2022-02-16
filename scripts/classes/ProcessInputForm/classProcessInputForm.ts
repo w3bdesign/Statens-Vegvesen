@@ -10,7 +10,7 @@ import { TStatensVegvesenBilData } from "../../types/typeDefinitions";
  * Class responsible for fetching the remote data
  * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
  */
-export default class ClassProcessInputForm {
+export default class classProcessInputForm {
   private static remoteBilData: TStatensVegvesenBilData;
 
   /**
@@ -22,8 +22,8 @@ export default class ClassProcessInputForm {
     event.preventDefault();
     classShowHideElements.showLoadingSpinner();
     classFetchRemoteData.fetchRemoteData().then((response) => {
-      ClassProcessInputForm.remoteBilData = response;
-      ClassProcessInputForm.processRemoteData();
+      classProcessInputForm.remoteBilData = response;
+      classProcessInputForm.processRemoteData();
     });
   }
 
@@ -33,9 +33,9 @@ export default class ClassProcessInputForm {
    * @returns void
    */
   private static processRemoteData() {
-    if (ClassProcessInputForm.remoteBilData.melding !== undefined) {
+    if (classProcessInputForm.remoteBilData.melding !== undefined) {
       classErrorHandler.displayErrorFromAPI(
-        ClassProcessInputForm.remoteBilData
+        classProcessInputForm.remoteBilData
       );
       classShowHideElements.hideDataTable();
       return;
@@ -60,19 +60,19 @@ export default class ClassProcessInputForm {
    * @returns void
    */
   private static addDataToTable() {
-    ClassProcessInputForm.setInnerHTML(
+    classProcessInputForm.setInnerHTML(
       "kjennemerke",
       this.remoteBilData.kjennemerke
     );
-    ClassProcessInputForm.setInnerHTML(
+    classProcessInputForm.setInnerHTML(
       "forstegangsregistrering",
       this.remoteBilData.registrering.forstegangsregistrering
     );
-    ClassProcessInputForm.setInnerHTML(
+    classProcessInputForm.setInnerHTML(
       "forstegangsregistreringEier",
       this.remoteBilData.registrering.forstegangsregistreringEier
     );
-    ClassProcessInputForm.setInnerHTML(
+    classProcessInputForm.setInnerHTML(
       "sistKontrollert",
       this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert
     );
