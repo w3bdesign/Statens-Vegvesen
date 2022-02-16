@@ -21,10 +21,13 @@ export default class classProcessInputForm {
   public sendForm(event: Event) {
     event.preventDefault();
     classShowHideElements.showLoadingSpinner();
-    classFetchRemoteData.fetchRemoteData().then((response) => {
-      classProcessInputForm.remoteBilData = response;
-      classProcessInputForm.processRemoteData();
-    });
+    classFetchRemoteData
+      .fetchRemoteData()
+      .then((response) => {
+        classProcessInputForm.remoteBilData = response;
+        classProcessInputForm.processRemoteData();
+      })
+      .catch((error) => console.log(error));
   }
 
   /**
