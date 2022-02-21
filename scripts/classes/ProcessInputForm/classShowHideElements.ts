@@ -8,7 +8,7 @@ export default class classShowHideElements {
    */
   static showLoadingSpinner() {
     window.document
-      .getElementById("loadingSpinner")!
+      .getElementById("loadingSpinner")
       .classList.remove("d-none");
   }
 
@@ -17,7 +17,7 @@ export default class classShowHideElements {
    * @returns void
    */
   static hideLoadingSpinner() {
-    window.document.getElementById("loadingSpinner")!.classList.add("d-none");
+    window.document.getElementById("loadingSpinner").classList.add("d-none");
   }
 
   /**
@@ -25,7 +25,7 @@ export default class classShowHideElements {
    * @returns void
    */
   static showDataTable() {
-    window.document.getElementById("tableElement")!.classList.remove("d-none");
+    window.document.getElementById("tableElement").classList.remove("d-none");
   }
 
   /**
@@ -34,7 +34,7 @@ export default class classShowHideElements {
    */
   static hideDataTable() {
     window.document
-      .getElementById("tableElement")!
+      .getElementById("tableElement")
       .classList.add("animate__fadeOut");
   }
 
@@ -44,8 +44,8 @@ export default class classShowHideElements {
    */
   static hideElements() {
     window.document
-      .getElementById("tableElement")!
+      .getElementById("tableElement")
       .classList.add("animate__fadeOut");
-    window.document.getElementById("loadingSpinner")!.classList.add("d-none");
+    window.document.getElementById("loadingSpinner").classList.add("d-none");
   }
 }
