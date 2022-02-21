@@ -18,9 +18,9 @@ export default class classValidText {
       bilInformasjon !== undefined &&
       bilInformasjon.length === 7
     ) {
-      submitButton!.removeAttribute("disabled");
+      submitButton.removeAttribute("disabled");
     } else {
-      submitButton!.setAttribute("disabled", "true");
+      submitButton.setAttribute("disabled", "true");
     }
   }
 }

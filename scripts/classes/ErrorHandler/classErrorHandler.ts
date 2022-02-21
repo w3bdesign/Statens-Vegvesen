@@ -12,9 +12,9 @@ export default class classErrorHandler {
    * @returns void
    */
   static displayErrorFromAPI(remoteBilData: TStatensVegvesenBilData) {
-    window.document.getElementById("feilMelding")!.innerHTML =
+    window.document.getElementById("feilMelding").innerHTML =
       remoteBilData.melding;
-    window.document.getElementById("loadingSpinner")!.classList.add("d-none");
+    window.document.getElementById("loadingSpinner").classList.add("d-none");
   }
 
   /**
@@ -22,7 +22,7 @@ export default class classErrorHandler {
    * @returns void
    */
   static resetErrorText() {
-    window.document.getElementById("feilMelding")!.innerHTML = "";
+    window.document.getElementById("feilMelding").innerHTML = "";
   }
 
   /**
@@ -30,7 +30,7 @@ export default class classErrorHandler {
    * @returns void
    */
   static showErrorFetchingRegNr() {
-    window.document.getElementById("feilMelding")!.innerHTML =
+    window.document.getElementById("feilMelding").innerHTML =
       "En feil har oppstått, vennligst prøv igjen.";
   }
 }
