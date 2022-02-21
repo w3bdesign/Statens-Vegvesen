@@ -36,5 +36,5 @@ class MainClass {
 }
 
 const main = new MainClass();
-
 main.initialize();
+/* lgtm [js/unused-local-variable] */
