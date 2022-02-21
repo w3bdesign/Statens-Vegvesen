@@ -30,8 +30,8 @@ class MainClass {
     const sendForm = new classProcessInputForm();
     const checkValidText = new classValidText();
 
-    this.#textInput!.addEventListener("input", checkValidText.checkValidText);
-    this.#textForm!.addEventListener("submit", sendForm.sendForm);
+    this.#textInput?.addEventListener("input", checkValidText.checkValidText);
+    this.#textForm?.addEventListener("submit", sendForm.sendForm);
   }
 }
 
