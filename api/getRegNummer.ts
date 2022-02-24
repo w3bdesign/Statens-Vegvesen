@@ -18,8 +18,8 @@ export default function getRegNummer(
           registrering: { forstegangsregistreringEier },
           periodiskKjoretoykontroll: { sistKontrollert },
         }) => {
-          
-          console.log(kjennemerke);
+
+          console.log("Kjennemerke: ", kjennemerke);
           console.log(forstegangsregistreringEier);
           console.log(sistKontrollert);
 
