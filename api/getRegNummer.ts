@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { sanitize } from "dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default function getRegNummer(
@@ -11,7 +12,8 @@ export default function getRegNummer(
     fetch(urlToFetch)
       .then((response) => response.json())
       .then((data: VercelResponse) => {
-        res.send(data);
+        const sanitizedData = sanitize(data);
+        res.send(sanitizedData);
       })
       .catch(() => {
         return;
