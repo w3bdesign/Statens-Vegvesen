@@ -11,6 +11,9 @@ export default class classValidText {
     // Need to cast this as <HTMLInputElement> or Typescript gives us an error
     const bilInformasjon = (<HTMLInputElement>event.target).value;
     const submitButton = window.document.getElementById("submitButton");
+    // Filter input to make sure it is in the format "XX12345"
+    // Set button as disabled until it is valid
+    // This will also prevent XSS
     const letters = /[A-Z]{2}\d{5}/gi;
 
     const bilInformasjonMatchesFormat = letters.test(bilInformasjon);
