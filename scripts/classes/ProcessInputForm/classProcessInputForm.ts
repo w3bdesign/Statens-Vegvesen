@@ -4,15 +4,14 @@ import classShowHideElements from "./classShowHideElements";
 import classErrorHandler from "../ErrorHandler/classErrorHandler";
 
 // Type definition imports
-import { TStatensVegvesenBilData } from "../../types/typeDefinitions";
+import { IStatensVegvesenBilData } from "../../types/typeDefinitions";
 
 /**
  * Class responsible for fetching the remote data
  * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
  */
 export default class classProcessInputForm {
-  //private static remoteBilData: TStatensVegvesenBilData;
-  private static remoteBilData: any;
+  private static remoteBilData: IStatensVegvesenBilData;
 
   /**
    * Send the form, show the loading spinner and fetch remote data
