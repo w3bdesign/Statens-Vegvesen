@@ -18,6 +18,7 @@ export default function getRegNummer(
           registrering: { forstegangsregistreringEier },
           periodiskKjoretoykontroll: { sistKontrollert },
         }) => {
+          
           /*     classProcessInputForm.setInnerHTML(
       "kjennemerke",
       this.remoteBilData.kjennemerke
