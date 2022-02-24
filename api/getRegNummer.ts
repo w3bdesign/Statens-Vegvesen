@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
-import { sanitize } from "dompurify";
-import DOMPurify from 'isomorphic-dompurify';
+
+import {sanitize} from 'isomorphic-dompurify';
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default function getRegNummer(
