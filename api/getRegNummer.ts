@@ -15,7 +15,8 @@ export default function getRegNummer(
       .then(
         ({
           kjennemerke,
-          registrering: { forstegangsregistreringEier, sistKontrollert },
+          registrering: { forstegangsregistreringEier },
+          periodiskKjoretoykontroll: { sistKontrollert },
         }) => {
           /*     classProcessInputForm.setInnerHTML(
       "kjennemerke",
