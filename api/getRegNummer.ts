@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-import {sanitize} from 'isomorphic-dompurify';
+import { sanitize } from "isomorphic-dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default function getRegNummer(
@@ -12,29 +12,18 @@ export default function getRegNummer(
   if (regNummer !== undefined) {
     fetch(urlToFetch)
       .then((response) => response.json())
-      //.then((data: VercelResponse) => {
       .then(
         ({
           kjennemerke,
           registrering: { forstegangsregistreringEier },
           periodiskKjoretoykontroll: { sistKontrollert },
-        }) => {
-          
-          //console.log("Kjennemerke: ", kjennemerke);
-         // console.log(forstegangsregistreringEier);
-         // console.log(sistKontrollert);
-
-          console.log("Dompurify Sanitize: ", sanitize(kjennemerke));
-          console.log("Dompurify Sanitize: ", sanitize(forstegangsregistreringEier));
-          console.log("Dompurify Sanitize: ", sanitize(sistKontrollert));
-
-          
-
-          // const sanitizedData = DOMPurify.sanitize(data);
-
-          //console.log("Old data: ", data);
-          //console.log("sanitizedData: ", sanitizedData);
-          //res.send(data);
+        }: VercelResponse) => {
+          const sanitizedData = {
+            kjennemerke: sanitize(kjennemerke),
+            forstegangsregistreringEier: sanitize(forstegangsregistreringEier),
+            sistKontrollert: sanitize(sistKontrollert),
+          };
+          res.send(sanitizedData);
         }
       )
       .catch(() => {

@@ -11,7 +11,8 @@ import { TStatensVegvesenBilData } from "../../types/typeDefinitions";
  * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
  */
 export default class classProcessInputForm {
-  private static remoteBilData: TStatensVegvesenBilData;
+  //private static remoteBilData: TStatensVegvesenBilData;
+  private static remoteBilData: any;
 
   /**
    * Send the form, show the loading spinner and fetch remote data
@@ -71,15 +72,15 @@ export default class classProcessInputForm {
     );
     classProcessInputForm.setInnerHTML(
       "forstegangsregistrering",
-      this.remoteBilData.registrering.forstegangsregistrering
+      this.remoteBilData.forstegangsregistrering
     );
     classProcessInputForm.setInnerHTML(
       "forstegangsregistreringEier",
-      this.remoteBilData.registrering.forstegangsregistreringEier
+      this.remoteBilData.forstegangsregistreringEier
     );
     classProcessInputForm.setInnerHTML(
       "sistKontrollert",
-      this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert
+      this.remoteBilData.sistKontrollert
     );
   }
 }
