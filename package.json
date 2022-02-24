@@ -40,6 +40,6 @@
     "node-forge": "1.2.1"
   },
   "dependencies": {
-    "isomorphic-dompurify": "^0.18.0"
+    "dompurify": "^2.3.6"
   }
 }

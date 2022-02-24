@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import DOMPurify from "isomorphic-dompurify";
+import { sanitize } from "dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default function getRegNummer(
@@ -19,26 +19,13 @@ export default function getRegNummer(
           periodiskKjoretoykontroll: { sistKontrollert },
         }) => {
           
-          /*     classProcessInputForm.setInnerHTML(
-      "kjennemerke",
-      this.remoteBilData.kjennemerke
-    );
-    classProcessInputForm.setInnerHTML(
-      "forstegangsregistrering",
-      this.remoteBilData.registrering.kjennemerke
-    );
-    classProcessInputForm.setInnerHTML(
-      "forstegangsregistreringEier",
-      this.remoteBilData.registrering.forstegangsregistreringEier
-    );
-    classProcessInputForm.setInnerHTML(
-      "sistKontrollert",
-      this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert
-    );*/
-
           console.log(kjennemerke);
           console.log(forstegangsregistreringEier);
           console.log(sistKontrollert);
+
+          console.log("Sanitize: ", sanitize(kjennemerke));
+          console.log("Sanitize: ", sanitize(forstegangsregistreringEier));
+          console.log("Sanitize: ", sanitize(sistKontrollert));
 
           // const sanitizedData = DOMPurify.sanitize(data);
 
