@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from "isomorphic-dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default function getRegNummer(
@@ -11,12 +11,42 @@ export default function getRegNummer(
   if (regNummer !== undefined) {
     fetch(urlToFetch)
       .then((response) => response.json())
-      .then((data: VercelResponse) => {
-        const sanitizedData = DOMPurify.sanitize(data);
+      //.then((data: VercelResponse) => {
+      .then(({ kjennemerke, forstegangsregistreringEier, sistKontrollert }) => {
+        /*     classProcessInputForm.setInnerHTML(
+      "kjennemerke",
+      this.remoteBilData.kjennemerke
+    );
+    classProcessInputForm.setInnerHTML(
+      "forstegangsregistrering",
+      this.remoteBilData.registrering.kjennemerke
+    );
+    classProcessInputForm.setInnerHTML(
+      "forstegangsregistreringEier",
+      this.remoteBilData.registrering.forstegangsregistreringEier
+    );
+    classProcessInputForm.setInnerHTML(
+      "sistKontrollert",
+      this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert
+    );*/
 
-        console.log("Old data: ", data)
-        console.log("sanitizedData: ", sanitizedData)
-        res.send(data);
+        const test = [
+          {
+            kjennemerke,
+            forstegangsregistreringEier,
+            sistKontrollert,
+          },
+        ];
+
+        console.log(kjennemerke);
+        console.log(forstegangsregistreringEier);
+        console.log(sistKontrollert);
+
+        // const sanitizedData = DOMPurify.sanitize(data);
+
+        //console.log("Old data: ", data);
+        //console.log("sanitizedData: ", sanitizedData);
+        //res.send(data);
       })
       .catch(() => {
         return;
