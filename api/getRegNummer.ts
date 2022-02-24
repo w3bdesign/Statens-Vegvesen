@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { sanitize } from "dompurify";
+import { sanitize } from "isomorphic-dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default function getRegNummer(
@@ -11,16 +11,20 @@ export default function getRegNummer(
   if (regNummer !== undefined) {
     fetch(urlToFetch)
       .then((response) => response.json())
-      .then((data: VercelResponse) => {
-
-       
-        const sanitizedData = sanitize(data);
-
-
-        console.log("Old data: ", data)
-        console.log("sanitizedData: ", sanitizedData)
-        res.send(sanitizedData);
-      })
+      .then(
+        ({
+          kjennemerke,
+          registrering: { forstegangsregistreringEier },
+          periodiskKjoretoykontroll: { sistKontrollert },
+        }: VercelResponse) => {
+          const sanitizedData = {
+            kjennemerke: sanitize(kjennemerke),
+            forstegangsregistreringEier: sanitize(forstegangsregistreringEier),
+            sistKontrollert: sanitize(sistKontrollert),
+          };
+          res.send(sanitizedData);
+        }
+      )
       .catch(() => {
         return;
       });

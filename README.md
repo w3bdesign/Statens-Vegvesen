@@ -1,7 +1,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=w3bdesign_Statens-Vegvesen&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=w3bdesign_Statens-Vegvesen)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/w3bdesign/Statens-Vegvesen.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/w3bdesign/Statens-Vegvesen/context:javascript)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/w3bdesign/Statens-Vegvesen/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/w3bdesign/Statens-Vegvesen/?branch=master)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9bc2e9dbe90c412d82ffbe19a9f878dd)](https://www.codacy.com/gh/w3bdesign/Statens-Vegvesen/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=w3bdesign/Statens-Vegvesen&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9bc2e9dbe90c412d82ffbe19a9f878dd)](https://www.codacy.com/gh/w3bdesign/Statens-Vegvesen/dashboard?utm_source=github.com&utm_medium=referral&utm_content=w3bdesign/Statens-Vegvesen&utm_campaign=Badge_Grade)
 [![DeepSource](https://deepsource.io/gh/w3bdesign/Statens-Vegvesen.svg/?label=active+issues&show_trend=true&token=vdKpHAssiI6fTmx5L1VmPilg)](https://deepsource.io/gh/w3bdesign/Statens-Vegvesen/?ref=repository-badge)
 
 # Display vehicle information from Statens Vegvesen (Norway)
@@ -16,7 +16,7 @@ This application uses Serverless with Typescript for the backend.
 
 ## Features
 
--   Javascript with OOP and Typescript 
+-   Javascript with OOP and Typescript
 -   Serverless backend with Typescript
 -   Bootstrap 5
 -   Animate.css for animations

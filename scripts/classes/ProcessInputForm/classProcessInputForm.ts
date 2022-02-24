@@ -4,21 +4,21 @@ import classShowHideElements from "./classShowHideElements";
 import classErrorHandler from "../ErrorHandler/classErrorHandler";
 
 // Type definition imports
-import { TStatensVegvesenBilData } from "../../types/typeDefinitions";
+import { IStatensVegvesenBilData } from "../../types/typeDefinitions";
 
 /**
  * Class responsible for fetching the remote data
  * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
  */
 export default class classProcessInputForm {
-  private static remoteBilData: TStatensVegvesenBilData;
+  private static remoteBilData: IStatensVegvesenBilData;
 
   /**
    * Send the form, show the loading spinner and fetch remote data
    * @param event Event Used to prevent default form submit action
    * @returns void
    */
-  public sendForm(event: Event): void  {
+  public sendForm(event: Event): void {
     event.preventDefault();
     classShowHideElements.showLoadingSpinner();
     classFetchRemoteData
@@ -71,15 +71,15 @@ export default class classProcessInputForm {
     );
     classProcessInputForm.setInnerHTML(
       "forstegangsregistrering",
-      this.remoteBilData.registrering.forstegangsregistrering
+      this.remoteBilData.forstegangsregistrering
     );
     classProcessInputForm.setInnerHTML(
       "forstegangsregistreringEier",
-      this.remoteBilData.registrering.forstegangsregistreringEier
+      this.remoteBilData.forstegangsregistreringEier
     );
     classProcessInputForm.setInnerHTML(
       "sistKontrollert",
-      this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert
+      this.remoteBilData.sistKontrollert
     );
   }
 }
