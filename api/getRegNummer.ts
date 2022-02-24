@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-
 import { sanitize } from "isomorphic-dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
