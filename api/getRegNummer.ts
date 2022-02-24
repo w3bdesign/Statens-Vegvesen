@@ -16,7 +16,7 @@ export default function getRegNummer(
 
         console.log("Old data: ", data)
         console.log("sanitizedData: ", sanitizedData)
-        res.send(sanitizedData);
+        res.send(data);
       })
       .catch(() => {
         return;
