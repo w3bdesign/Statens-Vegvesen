@@ -28,7 +28,7 @@ export default function getRegNummer(
           console.log("Dompurify Sanitize: ", sanitize(forstegangsregistreringEier));
           console.log("Dompurify Sanitize: ", sanitize(sistKontrollert));
 
-          const 
+          
 
           // const sanitizedData = DOMPurify.sanitize(data);
 
