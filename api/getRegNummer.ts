@@ -19,9 +19,10 @@ export default function getRegNummer(
           registrering: { forstegangsregistreringEier },
           periodiskKjoretoykontroll: { sistKontrollert },
         }) => {
-          console.log("Kjennemerke: ", kjennemerke);
-          console.log(forstegangsregistreringEier);
-          console.log(sistKontrollert);
+          
+          //console.log("Kjennemerke: ", kjennemerke);
+         // console.log(forstegangsregistreringEier);
+         // console.log(sistKontrollert);
 
           console.log("Sanitize: ", DOMPurify.sanitize(kjennemerke));
           console.log("Sanitize: ", DOMPurify.sanitize(forstegangsregistreringEier));
