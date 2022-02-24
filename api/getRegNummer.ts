@@ -12,8 +12,12 @@ export default function getRegNummer(
     fetch(urlToFetch)
       .then((response) => response.json())
       //.then((data: VercelResponse) => {
-      .then(({ kjennemerke, forstegangsregistreringEier, sistKontrollert }) => {
-        /*     classProcessInputForm.setInnerHTML(
+      .then(
+        ({
+          kjennemerke,
+          registrering: { forstegangsregistreringEier, sistKontrollert },
+        }) => {
+          /*     classProcessInputForm.setInnerHTML(
       "kjennemerke",
       this.remoteBilData.kjennemerke
     );
@@ -30,24 +34,17 @@ export default function getRegNummer(
       this.remoteBilData.periodiskKjoretoykontroll.sistKontrollert
     );*/
 
-        const test = [
-          {
-            kjennemerke,
-            forstegangsregistreringEier,
-            sistKontrollert,
-          },
-        ];
+          console.log(kjennemerke);
+          console.log(forstegangsregistreringEier);
+          console.log(sistKontrollert);
 
-        console.log(kjennemerke);
-        console.log(forstegangsregistreringEier);
-        console.log(sistKontrollert);
+          // const sanitizedData = DOMPurify.sanitize(data);
 
-        // const sanitizedData = DOMPurify.sanitize(data);
-
-        //console.log("Old data: ", data);
-        //console.log("sanitizedData: ", sanitizedData);
-        //res.send(data);
-      })
+          //console.log("Old data: ", data);
+          //console.log("sanitizedData: ", sanitizedData);
+          //res.send(data);
+        }
+      )
       .catch(() => {
         return;
       });
