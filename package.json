@@ -7,7 +7,7 @@
     "build": "parcel build index.html",
     "preinstall": "npx npm-force-resolutions",
     "prettier": "prettier --write .",
-    "refresh": "rm -rf node_modules && rm package-lock.json && npm i && npm prettier"
+    "refresh": "rm -rf node_modules && rm package-lock.json && npm i && npm run prettier"
   },
   "repository": {
     "type": "git",

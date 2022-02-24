@@ -12,10 +12,7 @@ export default function getRegNummer(
     fetch(urlToFetch)
       .then((response) => response.json())
       .then((data: VercelResponse) => {
-
-       
         //const sanitizedData = sanitize(data);
-
 
         //console.log("Old data: ", data)
         //console.log("sanitizedData: ", sanitizedData)

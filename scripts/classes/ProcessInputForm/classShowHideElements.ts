@@ -7,9 +7,7 @@ export default class classShowHideElements {
    * @returns void
    */
   static showLoadingSpinner() {
-    window.document
-      .getElementById("loadingSpinner")
-      .classList.remove("d-none");
+    window.document.getElementById("loadingSpinner").classList.remove("d-none");
   }
 
   /**
