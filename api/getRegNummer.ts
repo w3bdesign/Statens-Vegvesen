@@ -19,7 +19,7 @@ export default function getRegNummer(
             forstegangsregistreringEier,
           },
           periodiskKjoretoykontroll: { sistKontrollert },
-        }: VercelResponse) => {
+        }) => {
           const sanitizedData = {
             kjennemerke: sanitize(kjennemerke),
             forstegangsregistreringEier: sanitize(forstegangsregistreringEier),
