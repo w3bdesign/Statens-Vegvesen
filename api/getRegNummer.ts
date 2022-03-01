@@ -14,12 +14,16 @@ export default function getRegNummer(
       .then(
         ({
           kjennemerke,
-          registrering: { forstegangsregistreringEier },
+          registrering: {
+            forstegangsregistrering,
+            forstegangsregistreringEier,
+          },
           periodiskKjoretoykontroll: { sistKontrollert },
-        }: VercelResponse) => {
+        }) => {
           const sanitizedData = {
             kjennemerke: sanitize(kjennemerke),
             forstegangsregistreringEier: sanitize(forstegangsregistreringEier),
+            forstegangsregistrering: sanitize(forstegangsregistrering),
             sistKontrollert: sanitize(sistKontrollert),
           };
           res.send(sanitizedData);
