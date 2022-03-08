@@ -15,14 +15,13 @@ export default class classFetchRemoteData {
       window.document.getElementById("bilinformasjon")
     )).value;
 
-    const API_URL = `${process.env.API_URL}` || "/api/getRegNummer?regNummer=";
+    const API_URL = "/api/getRegNummer?regNummer=";
     const regNummer = `${API_URL}${bilInformasjon}`;
 
     return fetch(regNummer)
       .then(async (response) => {
         const bilResponse = await response.text();
-        const bilData = JSON.parse(bilResponse);
-        return bilData;
+        return JSON.parse(bilResponse);
       })
       .catch(() => {
         // Hide elements if we have an error

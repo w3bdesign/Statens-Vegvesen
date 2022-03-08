@@ -1,11 +1,11 @@
 {
   "name": "statensvegvesen",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Fetching vehicle information from the REST API on https://www.vegvesen.no and displaying it.",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html",
-    "preinstall": "npx npm-force-resolutions",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "prettier": "prettier --write .",
     "refresh": "rm -rf node_modules && rm package-lock.json && npm i && npm run prettier"
   },
@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/w3bdesign/Statens-Vegvesen#readme",
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.3.2",
     "@popperjs/core": "^2.11.2",
     "@types/node": "^17.0.21",
     "@types/node-fetch": "^2.6.1",
@@ -30,9 +29,10 @@
     "bootstrap": "^5.1.3",
     "node-fetch": "2.6.7",
     "node-forge": "1.2.1",
-    "parcel": "^2.3.2",
     "prettier": "2.5.1",
-    "typescript": "^4.6.2"
+    "sass": "^1.49.9",
+    "typescript": "^4.6.2",
+    "vite": "^2.8.6"
   },
   "type": "module",
   "browserslist": "> 0.5%, last 3 versions, not dead",

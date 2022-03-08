@@ -18,6 +18,7 @@ This application uses Serverless with Typescript for the backend.
 
 -   Javascript with OOP and Typescript
 -   Serverless backend with Typescript
+-   Vite as build tool
 -   Bootstrap 5
 -   Animate.css for animations
 -   Responsive design
