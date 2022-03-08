@@ -1,11 +1,11 @@
 {
   "name": "statensvegvesen",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Fetching vehicle information from the REST API on https://www.vegvesen.no and displaying it.",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html",
-    "preinstall": "npx npm-force-resolutions",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "prettier": "prettier --write .",
     "refresh": "rm -rf node_modules && rm package-lock.json && npm i && npm run prettier"
   },
@@ -32,7 +32,9 @@
     "node-forge": "1.2.1",
     "parcel": "^2.3.2",
     "prettier": "2.5.1",
-    "typescript": "^4.6.2"
+    "sass": "^1.49.9",
+    "typescript": "^4.6.2",
+    "vite": "^2.8.6"
   },
   "type": "module",
   "browserslist": "> 0.5%, last 3 versions, not dead",
