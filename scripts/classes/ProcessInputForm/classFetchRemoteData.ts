@@ -21,8 +21,7 @@ export default class classFetchRemoteData {
     return fetch(regNummer)
       .then(async (response) => {
         const bilResponse = await response.text();
-        const bilData = JSON.parse(bilResponse);
-        return bilData;
+        return JSON.parse(bilResponse);
       })
       .catch(() => {
         // Hide elements if we have an error
