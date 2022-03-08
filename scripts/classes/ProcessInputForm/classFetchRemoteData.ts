@@ -15,11 +15,8 @@ export default class classFetchRemoteData {
       window.document.getElementById("bilinformasjon")
     )).value;
 
-    const API_URL = `${process.env.API_URL}` || "/api/getRegNummer?regNummer=";
+    const API_URL = "/api/getRegNummer?regNummer=";
     const regNummer = `${API_URL}${bilInformasjon}`;
-
-
-    console.log("regnummer: ", regNummer)
 
     return fetch(regNummer)
       .then(async (response) => {
