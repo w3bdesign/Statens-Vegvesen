@@ -16,13 +16,13 @@ This application uses Serverless with Typescript for the backend.
 
 ## Features
 
-- Javascript with OOP and Typescript
-- Serverless backend with Typescript
-- Vite as build tool
-- Bootstrap 5
-- Animate.css for animations
-- Responsive design
-- Passes HTML5 standards - <https://validator.w3.org/nu/>
-- Input validation
-- Loading spinner
-- JSDoc comments wherever possible
+-   Javascript with OOP and Typescript
+-   Serverless backend with Typescript
+-   Vite as build tool
+-   Bootstrap 5
+-   Animate.css for animations
+-   Responsive design
+-   Passes HTML5 standards - <https://validator.w3.org/nu/>
+-   Input validation
+-   Loading spinner
+-   JSDoc comments wherever possible
