@@ -6,6 +6,8 @@
 
 # Display vehicle information from Statens Vegvesen (Norway)
 
+<img src="https://user-images.githubusercontent.com/45217974/164569251-ffd9b726-ccc5-4d87-b210-ec11e11c8c9d.png" alt="Screenshot" />
+
 ## Description
 
 Fetching vehicle information from the REST API on <https://www.vegvesen.no> and displaying it.
