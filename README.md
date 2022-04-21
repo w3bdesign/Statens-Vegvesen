@@ -4,7 +4,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9bc2e9dbe90c412d82ffbe19a9f878dd)](https://www.codacy.com/gh/w3bdesign/Statens-Vegvesen/dashboard?utm_source=github.com&utm_medium=referral&utm_content=w3bdesign/Statens-Vegvesen&utm_campaign=Badge_Grade)
 [![DeepSource](https://deepsource.io/gh/w3bdesign/Statens-Vegvesen.svg/?label=active+issues&token=vdKpHAssiI6fTmx5L1VmPilg)](https://deepsource.io/gh/w3bdesign/Statens-Vegvesen/?ref=repository-badge)
 
-# Display vehicle information from Statens Vegvesen (Norway)
+# Display vehicle information from Statens Vegvesen
 
 <img src="https://user-images.githubusercontent.com/45217974/164569251-ffd9b726-ccc5-4d87-b210-ec11e11c8c9d.png" alt="Screenshot" />
 
