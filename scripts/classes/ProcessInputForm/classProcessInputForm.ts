@@ -57,7 +57,11 @@ export default class classProcessInputForm {
    * @param {string} value Value that we modify with
    */
   private static setInnerHTML(elementId: string, value: string) {
-    window.document.getElementById(elementId).innerHTML = value;
+    const element = window.document.getElementById(elementId);
+
+    if (element && value) {
+      element.innerHTML = value;
+    }
   }
 
   /**
