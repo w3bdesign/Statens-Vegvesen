@@ -30,8 +30,8 @@ class MainClass {
     const textInput = window.document.getElementById("bilinformasjon");
     const textForm = window.document.getElementById("regnrform");
 
-    const validText = checkValidText.checkValidText;
-    const sendDataForm = sendForm.sendForm;
+    const validText = () => checkValidText.checkValidText;
+    const sendDataForm = () => sendForm.sendForm;
 
     if (textInput && textForm) {
       textInput.addEventListener("input", validText);
