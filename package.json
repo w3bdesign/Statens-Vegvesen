@@ -1,6 +1,6 @@
 {
   "name": "statensvegvesen",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Fetching vehicle information from the REST API on https://www.vegvesen.no and displaying it.",
   "scripts": {
     "dev": "vite",
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/w3bdesign/Statens-Vegvesen#readme",
   "devDependencies": {
     "@popperjs/core": "^2.11.5",
-    "@types/node": "^17.0.23",
+    "@types/node": "^17.0.25",
     "@types/node-fetch": "^2.6.1",
     "@vercel/node": "^1.14.1",
     "animate.css": "^4.1.1",
