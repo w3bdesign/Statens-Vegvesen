@@ -6,7 +6,7 @@ export default class classShowHideElements {
    * Show the loading spinner
    * @returns void
    */
-  static showLoadingSpinner() {
+  static showLoadingSpinner(): void  {
     window.document.getElementById("loadingSpinner").classList.remove("d-none");
   }
 
@@ -14,7 +14,7 @@ export default class classShowHideElements {
    * Hide the loading spinner
    * @returns void
    */
-  static hideLoadingSpinner() {
+  static hideLoadingSpinner(): void  {
     window.document.getElementById("loadingSpinner").classList.add("d-none");
   }
 
@@ -22,7 +22,7 @@ export default class classShowHideElements {
    * Display the table and add animation class
    * @returns void
    */
-  static showDataTable() {
+  static showDataTable(): void  {
     window.document.getElementById("tableElement").classList.remove("d-none");
   }
 
@@ -30,7 +30,7 @@ export default class classShowHideElements {
    * Hide the table. Usually caused by an error
    * @returns void
    */
-  static hideDataTable() {
+  static hideDataTable(): void  {
     window.document
       .getElementById("tableElement")
       .classList.add("animate__fadeOut");
@@ -40,7 +40,7 @@ export default class classShowHideElements {
    * Hide loading spinner and data table
    * @returns void
    */
-  static hideElements() {
+  static hideElements(): void  {
     window.document
       .getElementById("tableElement")
       .classList.add("animate__fadeOut");

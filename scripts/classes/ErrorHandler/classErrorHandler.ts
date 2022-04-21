@@ -11,7 +11,7 @@ export default class classErrorHandler {
    * Also hide the loading spinner
    * @returns void
    */
-  static displayErrorFromAPI(remoteBilData: TStatensVegvesenBilData) {
+  static displayErrorFromAPI(remoteBilData: TStatensVegvesenBilData): void  {
     window.document.getElementById("feilMelding").innerHTML =
       remoteBilData.melding;
     window.document.getElementById("loadingSpinner").classList.add("d-none");
@@ -21,7 +21,7 @@ export default class classErrorHandler {
    * Remove the error text if we fetch new data
    * @returns void
    */
-  static resetErrorText() {
+  static resetErrorText(): void  {
     window.document.getElementById("feilMelding").innerHTML = "";
   }
 
@@ -29,7 +29,7 @@ export default class classErrorHandler {
    * Notify user that an error has happened when fetching data from API
    * @returns void
    */
-  static showErrorFetchingRegNr() {
+  static showErrorFetchingRegNr(): void  {
     window.document.getElementById("feilMelding").innerHTML =
       "En feil har oppstått, vennligst prøv igjen.";
   }
