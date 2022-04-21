@@ -18,7 +18,7 @@ export default class classProcessInputForm {
    * @param event Event Used to prevent default form submit action
    * @returns void
    */
-  public sendForm(event: Event): void {
+  public sendForm = (event: Event): void => {
     event.preventDefault();
     classShowHideElements.showLoadingSpinner();
     classFetchRemoteData
@@ -30,7 +30,7 @@ export default class classProcessInputForm {
       .catch(() => {
         return;
       });
-  }
+  };
 
   /**
    * Check if we get any errors from the API, if we do, display the error and return

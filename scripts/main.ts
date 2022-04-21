@@ -11,9 +11,6 @@ import classProcessInputForm from "./classes/ProcessInputForm/classProcessInputF
  * @property {HTMLElement} #textForm Reference to form on page. Used to add event listener for form submit.
  */
 class MainClass {
-  #textInput = window.document.getElementById("bilinformasjon");
-  #textForm = window.document.getElementById("regnrform");
-
   /**
    * Initialize the class and add the event handlers
    * @return void
@@ -30,8 +27,13 @@ class MainClass {
     const sendForm = new classProcessInputForm();
     const checkValidText = new classValidText();
 
-    this.#textInput.addEventListener("input", checkValidText.checkValidText);
-    this.#textForm.addEventListener("submit", sendForm.sendForm);
+    const textInput = window.document.getElementById("bilinformasjon");
+    const textForm = window.document.getElementById("regnrform");
+
+    if (textInput && textForm) {
+      textInput.addEventListener("input", checkValidText.checkValidText);
+      textForm.addEventListener("submit", sendForm.sendForm);
+    }
   }
 }
 
