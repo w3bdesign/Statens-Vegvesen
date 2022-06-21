@@ -8,7 +8,8 @@ export default function getRegNummer(
 ): void {
   const { regNummer = "" } = req.query;
   const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${regNummer}`;
-  if (regNummer !== undefined) {
+
+  if (regNummer) {
     fetch(urlToFetch)
       .then((response) => response.json())
       .then(
@@ -19,7 +20,7 @@ export default function getRegNummer(
             forstegangsregistreringEier,
           },
           periodiskKjoretoykontroll: { sistKontrollert },
-        }) => {
+        }: any) => {
           const sanitizedData = {
             kjennemerke: sanitize(kjennemerke),
             forstegangsregistreringEier: sanitize(forstegangsregistreringEier),
