@@ -2,6 +2,7 @@
   "name": "statensvegvesen",
   "version": "1.1.0",
   "description": "Fetching vehicle information from the REST API on https://www.vegvesen.no and displaying it.",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,8 +15,7 @@
     "url": "git+https://github.com/w3bdesign/Statens-Vegvesen.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "", 
   "bugs": {
     "url": "https://github.com/w3bdesign/Statens-Vegvesen/issues"
   },
