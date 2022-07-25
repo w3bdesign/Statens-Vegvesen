@@ -1,4 +1,6 @@
-import fetch from "node-fetch";
+//import fetch from "node-fetch";
+import axios from "axios";
+
 import { sanitize } from "isomorphic-dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
@@ -9,7 +11,12 @@ export default function getRegNummer(
   const { regNummer = "" } = req.query;
   const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${regNummer}`;
   if (regNummer !== undefined) {
-    fetch(urlToFetch)
+
+
+    axios.get(urlToFetch).then((response) => res.send(response));
+
+    /*
+    axios.get<any>(urlToFetch)
       .then((response) => response.json())
       .then(
         ({
@@ -31,6 +38,6 @@ export default function getRegNummer(
       )
       .catch(() => {
         return;
-      });
+      });*/
   }
 }
