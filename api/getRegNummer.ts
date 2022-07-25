@@ -11,9 +11,12 @@ export default function getRegNummer(
   const { regNummer = "" } = req.query;
   const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${regNummer}`;
   if (regNummer !== undefined) {
+    axios.get(urlToFetch).then((response:any) => {
+      console.log(response);
+      res.send("Hi")
+    });
 
 
-    axios.get(urlToFetch).then((response) => res.send(response));
 
     /*
     axios.get<any>(urlToFetch)
