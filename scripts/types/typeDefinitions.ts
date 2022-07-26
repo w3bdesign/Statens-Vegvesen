@@ -61,15 +61,15 @@ export interface IStatensVegvesenFullData {
     hybridElektriskKjoretoy: null | boolean;
     girkasse: string;
     hybridkategori: string;
-    motorer: any;
+    motorer: string;
     karosseri: { farge: string; fargekode: string };
-    forbrukOgUtslipp: Array<any>;
+    forbrukOgUtslipp: Array<string>;
     aksler: {
       drivaksler: number;
-      dekkOgFelger: Array<any>;
-      aksler: Array<any>;
+      dekkOgFelger: Array<string>;
+      aksler: Array<string>;
     };
-    unntak: Array<any>;
+    unntak: Array<string>;
   };
   bruktimport: null | boolean;
   vektarsavgiftOppgittGrunnlag: null;
