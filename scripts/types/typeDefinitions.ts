@@ -18,3 +18,59 @@ export interface IStatensVegvesenBilData {
   // Last time the car had a mandatory roadworthiness test
   sistKontrollert: string;
 }
+
+export interface IStatensVegvesenFullData {
+  kjennemerke: string;
+  understellsnummer: string;
+  kuid: string;
+  personligKjennemerke: string | null;
+  registrering: {
+    registreringsstatus: string;
+    registreringsstatusDato: string;
+    forstegangsregistrering: string;
+    forstegangsregistreringNorge: string;
+    forstegangsregistreringEier: string;
+    avregistrertHosBilforhandler: boolean;
+    kjennemerkefarge: string;
+  };
+  periodiskKjoretoykontroll: { sistKontrollert: string; nesteKontroll: string };
+  tekniskKjoretoy: {
+    handelsbetegnelse: string;
+    typebetegnelse: string;
+    merke: string;
+    kjoretoyAvgiftskode: string;
+    tekniskKode: string;
+    miljoEuroklasse: null;
+    sitteplasser: number;
+    staplasser: null;
+    oppbygd: boolean;
+    lengde: number;
+    bredde: number;
+    hoyde: null;
+    lastegenskaper: {
+      egenvekt: number;
+      tillattTotalvekt: number;
+      nyttelast: number;
+      tillattTilhengervektMedBrems: number;
+      tillattTilhengervektUtenBrems: number;
+      tillattVertikalKoplingslast: number;
+      tillattVogntogvekt: number;
+      tillattTaklast: number;
+    };
+    maksimumHastighet: number;
+    hybridElektriskKjoretoy: null | boolean;
+    girkasse: string;
+    hybridkategori: string;
+    motorer: string;
+    karosseri: { farge: string; fargekode: string };
+    forbrukOgUtslipp: Array<string>;
+    aksler: {
+      drivaksler: number;
+      dekkOgFelger: Array<string>;
+      aksler: Array<string>;
+    };
+    unntak: Array<string>;
+  };
+  bruktimport: null | boolean;
+  vektarsavgiftOppgittGrunnlag: null;
+}
