@@ -3,6 +3,8 @@ import axios from "axios";
 import { sanitize } from "isomorphic-dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
+import { IStatensVegvesenFullData } from "../scripts/types/typeDefinitions";
+
 export default function getRegNummer(
   req: VercelRequest,
   res: VercelResponse
@@ -10,13 +12,8 @@ export default function getRegNummer(
   const { regNummer = "" } = req.query;
   const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${regNummer}`;
   if (regNummer !== undefined) {
-    axios.get(urlToFetch).then((response: any) => {
+    axios.get<IStatensVegvesenFullData>(urlToFetch).then((response) => {
       if (response.status === 200) {
-
-
-        console.log("Response:", response.data)
-
-
         const {
           kjennemerke,
           registrering: {
