@@ -12,8 +12,23 @@ export default function getRegNummer(
   const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/${regNummer}`;
   if (regNummer !== undefined) {
     axios.get(urlToFetch).then((response: any) => {
-     
-      res.send(response.data);
+      console.log("Status: ", response.status);
+
+      const {
+        kjennemerke,
+        forstegangsregistreringEier,
+        forstegangsregistrering,
+        sistKontrollert,
+      } = response.data;
+
+      const sanitizedData = {
+        kjennemerke: sanitize(kjennemerke),
+        forstegangsregistreringEier: sanitize(forstegangsregistreringEier),
+        forstegangsregistrering: sanitize(forstegangsregistrering),
+        sistKontrollert: sanitize(sistKontrollert),
+      };
+
+      res.send(sanitizedData);
     });
 
     /*
