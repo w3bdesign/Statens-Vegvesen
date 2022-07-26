@@ -14,21 +14,29 @@ export default function getRegNummer(
     axios.get(urlToFetch).then((response: any) => {
       console.log("Status: ", response.status);
 
-      const {
-        kjennemerke,
-        forstegangsregistreringEier,
-        forstegangsregistrering,
-        sistKontrollert,
-      } = response.data;
+      if (response.status === 200) {
+        const {
+          kjennemerke,
 
-      const sanitizedData = {
-        kjennemerke: sanitize(kjennemerke),
-        forstegangsregistreringEier: sanitize(forstegangsregistreringEier),
-        forstegangsregistrering: sanitize(forstegangsregistrering),
-        sistKontrollert: sanitize(sistKontrollert),
-      };
+          registrering: {
+            forstegangsregistrering,
+            forstegangsregistreringEier,
+          },
 
-      res.send(sanitizedData);
+          periodiskKjoretoykontroll: { sistKontrollert },
+        } = response.data;
+
+        const sanitizedData = {
+          kjennemerke: sanitize(kjennemerke),
+          forstegangsregistreringEier: sanitize(forstegangsregistreringEier),
+          forstegangsregistrering: sanitize(forstegangsregistrering),
+          sistKontrollert: sanitize(sistKontrollert),
+        };
+
+        res.send(sanitizedData);
+      } else {
+        res.send({ error: "Feil under henting av data" });
+      }
     });
 
     /*
