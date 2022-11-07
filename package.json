@@ -32,7 +32,7 @@
     "prettier": "2.7.1",
     "sass": "^1.56.0",
     "typescript": "^4.8.4",
-    "vite": "^3.2.2"
+    "vite": "^3.2.3"
   },
   "type": "module",
   "browserslist": "> 0.5%, last 3 versions, not dead",
