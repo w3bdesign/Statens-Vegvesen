@@ -50,20 +50,14 @@ const processRemoteData = () => {
 };
 
 // This function is called when a form is submitted
-//const sendForm = (): void => {
-export const sendForm = (): void => {
-  // Prevent the default form submission behavior
 
-  console.log("Send form called");
-
-  //event.preventDefault();
+const sendForm = (): void => {
   // Show the loading spinner using the 'classShowHideElements' object
   classShowHideElements.showLoadingSpinner();
   // Fetch remote data using the 'classFetchRemoteData' object
   classFetchRemoteData
     .fetchRemoteData()
     .then((response) => {
-      console.log("Response:", response);
       // If the fetch is successful, store the response in the 'remoteBilData' variable
       remoteBilData = response;
       // Call the 'processRemoteData' function to handle the data
@@ -75,6 +69,4 @@ export const sendForm = (): void => {
     });
 };
 
-/*export default {
-  sendForm,
-};*/
+export default sendForm;

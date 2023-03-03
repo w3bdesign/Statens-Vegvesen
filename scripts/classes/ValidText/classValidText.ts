@@ -15,18 +15,13 @@ const checkValidText = (event: Event): void => {
     "submitButton"
   ) as SubmitButton;
 
-  console.log("checkValidText is called");
-
   const letters = /[A-Z]{2}\d{5}/gi;
   const bilInformasjonMatchesFormat = letters.test(bilInformasjon.value);
-
-  console.log("bilInformasjon:", bilInformasjon);
-  console.log("bilInformasjonMatchesFormat: ", bilInformasjonMatchesFormat);
 
   if (
     bilInformasjonMatchesFormat &&
     bilInformasjon !== undefined
-    
+
     //bilInformasjon.length === 7
   ) {
     submitButton.removeAttribute("disabled");
