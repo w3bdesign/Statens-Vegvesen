@@ -11,15 +11,16 @@ const fetchRemoteData = async () => {
   )).value;
   const API_URL = "/api/getRegNummer?regNummer=";
   const regNummer = `${API_URL}${bilInformasjon}`;
+  let bilResponse = "";
 
   try {
     const response = await fetch(regNummer);
-    const bilResponse = await response.text();
-    return JSON.parse(bilResponse);
+    bilResponse = await response.text();
   } catch (error) {
     classShowHideElements.hideElements();
     classErrorHandler.showErrorFetchingRegNr();
   }
+  return JSON.parse(bilResponse);
 };
 
 export default { fetchRemoteData };
