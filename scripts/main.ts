@@ -7,13 +7,13 @@ const initialize = (): void => {
   const textInput = window.document.getElementById(
     "bilinformasjon"
   ) as HTMLInputElement;
-  const textForm = window.document.getElementById("regnrform");
+  const textForm = window.document.getElementById("regnrform") as HTMLFormElement;
 
   if (textInput && textForm) {
     console.log("textInput:", textInput);
 
     textInput.addEventListener("input", checkValidText);
-    textForm.addEventListener("submit", sendForm as any);
+    textForm.addEventListener("submit",  sendForm);
   }
 };
 

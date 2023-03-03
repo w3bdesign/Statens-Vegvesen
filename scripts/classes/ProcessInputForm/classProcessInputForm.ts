@@ -1,6 +1,7 @@
 import classFetchRemoteData from "./classFetchRemoteData";
 import classShowHideElements from "./classShowHideElements";
 import classErrorHandler from "../ErrorHandler/classErrorHandler";
+
 import type { IStatensVegvesenBilData } from "../../types/typeDefinitions";
 
 let remoteBilData: IStatensVegvesenBilData;
@@ -49,7 +50,7 @@ const processRemoteData = () => {
 };
 
 // This function is called when a form is submitted
-const sendForm = (event: Event): void => {
+const sendForm = (event: any) => {
   // Prevent the default form submission behavior
   event.preventDefault();
   // Show the loading spinner using the 'classShowHideElements' object
@@ -58,10 +59,12 @@ const sendForm = (event: Event): void => {
   classFetchRemoteData
     .fetchRemoteData()
     .then((response) => {
+
+      console.log("Response:", response)
       // If the fetch is successful, store the response in the 'remoteBilData' variable
       remoteBilData = response;
       // Call the 'processRemoteData' function to handle the data
-      processRemoteData();
+      //processRemoteData();
     })
     .catch(() => {
       // If the fetch fails, do nothing and return from the function early
