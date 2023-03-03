@@ -1,36 +1,28 @@
-// Type definition imports
-import { TStatensVegvesenBilData } from "../../types/typeDefinitions";
+import { IStatensVegvesenBilData } from "../../types/typeDefinitions";
 
-/**
- * Class responsible for handling errors
- * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
- */
-export default class classErrorHandler {
-  /**
-   * Display error (fieldname melding) from API if the registration number was not found
-   * Also hide the loading spinner
-   * @returns void
-   */
-  static displayErrorFromAPI(remoteBilData: TStatensVegvesenBilData): void  {
-    window.document.getElementById("feilMelding").innerHTML =
-      remoteBilData.melding;
-    window.document.getElementById("loadingSpinner").classList.add("d-none");
+const displayErrorFromAPI = (remoteBilData: IStatensVegvesenBilData): void => {
+  const feilMelding = document.getElementById("feilMelding");
+  if (feilMelding !== null) {
+    feilMelding.innerHTML = remoteBilData.melding;
   }
+  const loadingSpinner = document.getElementById("loadingSpinner");
+  if (loadingSpinner !== null) {
+    loadingSpinner.classList.add("d-none");
+  }
+};
 
-  /**
-   * Remove the error text if we fetch new data
-   * @returns void
-   */
-  static resetErrorText(): void  {
-    window.document.getElementById("feilMelding").innerHTML = "";
+const resetErrorText = (): void => {
+  const feilMelding = document.getElementById("feilMelding");
+  if (feilMelding !== null) {
+    feilMelding.innerHTML = "";
   }
+};
 
-  /**
-   * Notify user that an error has happened when fetching data from API
-   * @returns void
-   */
-  static showErrorFetchingRegNr(): void  {
-    window.document.getElementById("feilMelding").innerHTML =
-      "En feil har oppstått, vennligst prøv igjen.";
+const showErrorFetchingRegNr = (): void => {
+  const feilMelding = document.getElementById("feilMelding");
+  if (feilMelding !== null) {
+    feilMelding.innerHTML = "En feil har oppstått, vennligst prøv igjen.";
   }
-}
+};
+
+export default { displayErrorFromAPI, resetErrorText, showErrorFetchingRegNr };

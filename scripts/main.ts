@@ -3,7 +3,7 @@ import "animate.css";
 import checkValidText from "./classes/ValidText/classValidText";
 import sendForm from "./classes/ProcessInputForm/classProcessInputForm";
 
-const initialize = (): void => {
+const initialize = () => {
   const textInput = window.document.getElementById(
     "bilinformasjon"
   ) as HTMLInputElement;
