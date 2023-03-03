@@ -1,7 +1,7 @@
 import "animate.css";
 
 import checkValidText from "./classes/ValidText/classValidText";
-import {sendForm} from "./classes/ProcessInputForm/classProcessInputForm";
+import sendForm from "./classes/ProcessInputForm/classProcessInputForm";
 
 const initialize = (): void => {
   const textInput = window.document.getElementById(
@@ -15,7 +15,6 @@ const initialize = (): void => {
     textInput.addEventListener("input", checkValidText);
 
     textForm.addEventListener("submit", (event) => {
-      
       sendForm();
       event.preventDefault();
     });

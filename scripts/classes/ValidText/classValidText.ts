@@ -18,12 +18,7 @@ const checkValidText = (event: Event): void => {
   const letters = /[A-Z]{2}\d{5}/gi;
   const bilInformasjonMatchesFormat = letters.test(bilInformasjon.value);
 
-  if (
-    bilInformasjonMatchesFormat &&
-    bilInformasjon !== undefined
-
-    //bilInformasjon.length === 7
-  ) {
+  if (bilInformasjonMatchesFormat && bilInformasjon !== undefined) {
     submitButton.removeAttribute("disabled");
   } else {
     submitButton.setAttribute("disabled", "true");
