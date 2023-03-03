@@ -12,16 +12,12 @@ const initialize = (): void => {
   ) as HTMLFormElement;
 
   if (textInput && textForm) {
-   
-
     textInput.addEventListener("input", checkValidText);
-   
+
     textForm.addEventListener("submit", (event) => {
       event.preventDefault();
       sendForm;
     });
-
-   
   }
 };
 

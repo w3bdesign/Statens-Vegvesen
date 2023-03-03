@@ -66,7 +66,7 @@ const sendForm = (event: any) => {
       // If the fetch is successful, store the response in the 'remoteBilData' variable
       remoteBilData = response;
       // Call the 'processRemoteData' function to handle the data
-      //processRemoteData();
+      processRemoteData();
     })
     .catch(() => {
       // If the fetch fails, do nothing and return from the function early
