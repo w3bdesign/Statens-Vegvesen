@@ -1,7 +1,3 @@
-interface InputEvent extends Event {
-  target: HTMLInputElement;
-}
-
 interface SubmitButton extends HTMLElement {
   removeAttribute(name: string): void;
   setAttribute(name: string, value: string): void;
@@ -12,22 +8,26 @@ interface SubmitButton extends HTMLElement {
  * If it is, we enable the submit button
  */
 
-const checkValidText = (event: InputEvent): void => {
-  const bilInformasjon = event?.target?.value;
+const checkValidText = (event: Event): void => {
+  const bilInformasjon = event.target as HTMLInputElement;
+
   const submitButton = window.document.getElementById(
     "submitButton"
   ) as SubmitButton;
 
+  console.log("checkValidText is called");
+
   const letters = /[A-Z]{2}\d{5}/gi;
-  const bilInformasjonMatchesFormat = letters.test(bilInformasjon);
+  const bilInformasjonMatchesFormat = letters.test(bilInformasjon.value);
 
   console.log("bilInformasjon:", bilInformasjon);
   console.log("bilInformasjonMatchesFormat: ", bilInformasjonMatchesFormat);
 
   if (
     bilInformasjonMatchesFormat &&
-    bilInformasjon !== undefined &&
-    bilInformasjon.length === 7
+    bilInformasjon !== undefined
+    
+    //bilInformasjon.length === 7
   ) {
     submitButton.removeAttribute("disabled");
   } else {
