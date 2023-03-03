@@ -16,8 +16,9 @@ const initialize = (): void => {
 
     textInput.addEventListener("input", checkValidText);
     //textForm.addEventListener("submit",  sendForm as any);
-    textForm.addEventListener("submit", () => {
+    textForm.addEventListener("submit", (event) => {
       alert("Submit!");
+      event.preventDefault();
     });
 
     console.log("textForm after:", textForm);
