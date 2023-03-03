@@ -53,9 +53,7 @@ const processRemoteData = () => {
 const sendForm = (event: any) => {
   // Prevent the default form submission behavior
 
-
-  console.log("Send form called")
-
+  console.log("Send form called");
 
   event.preventDefault();
   // Show the loading spinner using the 'classShowHideElements' object
@@ -64,8 +62,7 @@ const sendForm = (event: any) => {
   classFetchRemoteData
     .fetchRemoteData()
     .then((response) => {
-
-      console.log("Response:", response)
+      console.log("Response:", response);
       // If the fetch is successful, store the response in the 'remoteBilData' variable
       remoteBilData = response;
       // Call the 'processRemoteData' function to handle the data
