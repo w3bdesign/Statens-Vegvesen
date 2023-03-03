@@ -50,12 +50,13 @@ const processRemoteData = () => {
 };
 
 // This function is called when a form is submitted
-const sendForm = (event: any) => {
+//const sendForm = (): void => {
+export const sendForm = (): void => {
   // Prevent the default form submission behavior
 
   console.log("Send form called");
 
-  event.preventDefault();
+  //event.preventDefault();
   // Show the loading spinner using the 'classShowHideElements' object
   classShowHideElements.showLoadingSpinner();
   // Fetch remote data using the 'classFetchRemoteData' object
@@ -74,6 +75,6 @@ const sendForm = (event: any) => {
     });
 };
 
-export default {
+/*export default {
   sendForm,
-};
+};*/
