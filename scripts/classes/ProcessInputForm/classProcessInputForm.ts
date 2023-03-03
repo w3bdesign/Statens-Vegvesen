@@ -1,89 +1,72 @@
-// Class imports
 import classFetchRemoteData from "./classFetchRemoteData";
 import classShowHideElements from "./classShowHideElements";
 import classErrorHandler from "../ErrorHandler/classErrorHandler";
 
-// Type definition imports
-import { IStatensVegvesenBilData } from "../../types/typeDefinitions";
+import type { IStatensVegvesenBilData } from "../../types/typeDefinitions";
+
+let remoteBilData: IStatensVegvesenBilData;
+
+// Helper function to set innerHTML
+const setInnerHTML = (elementId: string, value: string) => {
+  const element = window.document.getElementById(elementId);
+  if (element && value) {
+    element.innerHTML = value;
+  }
+};
 
 /**
- * Class responsible for fetching the remote data
- * @property {TStatensVegvesenBilData} remoteBilData Remote data from API
+ * Add remote data to the table
  */
-export default class classProcessInputForm {
-  private static remoteBilData: IStatensVegvesenBilData;
+const addDataToTable = () => {
+  setInnerHTML("kjennemerke", remoteBilData.kjennemerke);
+  setInnerHTML(
+    "forstegangsregistrering",
+    remoteBilData.forstegangsregistrering
+  );
+  setInnerHTML(
+    "forstegangsregistreringEier",
+    remoteBilData.forstegangsregistreringEier
+  );
+  setInnerHTML("sistKontrollert", remoteBilData.sistKontrollert);
+};
 
-  /**
-   * Send the form, show the loading spinner and fetch remote data
-   * @param event Event Used to prevent default form submit action
-   * @returns void
-   */
-  public sendForm = (event: Event): void => {
-    event.preventDefault();
-    classShowHideElements.showLoadingSpinner();
-    classFetchRemoteData
-      .fetchRemoteData()
-      .then((response) => {
-        classProcessInputForm.remoteBilData = response;
-        classProcessInputForm.processRemoteData();
-      })
-      .catch(() => {
-        return;
-      });
-  };
+// This function processes remote data
+const processRemoteData = () => {
+  // Check if the remote data has a 'melding' property
+  if (remoteBilData.melding !== undefined) {
+    // If it does, display an error message using the 'classErrorHandler' object and hide the data table
+    classErrorHandler.displayErrorFromAPI(remoteBilData);
+    classShowHideElements.hideDataTable();
 
-  /**
-   * Check if we get any errors from the API, if we do, display the error and return
-   * Otherwise we hide the loading spinner, show the data table, add the data and reset the error text
-   * @returns void
-   */
-  private static processRemoteData() {
-    if (classProcessInputForm.remoteBilData.melding !== undefined) {
-      classErrorHandler.displayErrorFromAPI(
-        classProcessInputForm.remoteBilData
-      );
-      classShowHideElements.hideDataTable();
+    return;
+  }
+  // If the remote data does not have a 'melding' property, hide the loading spinner and show the data table
+  classShowHideElements.hideLoadingSpinner();
+  classShowHideElements.showDataTable();
+  // Add the remote data to the table
+  addDataToTable();
+  // Reset any error text using the 'classErrorHandler' object
+  classErrorHandler.resetErrorText();
+};
+
+// This function is called when a form is submitted
+
+const sendForm = (): void => {
+  // Show the loading spinner using the 'classShowHideElements' object
+  classShowHideElements.showLoadingSpinner();
+  // Fetch remote data using the 'classFetchRemoteData' object
+  classFetchRemoteData
+    .fetchRemoteData()
+    .then((response) => {
+      // If the fetch is successful, store the response in the 'remoteBilData' variable
+      remoteBilData = response;
+      // Call the 'processRemoteData' function to handle the data
+      processRemoteData();
+    })
+    .catch(() => {
+      // If the fetch fails, do nothing and return from the function early
       return;
-    }
-    classShowHideElements.hideLoadingSpinner();
-    classShowHideElements.showDataTable();
-    this.addDataToTable();
-    classErrorHandler.resetErrorText();
-  }
+    });
+};
 
-  /**
-   * Helper function to set the innerHTML attribute for each element
-   * @param {string} elementId ID of element that we need to modify
-   * @param {string} value Value that we modify with
-   */
-  private static setInnerHTML(elementId: string, value: string) {
-    const element = window.document.getElementById(elementId);
-
-    if (element && value) {
-      element.innerHTML = value;
-    }
-  }
-
-  /**
-   * Set the content of the table <td>s to the fetched remote data
-   * @returns void
-   */
-  private static addDataToTable() {
-    classProcessInputForm.setInnerHTML(
-      "kjennemerke",
-      this.remoteBilData.kjennemerke
-    );
-    classProcessInputForm.setInnerHTML(
-      "forstegangsregistrering",
-      this.remoteBilData.forstegangsregistrering
-    );
-    classProcessInputForm.setInnerHTML(
-      "forstegangsregistreringEier",
-      this.remoteBilData.forstegangsregistreringEier
-    );
-    classProcessInputForm.setInnerHTML(
-      "sistKontrollert",
-      this.remoteBilData.sistKontrollert
-    );
-  }
-}
+export default sendForm;
