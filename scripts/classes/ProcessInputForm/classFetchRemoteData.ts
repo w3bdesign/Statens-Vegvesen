@@ -3,7 +3,7 @@ import classShowHideElements from "./classShowHideElements";
 import classErrorHandler from "../ErrorHandler/classErrorHandler";
 
 /**
- * Class responsible for fetching the remote data
+ * Function responsible for fetching the remote data
  */
 const fetchRemoteData = async () => {
   const bilInformasjon = (<HTMLInputElement>(
