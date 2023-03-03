@@ -11,8 +11,9 @@ interface SubmitButton extends HTMLElement {
  * checkValidText is where we check if the text input is valid
  * If it is, we enable the submit button
  */
+
 const checkValidText = (event: InputEvent): void => {
-  const bilInformasjon = event.target.value;
+  const bilInformasjon = event?.target?.value;
   const submitButton = window.document.getElementById(
     "submitButton"
   ) as SubmitButton;
