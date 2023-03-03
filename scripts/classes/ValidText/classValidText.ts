@@ -21,6 +21,9 @@ const checkValidText = (event: InputEvent): void => {
   const letters = /[A-Z]{2}\d{5}/gi;
   const bilInformasjonMatchesFormat = letters.test(bilInformasjon);
 
+  console.log("bilInformasjon:", bilInformasjon);
+  console.log("bilInformasjonMatchesFormat: ", bilInformasjonMatchesFormat);
+
   if (
     bilInformasjonMatchesFormat &&
     bilInformasjon !== undefined &&
