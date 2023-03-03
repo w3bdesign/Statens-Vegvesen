@@ -10,12 +10,10 @@ const initialize = (): void => {
   const textForm = window.document.getElementById("regnrform");
 
   if (textInput && textForm) {
+    console.log("textInput:", textInput);
 
-    console.log("Adding event listeners ...");
-
-
-    textInput.addEventListener("input", () => checkValidText);
-    textForm.addEventListener("submit", () => sendForm);
+    textInput.addEventListener("input", checkValidText);
+    textForm.addEventListener("submit", sendForm as any);
   }
 };
 
