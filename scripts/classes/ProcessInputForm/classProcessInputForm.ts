@@ -52,6 +52,11 @@ const processRemoteData = () => {
 // This function is called when a form is submitted
 const sendForm = (event: any) => {
   // Prevent the default form submission behavior
+
+
+  console.log("Send form called")
+
+
   event.preventDefault();
   // Show the loading spinner using the 'classShowHideElements' object
   classShowHideElements.showLoadingSpinner();
