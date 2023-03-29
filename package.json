@@ -22,7 +22,7 @@
   "homepage": "https://github.com/w3bdesign/Statens-Vegvesen#readme",
   "devDependencies": {
     "@popperjs/core": "^2.11.7",
-    "@types/node": "^18.15.10",
+    "@types/node": "^18.15.11",
     "@types/node-fetch": "^2.6.2",
     "@vercel/node": "^2.10.1",
     "animate.css": "^4.1.1",
