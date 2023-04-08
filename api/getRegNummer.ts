@@ -25,31 +25,31 @@ export default async function handler(
       },
     });
 
-    //console.log("Response er: ", response);
-    //res.status(500).json({ debug: `Debug ${response}` });
-
-
-    /*if (response.status === 200) {
+    if (response.status === 200) {
       const {
-        kjennemerke,
-        registrering: { forstegangsregistrering, forstegangsregistreringEier },
-        periodiskKjoretoykontroll: { sistKontrollert },
+        kjoretoydataListe: [
+          {
+            kjoretoyId: { kjennemerke },
+            forstegangsregistrering: {
+              registrertForstegangNorgeDato: forstegangsregistrering,
+            },
+            periodiskKjoretoyKontroll: { sistGodkjent: sistKontrollert },
+          },
+        ],
       } = response.data;
 
       const sanitizedData = {
         kjennemerke: sanitize(kjennemerke),
-        forstegangsregistreringEier: sanitize(forstegangsregistreringEier),
-        forstegangsregistrering: sanitize(forstegangsregistrering),
-        sistKontrollert: sanitize(sistKontrollert),
-      };*/
+        forstegangsregistrering: sanitize(forstegangsregistrering.toString()),
+        sistKontrollert: sanitize(sistKontrollert.toString()),
+      };
 
-      //res.status(200).json(sanitizedData);
-       res.status(200).json(response.data);
-   /* } else {
-      res.status(500).json({ error: `Feil under henting av data  ${response}` });
-    }*/
+      res.status(200).json(sanitizedData);
+    } else {
+      res.status(500).json({ error: `Feil under henting av data ` });
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: `Feil under henting av data  - error ${error}` });
+    res.status(500).json({ error: `Feil under henting av data ` });
   }
 }
