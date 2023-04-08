@@ -25,8 +25,8 @@ export default async function handler(
       },
     });
 
-    console.log("Response er: ", response);
-    res.status(500).json({ debug: `Debug ${response}` });
+    //console.log("Response er: ", response);
+    //res.status(500).json({ debug: `Debug ${response}` });
 
 
     if (response.status === 200) {
