@@ -24,6 +24,8 @@ export default async function handler(
       },
     });
 
+    console.log("Response er: ", response);
+
     if (response.status === 200) {
       const {
         kjennemerke,
