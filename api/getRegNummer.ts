@@ -1,11 +1,11 @@
 import axios from "axios";
 import { sanitize } from "isomorphic-dompurify";
-import { NextApiRequest, NextApiResponse } from "next";
+import { VercelRequest, VercelResponse } from "@vercel/node";
 import { IStatensVegvesenFullData } from "../scripts/types/typeDefinitions";
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: VercelRequest,
+  res: VercelResponse
 ): Promise<void> {
   const { regNummer = "" } = req.query;
 
