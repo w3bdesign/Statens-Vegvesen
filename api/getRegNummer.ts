@@ -3,6 +3,8 @@ import { sanitize } from "isomorphic-dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import { IStatensVegvesenFullData } from "../scripts/types/typeDefinitions";
 
+// https://autosys-kjoretoy-api.atlas.vegvesen.no/api-ui/index-enkeltoppslag.html
+
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse
@@ -45,10 +47,10 @@ export default async function handler(
 
       res.status(200).json(sanitizedData);
     } else {
-      res.status(500).json({ error: `Feil under henting av data ` });
+      res.status(500).json({ error: "Feil under henting av data " });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: `Feil under henting av data ` });
+    res.status(500).json({ error: "Feil under henting av data" });
   }
 }
