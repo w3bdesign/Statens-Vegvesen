@@ -14,7 +14,8 @@ export default async function handler(
     return;
   }
 
-  const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${regNummer}`;
+  //const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${regNummer}`;
+  const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=ce65676`;
 
   try {
     const response = await axios.get<IStatensVegvesenFullData>(urlToFetch, {
@@ -26,8 +27,6 @@ export default async function handler(
 
     console.log("Response er: ", response);
     res.status(500).json({ debug: `Debug ${response}` });
-
-
 
 
     if (response.status === 200) {
