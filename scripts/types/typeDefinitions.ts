@@ -26,7 +26,7 @@ export interface Godkjenning {
   kjoretoymerknad: Kjoretoymerknad[];
   registreringsbegrensninger: Registreringsbegrensninger;
   tekniskGodkjenning: TekniskGodkjenning;
-  tilleggsgodkjenninger: any[];
+  tilleggsgodkjenninger: string[];
 }
 
 export interface ForstegangsGodkjenning {
@@ -36,13 +36,13 @@ export interface ForstegangsGodkjenning {
   gyldigFraDato: Date;
   gyldigFraDatoTid: Date;
   kvalitetskodeForstegangRegDato: KjoringensArt;
-  unntak: any[];
+  unntak: string[];
 }
 
 export interface KjoringensArt {
   kodeNavn?: string;
   kodeVerdi: string;
-  tidligereKodeVerdi: any[];
+  tidligereKodeVerdi: string[];
   kodeBeskrivelse?: string;
   kodeTypeId?: string;
 }
@@ -53,7 +53,7 @@ export interface Kjoretoymerknad {
 }
 
 export interface Registreringsbegrensninger {
-  registreringsbegrensning: any[];
+  registreringsbegrensning: string[];
 }
 
 export interface TekniskGodkjenning {
@@ -64,7 +64,7 @@ export interface TekniskGodkjenning {
   kjoretoyklassifisering: Kjoretoyklassifisering;
   krav: Krav[];
   tekniskeData: TekniskeData;
-  unntak: any[];
+  unntak: string[];
 }
 
 export interface Kjoretoyklassifisering {
@@ -99,7 +99,7 @@ export interface NasjonalGodkjenning {
 
 export interface TekniskUnderkode {
   kodeVerdi: string;
-  tidligereKodeVerdi: any[];
+  tidligereKodeVerdi: string[];
 }
 
 export interface Krav {
@@ -116,7 +116,7 @@ export interface TekniskeData {
   karosseriOgLasteplan: KarosseriOgLasteplan;
   miljodata: Miljodata;
   motorOgDrivverk: MotorOgDrivverk;
-  ovrigeTekniskeData: any[];
+  ovrigeTekniskeData: string[];
   persontall: Persontall;
   tilhengerkopling: Tilhengerkopling;
   vekter: Vekter;
@@ -150,7 +150,7 @@ export interface Aksel {
 }
 
 export interface Bremser {
-  tilhengerBremseforbindelse: any[];
+  tilhengerBremseforbindelse: string[];
 }
 
 export interface DekkOgFelg {
@@ -176,7 +176,7 @@ export interface Dimensjoner {
 }
 
 export interface Generelt {
-  fabrikant: any[];
+  fabrikant: string[];
   handelsbetegnelse: string[];
   merke: Merke[];
   tekniskKode: KjoringensArt;
@@ -189,8 +189,8 @@ export interface Merke {
 }
 
 export interface KarosseriOgLasteplan {
-  antallDorer: any[];
-  dorUtforming: any[];
+  antallDorer: string[];
+  dorUtforming: string[];
   kjennemerketypeBak: KjoringensArt;
   kjennemerkestorrelseBak: KjoringensArt;
   kjennemerketypeForan: KjoringensArt;
@@ -220,10 +220,10 @@ export interface Lyd {
 
 export interface MotorOgDrivverk {
   girkassetype: KjoringensArt;
-  girutvekslingPrGir: any[];
+  girutvekslingPrGir: string[];
   hybridKategori: KjoringensArt;
   maksimumHastighet: number[];
-  maksimumHastighetMalt: any[];
+  maksimumHastighetMalt: string[];
   motor: Motor[];
 }
 
@@ -245,7 +245,7 @@ export interface Persontall {
 }
 
 export interface Tilhengerkopling {
-  kopling: any[];
+  kopling: string[];
 }
 
 export interface Vekter {
@@ -258,7 +258,7 @@ export interface Vekter {
   tillattTotalvekt: number;
   tillattVertikalKoplingslast: number;
   tillattVogntogvekt: number;
-  vogntogvektAvhBremsesystem: any[];
+  vogntogvektAvhBremsesystem: string[];
 }
 
 export interface Kjennemerke {
