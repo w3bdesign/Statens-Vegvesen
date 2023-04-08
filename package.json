@@ -21,18 +21,18 @@
   },
   "homepage": "https://github.com/w3bdesign/Statens-Vegvesen#readme",
   "devDependencies": {
-    "@popperjs/core": "^2.11.6",
-    "@types/node": "^18.14.6",
-    "@types/node-fetch": "^2.6.2",
-    "@vercel/node": "^2.9.10",
+    "@popperjs/core": "^2.11.7",
+    "@types/node": "^18.15.11",
+    "@types/node-fetch": "^2.6.3",
+    "@vercel/node": "^2.10.3",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.2.3",
-    "axios": "1.3.4",
+    "axios": "1.3.5",
     "node-forge": "1.3.1",
-    "prettier": "2.8.4",
-    "sass": "^1.58.3",
-    "typescript": "^4.9.5",
-    "vite": "^4.1.4"
+    "prettier": "2.8.7",
+    "sass": "^1.61.0",
+    "typescript": "^5.0.4",
+    "vite": "^4.2.1"
   },  
   "browserslist": "> 0.5%, last 3 versions, not dead",
   "resolutions": {
@@ -40,6 +40,6 @@
   },
   "dependencies": {
     "dompurify": "^3.0.1",
-    "isomorphic-dompurify": "^1.0.0"
+    "isomorphic-dompurify": "^1.2.0"
   }
 }
