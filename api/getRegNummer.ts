@@ -39,6 +39,8 @@ export default async function handler(
         ],
       } = response.data;
 
+      console.log("response.data: ", response.data)
+
       const sanitizedData = {
         kjennemerke: sanitize(kjennemerke),
         forstegangsregistrering: sanitize(forstegangsregistrering.toString()),
