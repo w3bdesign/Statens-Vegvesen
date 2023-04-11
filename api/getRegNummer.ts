@@ -47,10 +47,10 @@ export default async function handler(
 
       res.status(200).json(sanitizedData);
     } else {
-      res.status(500).json({ error: "Feil under henting av data " });
+      res.status(500).json({ error: `Feil under henting av data - ${response}` });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Feil under henting av data" });
+    res.status(500).json({ error: `Feil under henting av data - ${error}` });
   }
 }
