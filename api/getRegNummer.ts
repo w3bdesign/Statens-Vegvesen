@@ -43,8 +43,10 @@ export default async function handler(
 
       const sanitizedData = {
         kjennemerke: sanitize(kjennemerke),
-        forstegangsregistrering: sanitize(forstegangsregistrering.toString()),
-        sistKontrollert: sanitize(sistKontrollert.toString()),
+        //forstegangsregistrering: sanitize(forstegangsregistrering.toString()),
+        forstegangsregistrering: sanitize(forstegangsregistrering),
+        //sistKontrollert: sanitize(sistKontrollert.toString()),
+        sistKontrollert: sanitize(sistKontrollert),
       };
 
       res.status(200).json(sanitizedData);
