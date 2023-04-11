@@ -13,9 +13,7 @@ Fetching vehicle information from the REST API on <https://autosys-kjoretoy-api.
 
 It requires an API key set inside .env that you can get from <https://www.vegvesen.no/om+statens+vegvesen/om+organisasjonen/apne-data/api-for-tekniske-kjoretoyopplysninger>
 
-Example: <https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/kjoretoyoppslag/v1/kjennemerkeoppslag/kjoretoy/AA12345>
-
-This application uses Serverless with Typescript for the backend.
+This application uses Next.js with Typescript for the backend.
 
 ## Features
 
