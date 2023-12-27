@@ -23,7 +23,7 @@
   "devDependencies": {
     "@popperjs/core": "^2.11.8",
     "@types/node": "^20.10.5",
-    "@types/node-fetch": "^2.6.9",
+    "@types/node-fetch": "^2.6.10",
     "@vercel/node": "^3.0.14",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.2",
