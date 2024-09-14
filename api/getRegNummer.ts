@@ -26,8 +26,6 @@ export default async function handler(
       },
     });
 
-    console.log("Response", response);
-
     if (response.status === 200) {
       const {
         kjoretoydataListe: [
