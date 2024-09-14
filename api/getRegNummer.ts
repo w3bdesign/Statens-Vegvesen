@@ -7,11 +7,11 @@ import { IStatensVegvesenFullData } from "../scripts/types/typeDefinitions";
 
 export default async function handler(
   req: VercelRequest,
-  res: VercelResponse
+  res: VercelResponse,
 ): Promise<void> {
   const { regNummer = "" } = req.query;
 
-  if (regNummer === undefined) {
+  if (!regNummer) {
     res.status(400).json({ error: "Mangler regNummer parameter" });
     return;
   }
@@ -26,6 +26,8 @@ export default async function handler(
       },
     });
 
+    console.log("Response", response);
+
     if (response.status === 200) {
       const {
         kjoretoydataListe: [
@@ -39,20 +41,19 @@ export default async function handler(
         ],
       } = response.data;
 
-     
-
       const sanitizedData = {
-        kjennemerke: sanitize(kjennemerke),       
-        forstegangsregistrering: sanitize(forstegangsregistrering),        
+        kjennemerke: sanitize(kjennemerke),
+        forstegangsregistrering: sanitize(forstegangsregistrering),
         sistKontrollert: sanitize(sistKontrollert),
       };
 
       res.status(200).json(sanitizedData);
     } else {
-      res.status(500).json({ error: `Feil under henting av data - ${response}` });
+      res
+        .status(500)
+        .json({ error: `Feil under henting av data - ${response}` });
     }
   } catch (error) {
-    
     res.status(500).json({ error: `Feil under henting av data - ${error}` });
   }
 }
