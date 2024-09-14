@@ -26,7 +26,7 @@ export default async function handler(
       },
     });
 
-    console.log(JSON.stringify(response.data));
+    // console.log(JSON.stringify(response.data));
 
     if (response.status === 200) {
       const {
