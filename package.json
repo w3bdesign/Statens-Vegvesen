@@ -24,7 +24,7 @@
     "@popperjs/core": "^2.11.8",
     "@types/node": "^22.5.5",
     "@types/node-fetch": "^2.6.11",
-    "@vercel/node": "^3.2.14",
+    "@vercel/node": "^3.2.15",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
     "axios": "1.7.7",
