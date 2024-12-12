@@ -22,24 +22,24 @@
   "homepage": "https://github.com/w3bdesign/Statens-Vegvesen#readme",
   "devDependencies": {
     "@popperjs/core": "^2.11.8",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.10.2",
     "@types/node-fetch": "^2.6.12",
-    "@vercel/node": "^3.2.24",
+    "@vercel/node": "^3.2.29",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
-    "axios": "1.7.7",
+    "axios": "1.7.9",
     "node-forge": "1.3.1",
-    "prettier": "3.3.3",
-    "sass": "^1.81.0",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.11"
+    "prettier": "3.4.2",
+    "sass": "^1.82.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3"
   },  
   "browserslist": "> 0.5%, last 3 versions, not dead",
   "resolutions": {
     "node-forge": "1.3.1"
   },
   "dependencies": {
-    "dompurify": "^3.2.0",
-    "isomorphic-dompurify": "^2.16.0"
+    "dompurify": "^3.2.3",
+    "isomorphic-dompurify": "^2.19.0"
   }
 }
