@@ -41,8 +41,8 @@ export default async function handler(
 
       const sanitizedData = {
         kjennemerke: sanitize(kjennemerke),
-        forstegangsregistrering: sanitize(forstegangsregistrering.toLocaleDateString('no-NO')),
-        sistKontrollert: sanitize(sistKontrollert.toLocaleDateString('no-NO')),
+        forstegangsregistrering: sanitize(forstegangsregistrering),
+        sistKontrollert: sanitize(sistKontrollert),
       };
 
       res.status(200).json(sanitizedData);
