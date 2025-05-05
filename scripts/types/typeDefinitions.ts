@@ -18,7 +18,7 @@ export interface KjoretoydataListe {
 }
 
 export interface Forstegangsregistrering {
-  registrertForstegangNorgeDato: Date;
+  registrertForstegangNorgeDato: string;
 }
 
 export interface Godkjenning {
@@ -274,8 +274,8 @@ export interface KjoretoyID {
 }
 
 export interface PeriodiskKjoretoyKontroll {
-  kontrollfrist: Date;
-  sistGodkjent: Date;
+  kontrollfrist: string;
+  sistGodkjent: string;
 }
 
 export interface Registrering {
