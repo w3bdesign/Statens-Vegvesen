@@ -26,8 +26,6 @@ export default async function handler(
       },
     });
 
-    // console.log(JSON.stringify(response.data));
-
     if (response.status === 200) {
       const {
         kjoretoydataListe: [
@@ -43,8 +41,8 @@ export default async function handler(
 
       const sanitizedData = {
         kjennemerke: sanitize(kjennemerke),
-        forstegangsregistrering: sanitize(forstegangsregistrering),
-        sistKontrollert: sanitize(sistKontrollert),
+        forstegangsregistrering: sanitize(forstegangsregistrering.toLocaleDateString('no-NO')),
+        sistKontrollert: sanitize(sistKontrollert.toLocaleDateString('no-NO')),
       };
 
       res.status(200).json(sanitizedData);
