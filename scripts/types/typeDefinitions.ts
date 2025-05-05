@@ -274,8 +274,8 @@ export interface KjoretoyID {
 }
 
 export interface PeriodiskKjoretoyKontroll {
-  kontrollfrist: string; // Changed from Date to string
-  sistGodkjent: string; // Changed from Date to string
+  kontrollfrist: string;
+  sistGodkjent: string;
 }
 
 export interface Registrering {
