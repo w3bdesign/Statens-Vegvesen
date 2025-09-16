@@ -40,6 +40,6 @@
   },
   "dependencies": {
     "dompurify": "^3.2.6",
-    "isomorphic-dompurify": "^2.26.0"
+    "isomorphic-dompurify": "^2.27.0"
   }
 }
