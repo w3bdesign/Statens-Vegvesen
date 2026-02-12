@@ -1,5 +1,4 @@
 import axios from "axios";
-import { sanitize } from "isomorphic-dompurify";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import type {
   IStatensVegvesenFullData,
@@ -7,6 +6,16 @@ import type {
 } from "../scripts/types/typeDefinitions";
 
 // https://autosys-kjoretoy-api.atlas.vegvesen.no/api-ui/index-enkeltoppslag.html
+
+/** Escape HTML special characters to prevent XSS */
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 /** Safely access deeply nested properties, returning null if any part is missing */
 
@@ -22,7 +31,7 @@ function safe<T>(fn: () => T): T | null {
 /** Sanitize a string value, or return null */
 function sanitizeStr(val: string | null | undefined): string | null {
   if (val === null || val === undefined) return null;
-  return sanitize(String(val));
+  return escapeHtml(String(val));
 }
 
 /** Sanitize a number value, or return null */
