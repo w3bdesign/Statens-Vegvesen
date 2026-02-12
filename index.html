@@ -10,7 +10,7 @@
   <body>
     <!-- Start Div for entering registration number -->
     <div class="container d-flex justify-content-center ps-2 pe-2 mt-5 sm-m-5">
-      <div class="">
+      <div class="col-12 col-lg-8">
         <div class="bg-dark bg-gradient text-white p-4 mb-4 rounded shadow-sm">
           <div class="d-none d-lg-block">
             <h3 class="text-center">
@@ -38,7 +38,7 @@
             <div class="d-flex justify-content-center">
               <span
                 id="feilMelding"
-                class="helper-text"
+                class="helper-text text-danger mt-2"
                 data-error="Feil lengde på registreringsnummer"
               ></span>
               <button
@@ -62,53 +62,372 @@
               >Henter informasjon, vennligst vent</span
             >
           </div>
-          <div class="row">
-            <div class="preloader-wrapper small active">
-              <div class="spinner-layer spinner-teal-only">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
+        </div>
+        <!-- End Div Loading spinner  -->
+
+        <!-- Start Vehicle Results Container -->
+        <div
+          id="vehicleResults"
+          class="d-none animate__animated animate__fadeIn mt-4"
+        >
+          <!-- Vehicle Header Card -->
+          <div
+            id="vehicleHeader"
+            class="card bg-dark text-white shadow-sm mb-4"
+          >
+            <div class="card-body">
+              <div
+                class="d-flex flex-column flex-md-row align-items-md-center justify-content-between"
+              >
+                <div>
+                  <h4 class="card-title mb-1">
+                    <span id="headerMerke"></span>
+                    <span id="headerModell" class="fw-light"></span>
+                  </h4>
+                  <p class="card-text mb-0">
+                    <span
+                      id="headerKjennemerke"
+                      class="badge bg-warning text-dark fs-6 me-2"
+                    ></span>
+                    <span id="headerType" class="text-white-50 small"></span>
+                  </p>
                 </div>
-                <div class="gap-patch">
-                  <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                  <div class="circle"></div>
+                <div class="mt-2 mt-md-0">
+                  <span
+                    id="headerFarge"
+                    class="badge rounded-pill bg-secondary text-white text-capitalize fs-6"
+                  ></span>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- Tab Navigation -->
+          <ul
+            class="nav nav-tabs flex-nowrap overflow-auto"
+            id="vehicleTabs"
+            role="tablist"
+          >
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="oversikt-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#oversikt"
+                type="button"
+                role="tab"
+                aria-controls="oversikt"
+                aria-selected="true"
+              >
+                Oversikt
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="motor-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#motor"
+                type="button"
+                role="tab"
+                aria-controls="motor"
+                aria-selected="false"
+              >
+                Motor &amp; Ytelse
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="mal-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#mal"
+                type="button"
+                role="tab"
+                aria-controls="mal"
+                aria-selected="false"
+              >
+                Mål &amp; Vekt
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="teknisk-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#teknisk"
+                type="button"
+                role="tab"
+                aria-controls="teknisk"
+                aria-selected="false"
+              >
+                Teknisk
+              </button>
+            </li>
+          </ul>
+
+          <!-- Tab Content -->
+          <div class="tab-content border border-top-0 rounded-bottom p-3 bg-body shadow-sm" id="vehicleTabContent">
+            <!-- Oversikt Tab -->
+            <div
+              class="tab-pane fade show active"
+              id="oversikt"
+              role="tabpanel"
+              aria-labelledby="oversikt-tab"
+            >
+              <table class="table table-hover table-striped mb-0">
+                <tbody>
+                  <tr>
+                    <th scope="row">Kjennemerke</th>
+                    <td id="val-kjennemerke">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Understellsnummer</th>
+                    <td id="val-understellsnummer">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Merke</th>
+                    <td id="val-merke">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Modell</th>
+                    <td id="val-modell">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Typebetegnelse</th>
+                    <td id="val-typebetegnelse">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Farge</th>
+                    <td id="val-farge">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Kjøretøyklasse</th>
+                    <td id="val-kjoretoyKlasse">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Førstegangsregistrering</th>
+                    <td id="val-forstegangsregistrering">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Registreringsstatus</th>
+                    <td id="val-registreringsstatus">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Kjøringens art</th>
+                    <td id="val-kjoringensArt">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Neste EU-kontroll</th>
+                    <td id="val-nesteEuKontroll">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sist godkjent EU-kontroll</th>
+                    <td id="val-sistGodkjentEuKontroll">&mdash;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Motor & Ytelse Tab -->
+            <div
+              class="tab-pane fade"
+              id="motor"
+              role="tabpanel"
+              aria-labelledby="motor-tab"
+            >
+              <table class="table table-hover table-striped mb-0">
+                <tbody>
+                  <tr>
+                    <th scope="row">Drivstofftype</th>
+                    <td id="val-drivstofftype">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Motoreffekt (kW)</th>
+                    <td id="val-motoreffektKw">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Slagvolum (cc)</th>
+                    <td id="val-slagvolumCc">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Antall sylindre</th>
+                    <td id="val-antallSylindre">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Girkassetype</th>
+                    <td id="val-girkassetype">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Antall gir</th>
+                    <td id="val-antallGir">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Hybrid-kategori</th>
+                    <td id="val-hybridKategori">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Maks hastighet (km/t)</th>
+                    <td id="val-maksHastighetKmT">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Euro-klasse</th>
+                    <td id="val-euroKlasse">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">CO₂ blandet kjøring (g/km)</th>
+                    <td id="val-co2BlandetKjoring">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Forbruk blandet kjøring (l/100km)</th>
+                    <td id="val-forbrukBlandetKjoring">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">NOx utslipp (mg/km)</th>
+                    <td id="val-noxUtslippMgKm">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Partikkelfilter</th>
+                    <td id="val-partikkelfilter">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Rekkevidde (km)</th>
+                    <td id="val-rekkeviddeKm">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Støynivå (dB)</th>
+                    <td id="val-stoynivaaDb">&mdash;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Mål & Vekt Tab -->
+            <div
+              class="tab-pane fade"
+              id="mal"
+              role="tabpanel"
+              aria-labelledby="mal-tab"
+            >
+              <table class="table table-hover table-striped mb-0">
+                <tbody>
+                  <tr>
+                    <th scope="row">Lengde (mm)</th>
+                    <td id="val-lengdeMm">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Bredde (mm)</th>
+                    <td id="val-breddeMm">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Høyde (mm)</th>
+                    <td id="val-hoydeMm">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Egenvekt (kg)</th>
+                    <td id="val-egenvektKg">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Nyttelast (kg)</th>
+                    <td id="val-nyttelastKg">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tillatt totalvekt (kg)</th>
+                    <td id="val-tillattTotalvektKg">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tillatt taklast (kg)</th>
+                    <td id="val-tillattTaklastKg">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tillatt tilhengervekt m/brems (kg)</th>
+                    <td id="val-tillattTilhengervektMedBremsKg">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tillatt tilhengervekt u/brems (kg)</th>
+                    <td id="val-tillattTilhengervektUtenBremsKg">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tillatt vogntogvekt (kg)</th>
+                    <td id="val-tillattVogntogvektKg">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sitteplasser totalt</th>
+                    <td id="val-sitteplasserTotalt">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sitteplasser foran</th>
+                    <td id="val-sitteplasserForan">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Antall dører</th>
+                    <td id="val-antallDorer">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Kjøreside</th>
+                    <td id="val-kjoreSide">&mdash;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Teknisk Tab -->
+            <div
+              class="tab-pane fade"
+              id="teknisk"
+              role="tabpanel"
+              aria-labelledby="teknisk-tab"
+            >
+              <table class="table table-hover table-striped mb-0">
+                <tbody>
+                  <tr>
+                    <th scope="row">Antall aksler</th>
+                    <td id="val-antallAksler">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Dekkdimensjon foran</th>
+                    <td id="val-dekkdimensjonForan">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Felgdimensjon foran</th>
+                    <td id="val-felgdimensjonForan">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Hastighetskode dekk foran</th>
+                    <td id="val-hastighetsKodeDekkForan">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Dekkdimensjon bak</th>
+                    <td id="val-dekkdimensjonBak">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Felgdimensjon bak</th>
+                    <td id="val-felgdimensjonBak">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Hastighetskode dekk bak</th>
+                    <td id="val-hastighetsKodeDekkBak">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sporvidde foran (mm)</th>
+                    <td id="val-sporviddeForanMm">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sporvidde bak (mm)</th>
+                    <td id="val-sporviddeBakMm">&mdash;</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tilhengerkopling</th>
+                    <td id="val-tilhengerkopling">&mdash;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <!-- End Div Loading spinner  -->
-        <!-- Start Div information table  -->
-        <div
-          id="tableElement"
-          class="container mt-5 d-none animate__animated animate__fadeIn"
-        >
-          <table class="table table-responsive table-hover">
-            <caption class="mt-2">
-              Kjøretøyinformasjon
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col">Skilt</th>
-                <th scope="col">Førstereg</th>
-                <th scope="col">Eierreg</th>
-                <th scope="col">EU kontroll</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id="trInfo">
-                <td id="kjennemerke">&nbsp;</td>
-                <td id="forstegangsregistrering">&nbsp;</td>
-                <td id="forstegangsregistreringEier">&nbsp;</td>
-                <td id="sistKontrollert">&nbsp;</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <!-- End Vehicle Results Container -->
       </div>
     </div>
-    <!-- End Div information table  -->
     <!-- Compiled and minified JavaScript -->
     <script type="module" src="./scripts/main.ts"></script>
   </body>

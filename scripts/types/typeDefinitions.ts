@@ -1,8 +1,95 @@
 /**
+ * Type definitions for data returned from the Statens Vegvesen API.
+ *
+ * IStatensVegvesenFullData — raw API response shape
+ * IStatensVegvesenBilData — simplified frontend response (from our serverless function)
+ * IVehicleData — expanded 4-section response for the new tabbed UI
+ */
 
-    Type definition for data returned from API.
-    Returns an object with strings and optional values.
-    */
+// ─── Frontend response types (returned by our /api/getRegNummer endpoint) ────
+
+/** Legacy simplified response for backwards compatibility / error handling */
+export interface IStatensVegvesenBilData {
+  kjennemerke: string;
+  forstegangsregistrering: string;
+  forstegangsregistreringEier: string;
+  sistKontrollert: string;
+  melding: string;
+}
+
+/** Expanded 4-tab vehicle data returned by the updated API endpoint */
+export interface IVehicleData {
+  oversikt: IOversikt;
+  motorOgYtelse: IMotorOgYtelse;
+  malOgVekt: IMalOgVekt;
+  teknisk: ITeknisk;
+  melding?: string;
+}
+
+export interface IOversikt {
+  kjennemerke: string | null;
+  understellsnummer: string | null;
+  merke: string | null;
+  modell: string | null;
+  typebetegnelse: string | null;
+  farge: string | null;
+  kjoretoyKlasse: string | null;
+  forstegangsregistrering: string | null;
+  registreringsstatus: string | null;
+  kjoringensArt: string | null;
+  nesteEuKontroll: string | null;
+  sistGodkjentEuKontroll: string | null;
+}
+
+export interface IMotorOgYtelse {
+  drivstofftype: string | null;
+  motoreffektKw: number | null;
+  slagvolumCc: number | null;
+  antallSylindre: number | null;
+  girkassetype: string | null;
+  antallGir: number | null;
+  hybridKategori: string | null;
+  maksHastighetKmT: number | null;
+  euroKlasse: string | null;
+  co2BlandetKjoring: number | null;
+  forbrukBlandetKjoring: number | null;
+  noxUtslippMgKm: number | null;
+  partikkelfilter: boolean | null;
+  rekkeviddeKm: number | null;
+  stoynivaaDb: number | null;
+}
+
+export interface IMalOgVekt {
+  lengdeMm: number | null;
+  breddeMm: number | null;
+  hoydeMm: number | null;
+  egenvektKg: number | null;
+  nyttelastKg: number | null;
+  tillattTotalvektKg: number | null;
+  tillattTaklastKg: number | null;
+  tillattTilhengervektMedBremsKg: number | null;
+  tillattTilhengervektUtenBremsKg: number | null;
+  tillattVogntogvektKg: number | null;
+  sitteplasserTotalt: number | null;
+  sitteplasserForan: number | null;
+  antallDorer: number | null;
+  kjoreSide: string | null;
+}
+
+export interface ITeknisk {
+  antallAksler: number | null;
+  dekkdimensjonForan: string | null;
+  felgdimensjonForan: string | null;
+  hastighetsKodeDekkForan: string | null;
+  dekkdimensjonBak: string | null;
+  felgdimensjonBak: string | null;
+  hastighetsKodeDekkBak: string | null;
+  sporviddeFoyanMm: number | null;
+  sporviddeBakMm: number | null;
+  tilhengerkopling: string | null;
+}
+
+// ─── Raw API response types (from vegvesen.no) ──────────────────────────────
 
 export interface IStatensVegvesenFullData {
   kjoretoydataListe: KjoretoydataListe[];
@@ -172,6 +259,7 @@ export interface AkselDekkOgFelg {
 
 export interface Dimensjoner {
   bredde: number;
+  hoyde: number;
   lengde: number;
 }
 
@@ -189,7 +277,7 @@ export interface Merke {
 }
 
 export interface KarosseriOgLasteplan {
-  antallDorer: string[];
+  antallDorer: number[];
   dorUtforming: string[];
   kjennemerketypeBak: KjoringensArt;
   kjennemerkestorrelseBak: KjoringensArt;
@@ -203,13 +291,29 @@ export interface KarosseriOgLasteplan {
 }
 
 export interface Miljodata {
+  euroKlasse: KjoringensArt;
   miljoOgdrivstoffGruppe: MiljoOgdrivstoffGruppe[];
   okoInnovasjon: boolean;
 }
 
 export interface MiljoOgdrivstoffGruppe {
   drivstoffKodeMiljodata: KjoringensArt;
+  forbrukOgUtslipp: ForbrukOgUtslipp[];
   lyd: Lyd;
+}
+
+export interface ForbrukOgUtslipp {
+  co2BlandetKjoring: number;
+  co2Bykjoring: number;
+  co2Landeveiskjoring: number;
+  forbrukBlandetKjoring: number;
+  forbrukBykjoring: number;
+  forbrukLandeveiskjoring: number;
+  utslippNOxMgPrKm: number;
+  partikkelfilterFabrikkmontert: boolean;
+  rekkeviddeKm: number;
+  elEnergiforbruk: number;
+  malemetode: KjoringensArt;
 }
 
 export interface Lyd {
@@ -219,6 +323,7 @@ export interface Lyd {
 }
 
 export interface MotorOgDrivverk {
+  antallGir: number;
   girkassetype: KjoringensArt;
   girutvekslingPrGir: string[];
   hybridKategori: KjoringensArt;
@@ -245,7 +350,12 @@ export interface Persontall {
 }
 
 export interface Tilhengerkopling {
-  kopling: string[];
+  kopling: Kopling[];
+}
+
+export interface Kopling {
+  koplingType?: KjoringensArt;
+  koplingBeskrivelse?: string;
 }
 
 export interface Vekter {
