@@ -2,69 +2,159 @@ import classFetchRemoteData from "./classFetchRemoteData";
 import classShowHideElements from "./classShowHideElements";
 import classErrorHandler from "../ErrorHandler/classErrorHandler";
 
-import type { IStatensVegvesenBilData } from "../../types/typeDefinitions";
+import type { IVehicleData } from "../../types/typeDefinitions";
 
-let remoteBilData: IStatensVegvesenBilData;
+let remoteVehicleData: IVehicleData;
 
-// Helper function to set innerHTML
-const setInnerHTML = (elementId: string, value: string) => {
+/** Format a value for display — returns "—" for null/undefined */
+const formatValue = (
+  value: string | number | boolean | null | undefined,
+): string => {
+  if (value === null || value === undefined) return "—";
+  if (typeof value === "boolean") return value ? "Ja" : "Nei";
+  return String(value);
+};
+
+/** Set text content of an element by ID */
+const setText = (elementId: string, value: string | number | boolean | null | undefined): void => {
   const element = window.document.getElementById(elementId);
-  if (element && value) {
-    element.innerHTML = value;
+  if (element) {
+    element.textContent = formatValue(value);
   }
 };
 
 /**
- * Add remote data to the table
+ * Populate the vehicle header card
  */
-const addDataToTable = () => {
-  setInnerHTML("kjennemerke", remoteBilData.kjennemerke);
-  setInnerHTML(
-    "forstegangsregistrering",
-    remoteBilData.forstegangsregistrering
-  );
-  setInnerHTML(
-    "forstegangsregistreringEier",
-    remoteBilData.forstegangsregistreringEier
-  );
-  setInnerHTML("sistKontrollert", remoteBilData.sistKontrollert);
+const populateHeader = (): void => {
+  const o = remoteVehicleData.oversikt;
+  setText("headerMerke", o.merke);
+  setText("headerModell", o.modell);
+  setText("headerKjennemerke", o.kjennemerke);
+  setText("headerType", o.typebetegnelse);
+  setText("headerFarge", o.farge);
 };
 
-// This function processes remote data
-const processRemoteData = () => {
-  // Check if the remote data has a 'melding' property
-  if (remoteBilData.melding !== undefined) {
-    // If it does, display an error message using the 'classErrorHandler' object and hide the data table
-    classErrorHandler.displayErrorFromAPI(remoteBilData);
-    classShowHideElements.hideDataTable();
+/**
+ * Populate the Oversikt tab
+ */
+const populateOversikt = (): void => {
+  const o = remoteVehicleData.oversikt;
+  setText("val-kjennemerke", o.kjennemerke);
+  setText("val-understellsnummer", o.understellsnummer);
+  setText("val-merke", o.merke);
+  setText("val-modell", o.modell);
+  setText("val-typebetegnelse", o.typebetegnelse);
+  setText("val-farge", o.farge);
+  setText("val-kjoretoyKlasse", o.kjoretoyKlasse);
+  setText("val-forstegangsregistrering", o.forstegangsregistrering);
+  setText("val-registreringsstatus", o.registreringsstatus);
+  setText("val-kjoringensArt", o.kjoringensArt);
+  setText("val-nesteEuKontroll", o.nesteEuKontroll);
+  setText("val-sistGodkjentEuKontroll", o.sistGodkjentEuKontroll);
+};
 
+/**
+ * Populate the Motor & Ytelse tab
+ */
+const populateMotorOgYtelse = (): void => {
+  const m = remoteVehicleData.motorOgYtelse;
+  setText("val-drivstofftype", m.drivstofftype);
+  setText("val-motoreffektKw", m.motoreffektKw);
+  setText("val-slagvolumCc", m.slagvolumCc);
+  setText("val-antallSylindre", m.antallSylindre);
+  setText("val-girkassetype", m.girkassetype);
+  setText("val-antallGir", m.antallGir);
+  setText("val-hybridKategori", m.hybridKategori);
+  setText("val-maksHastighetKmT", m.maksHastighetKmT);
+  setText("val-euroKlasse", m.euroKlasse);
+  setText("val-co2BlandetKjoring", m.co2BlandetKjoring);
+  setText("val-forbrukBlandetKjoring", m.forbrukBlandetKjoring);
+  setText("val-noxUtslippMgKm", m.noxUtslippMgKm);
+  setText("val-partikkelfilter", m.partikkelfilter);
+  setText("val-rekkeviddeKm", m.rekkeviddeKm);
+  setText("val-stoynivaaDb", m.stoynivaaDb);
+};
+
+/**
+ * Populate the Mål & Vekt tab
+ */
+const populateMalOgVekt = (): void => {
+  const v = remoteVehicleData.malOgVekt;
+  setText("val-lengdeMm", v.lengdeMm);
+  setText("val-breddeMm", v.breddeMm);
+  setText("val-hoydeMm", v.hoydeMm);
+  setText("val-egenvektKg", v.egenvektKg);
+  setText("val-nyttelastKg", v.nyttelastKg);
+  setText("val-tillattTotalvektKg", v.tillattTotalvektKg);
+  setText("val-tillattTaklastKg", v.tillattTaklastKg);
+  setText("val-tillattTilhengervektMedBremsKg", v.tillattTilhengervektMedBremsKg);
+  setText("val-tillattTilhengervektUtenBremsKg", v.tillattTilhengervektUtenBremsKg);
+  setText("val-tillattVogntogvektKg", v.tillattVogntogvektKg);
+  setText("val-sitteplasserTotalt", v.sitteplasserTotalt);
+  setText("val-sitteplasserForan", v.sitteplasserForan);
+  setText("val-antallDorer", v.antallDorer);
+  setText("val-kjoreSide", v.kjoreSide);
+};
+
+/**
+ * Populate the Teknisk tab
+ */
+const populateTeknisk = (): void => {
+  const t = remoteVehicleData.teknisk;
+  setText("val-antallAksler", t.antallAksler);
+  setText("val-dekkdimensjonForan", t.dekkdimensjonForan);
+  setText("val-felgdimensjonForan", t.felgdimensjonForan);
+  setText("val-hastighetsKodeDekkForan", t.hastighetsKodeDekkForan);
+  setText("val-dekkdimensjonBak", t.dekkdimensjonBak);
+  setText("val-felgdimensjonBak", t.felgdimensjonBak);
+  setText("val-hastighetsKodeDekkBak", t.hastighetsKodeDekkBak);
+  setText("val-sporviddeForanMm", t.sporviddeFoyanMm);
+  setText("val-sporviddeBakMm", t.sporviddeBakMm);
+  setText("val-tilhengerkopling", t.tilhengerkopling);
+};
+
+/**
+ * Add all remote data to the 4 tab sections + header
+ */
+const addDataToTabs = (): void => {
+  populateHeader();
+  populateOversikt();
+  populateMotorOgYtelse();
+  populateMalOgVekt();
+  populateTeknisk();
+};
+
+/**
+ * Process the remote data — check for errors, then populate UI
+ */
+const processRemoteData = (): void => {
+  if (remoteVehicleData.melding !== undefined) {
+    classErrorHandler.displayErrorFromAPI(remoteVehicleData.melding);
+    classShowHideElements.hideVehicleResults();
     return;
   }
-  // If the remote data does not have a 'melding' property, hide the loading spinner and show the data table
+
   classShowHideElements.hideLoadingSpinner();
-  classShowHideElements.showDataTable();
-  // Add the remote data to the table
-  addDataToTable();
-  // Reset any error text using the 'classErrorHandler' object
+  classShowHideElements.showVehicleResults();
+  addDataToTabs();
   classErrorHandler.resetErrorText();
 };
 
-// This function is called when a form is submitted
-
+/**
+ * Called when the form is submitted
+ */
 const sendForm = (): void => {
-  // Show the loading spinner using the 'classShowHideElements' object
   classShowHideElements.showLoadingSpinner();
-  // Fetch remote data using the 'classFetchRemoteData' object
+  classShowHideElements.hideVehicleResults();
+
   classFetchRemoteData
     .fetchRemoteData()
     .then((response) => {
-      // If the fetch is successful, store the response in the 'remoteBilData' variable
-      remoteBilData = response;
-      // Call the 'processRemoteData' function to handle the data
+      remoteVehicleData = response;
       processRemoteData();
     })
     .catch(() => {
-      // If the fetch fails, do nothing and return from the function early
       return;
     });
 };

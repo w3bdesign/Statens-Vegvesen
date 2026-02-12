@@ -6,3 +6,22 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 // Then add additional custom code here
+
+// ─── Tab scrollbar on mobile (Bootstrap has no utility for thin scrollbar) ───
+
+.nav-tabs {
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+  }
+}
