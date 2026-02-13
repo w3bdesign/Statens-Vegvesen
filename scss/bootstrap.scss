@@ -10,15 +10,12 @@
 // ─── Tab scrollbar on mobile (Bootstrap has no utility for thin scrollbar) ───
 
 .nav-tabs {
-  scrollbar-width: thin;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
 
   &::-webkit-scrollbar {
-    height: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
+    display: none;
   }
 
   .nav-link {
