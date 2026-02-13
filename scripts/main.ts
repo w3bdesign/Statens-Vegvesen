@@ -1,4 +1,5 @@
 import "animate.css";
+import "bootstrap";
 
 import checkValidText from "./classes/ValidText/classValidText";
 import sendForm from "./classes/ProcessInputForm/classProcessInputForm";
