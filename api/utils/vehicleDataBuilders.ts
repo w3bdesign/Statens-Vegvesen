@@ -1,8 +1,5 @@
-import axios from "axios";
-import { VercelRequest, VercelResponse } from "@vercel/node";
+import { safe, sanitizeStr, sanitizeNum, sanitizeBool } from "./sanitize";
 import type {
-  IStatensVegvesenFullData,
-  IVehicleData,
   IOversikt,
   IMotorOgYtelse,
   IMalOgVekt,
@@ -23,50 +20,10 @@ import type {
   AkselDekkOgFelg,
   Aksel,
   Tilhengerkopling,
-} from "../scripts/types/typeDefinitions";
-
-// https://autosys-kjoretoy-api.atlas.vegvesen.no/api-ui/index-enkeltoppslag.html
-
-/** Escape HTML special characters to prevent XSS */
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-/** Safely access deeply nested properties, returning null if any part is missing */
-function safe<T>(fn: () => T): Exclude<T, undefined> | null {
-  try {
-    const result = fn();
-    return result === undefined ? null : (result as Exclude<T, undefined>);
-  } catch {
-    return null;
-  }
-}
-
-/** Sanitize a string value, or return null */
-function sanitizeStr(val: string | null | undefined): string | null {
-  if (val === null || val === undefined) return null;
-  return escapeHtml(String(val));
-}
-
-/** Sanitize a number value, or return null */
-function sanitizeNum(val: number | null | undefined): number | null {
-  if (val === null || val === undefined || isNaN(Number(val))) return null;
-  return Number(val);
-}
-
-/** Sanitize a boolean value, or return null */
-function sanitizeBool(val: boolean | null | undefined): boolean | null {
-  if (val === null || val === undefined) return null;
-  return Boolean(val);
-}
+} from "../../scripts/types/typeDefinitions";
 
 /** Build the Oversikt section of the vehicle data response */
-function buildOversikt(
+export function buildOversikt(
   kjoretoy: KjoretoydataListe,
   generelt: Generelt | null,
   karosseri: KarosseriOgLasteplan | null,
@@ -119,7 +76,7 @@ function buildOversikt(
 }
 
 /** Build the Motor & Ytelse section of the vehicle data response */
-function buildMotorOgYtelse(
+export function buildMotorOgYtelse(
   motor: Motor | null,
   motorOgDrivverk: MotorOgDrivverk | null,
   miljodata: Miljodata | null,
@@ -178,7 +135,7 @@ function buildMotorOgYtelse(
 }
 
 /** Build the Mål & Vekt section of the vehicle data response */
-function buildMalOgVekt(
+export function buildMalOgVekt(
   dimensjoner: Dimensjoner | null,
   vekter: Vekter | null,
   persontall: Persontall | null,
@@ -207,7 +164,7 @@ function buildMalOgVekt(
 }
 
 /** Build the Teknisk section of the vehicle data response */
-function buildTeknisk(
+export function buildTeknisk(
   akslinger: Akslinger | null,
   dekkForan: AkselDekkOgFelg | null,
   dekkBak: AkselDekkOgFelg | null,
@@ -242,87 +199,4 @@ function buildTeknisk(
       }),
     ),
   };
-}
-
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse,
-): Promise<void> {
-  const { regNummer = "" } = req.query;
-
-  if (!regNummer) {
-    res.status(400).json({ error: "Mangler regNummer parameter" });
-    return;
-  }
-
-  const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${regNummer}`;
-
-  try {
-    const response = await axios.get<IStatensVegvesenFullData>(urlToFetch, {
-      headers: {
-        "SVV-Authorization": `Apikey ${process.env.SVV_API_KEY}`,
-        "X-Client-Identifier": "my-app",
-      },
-    });
-
-    if (response.status === 200) {
-      const kjoretoy = response.data?.kjoretoydataListe?.[0];
-
-      if (!kjoretoy) {
-        res
-          .status(404)
-          .json({
-            melding: "Ingen data funnet for dette registreringsnummeret",
-          });
-        return;
-      }
-
-      // Extract nested data safely
-      const tekniskGodkjenning = safe(
-        () => kjoretoy.godkjenning.tekniskGodkjenning,
-      );
-      const tekniskeData = safe(() => tekniskGodkjenning?.tekniskeData);
-      const generelt = safe(() => tekniskeData?.generelt);
-      const motorOgDrivverk = safe(() => tekniskeData?.motorOgDrivverk);
-      const miljodata = safe(() => tekniskeData?.miljodata);
-      const dimensjoner = safe(() => tekniskeData?.dimensjoner);
-      const vekter = safe(() => tekniskeData?.vekter);
-      const persontall = safe(() => tekniskeData?.persontall);
-      const karosseri = safe(() => tekniskeData?.karosseriOgLasteplan);
-      const akslinger = safe(() => tekniskeData?.akslinger);
-      const dekkOgFelg = safe(() => tekniskeData?.dekkOgFelg);
-      const tilhengerkopling = safe(() => tekniskeData?.tilhengerkopling);
-
-      const motor = safe(() => motorOgDrivverk?.motor?.[0]);
-      const miljoGruppe = safe(() => miljodata?.miljoOgdrivstoffGruppe?.[0]);
-      const forbruk = safe(() => miljoGruppe?.forbrukOgUtslipp?.[0]);
-      const dekkKomb = safe(
-        () => dekkOgFelg?.akselDekkOgFelgKombinasjon?.[0],
-      );
-      const dekkForan = safe(() => dekkKomb?.akselDekkOgFelg?.[0]);
-      const dekkBak = safe(() => dekkKomb?.akselDekkOgFelg?.[1]);
-      const akselForan = safe(
-        () => akslinger?.akselGruppe?.[0]?.akselListe?.aksel?.[0],
-      );
-      const akselBak = safe(
-        () => akslinger?.akselGruppe?.[1]?.akselListe?.aksel?.[0],
-      );
-
-      // Build the structured response
-      const vehicleData: IVehicleData = {
-        oversikt: buildOversikt(kjoretoy, generelt, karosseri, tekniskGodkjenning),
-        motorOgYtelse: buildMotorOgYtelse(motor, motorOgDrivverk, miljodata, miljoGruppe, forbruk),
-        malOgVekt: buildMalOgVekt(dimensjoner, vekter, persontall, karosseri),
-        teknisk: buildTeknisk(akslinger, dekkForan, dekkBak, akselForan, akselBak, tilhengerkopling),
-      };
-
-      res.status(200).json(vehicleData);
-    } else {
-      res
-        .status(500)
-        .json({ error: `Feil under henting av data - ${response}` });
-    }
-  } catch (error) {
-    res.status(500).json({ error: `Feil under henting av data - ${error}` });
-  }
 }
