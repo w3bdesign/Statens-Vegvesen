@@ -1,248 +1,18 @@
 import axios from "axios";
 import { VercelRequest, VercelResponse } from "@vercel/node";
+import { safe } from "./utils/sanitize";
+import {
+  buildOversikt,
+  buildMotorOgYtelse,
+  buildMalOgVekt,
+  buildTeknisk,
+} from "./utils/vehicleDataBuilders";
 import type {
   IStatensVegvesenFullData,
   IVehicleData,
-  IOversikt,
-  IMotorOgYtelse,
-  IMalOgVekt,
-  ITeknisk,
-  KjoretoydataListe,
-  TekniskGodkjenning,
-  Generelt,
-  KarosseriOgLasteplan,
-  Motor,
-  MotorOgDrivverk,
-  Miljodata,
-  MiljoOgdrivstoffGruppe,
-  ForbrukOgUtslipp,
-  Dimensjoner,
-  Vekter,
-  Persontall,
-  Akslinger,
-  AkselDekkOgFelg,
-  Aksel,
-  Tilhengerkopling,
 } from "../scripts/types/typeDefinitions";
 
 // https://autosys-kjoretoy-api.atlas.vegvesen.no/api-ui/index-enkeltoppslag.html
-
-/** Escape HTML special characters to prevent XSS */
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-/** Safely access deeply nested properties, returning null if any part is missing */
-function safe<T>(fn: () => T): Exclude<T, undefined> | null {
-  try {
-    const result = fn();
-    return result === undefined ? null : (result as Exclude<T, undefined>);
-  } catch {
-    return null;
-  }
-}
-
-/** Sanitize a string value, or return null */
-function sanitizeStr(val: string | null | undefined): string | null {
-  if (val === null || val === undefined) return null;
-  return escapeHtml(String(val));
-}
-
-/** Sanitize a number value, or return null */
-function sanitizeNum(val: number | null | undefined): number | null {
-  if (val === null || val === undefined || isNaN(Number(val))) return null;
-  return Number(val);
-}
-
-/** Sanitize a boolean value, or return null */
-function sanitizeBool(val: boolean | null | undefined): boolean | null {
-  if (val === null || val === undefined) return null;
-  return Boolean(val);
-}
-
-/** Build the Oversikt section of the vehicle data response */
-function buildOversikt(
-  kjoretoy: KjoretoydataListe,
-  generelt: Generelt | null,
-  karosseri: KarosseriOgLasteplan | null,
-  tekniskGodkjenning: TekniskGodkjenning | null,
-): IOversikt {
-  return {
-    kjennemerke: sanitizeStr(safe(() => kjoretoy.kjoretoyId.kjennemerke)),
-    understellsnummer: sanitizeStr(
-      safe(() => kjoretoy.kjoretoyId.understellsnummer),
-    ),
-    merke: sanitizeStr(safe(() => generelt?.merke?.[0]?.merke)),
-    modell: sanitizeStr(safe(() => generelt?.handelsbetegnelse?.[0])),
-    typebetegnelse: sanitizeStr(safe(() => generelt?.typebetegnelse)),
-    farge: sanitizeStr(
-      safe(
-        () =>
-          karosseri?.rFarge?.[0]?.kodeBeskrivelse ||
-          karosseri?.rFarge?.[0]?.kodeNavn,
-      ),
-    ),
-    kjoretoyKlasse: sanitizeStr(
-      safe(() => tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse),
-    ),
-    forstegangsregistrering: sanitizeStr(
-      safe(
-        () => kjoretoy.forstegangsregistrering?.registrertForstegangNorgeDato,
-      ),
-    ),
-    registreringsstatus: sanitizeStr(
-      safe(
-        () =>
-          kjoretoy.registrering?.registreringsstatus?.kodeBeskrivelse ||
-          kjoretoy.registrering?.registreringsstatus?.kodeNavn,
-      ),
-    ),
-    kjoringensArt: sanitizeStr(
-      safe(
-        () =>
-          kjoretoy.registrering?.kjoringensArt?.kodeBeskrivelse ||
-          kjoretoy.registrering?.kjoringensArt?.kodeNavn,
-      ),
-    ),
-    nesteEuKontroll: sanitizeStr(
-      safe(() => kjoretoy.periodiskKjoretoyKontroll?.kontrollfrist),
-    ),
-    sistGodkjentEuKontroll: sanitizeStr(
-      safe(() => kjoretoy.periodiskKjoretoyKontroll?.sistGodkjent),
-    ),
-  };
-}
-
-/** Build the Motor & Ytelse section of the vehicle data response */
-function buildMotorOgYtelse(
-  motor: Motor | null,
-  motorOgDrivverk: MotorOgDrivverk | null,
-  miljodata: Miljodata | null,
-  miljoGruppe: MiljoOgdrivstoffGruppe | null,
-  forbruk: ForbrukOgUtslipp | null,
-): IMotorOgYtelse {
-  return {
-    drivstofftype: sanitizeStr(
-      safe(
-        () =>
-          miljoGruppe?.drivstoffKodeMiljodata?.kodeBeskrivelse ||
-          miljoGruppe?.drivstoffKodeMiljodata?.kodeNavn,
-      ),
-    ),
-    motoreffektKw: sanitizeNum(
-      safe(() => motor?.drivstoff?.[0]?.maksNettoEffekt),
-    ),
-    slagvolumCc: sanitizeNum(safe(() => motor?.slagvolum)),
-    antallSylindre: sanitizeNum(safe(() => motor?.antallSylindre)),
-    girkassetype: sanitizeStr(
-      safe(
-        () =>
-          motorOgDrivverk?.girkassetype?.kodeBeskrivelse ||
-          motorOgDrivverk?.girkassetype?.kodeNavn,
-      ),
-    ),
-    antallGir: sanitizeNum(safe(() => motorOgDrivverk?.antallGir)),
-    hybridKategori: sanitizeStr(
-      safe(
-        () =>
-          motorOgDrivverk?.hybridKategori?.kodeBeskrivelse ||
-          motorOgDrivverk?.hybridKategori?.kodeNavn,
-      ),
-    ),
-    maksHastighetKmT: sanitizeNum(
-      safe(() => motorOgDrivverk?.maksimumHastighet?.[0]),
-    ),
-    euroKlasse: sanitizeStr(
-      safe(
-        () =>
-          miljodata?.euroKlasse?.kodeBeskrivelse ||
-          miljodata?.euroKlasse?.kodeNavn,
-      ),
-    ),
-    co2BlandetKjoring: sanitizeNum(safe(() => forbruk?.co2BlandetKjoring)),
-    forbrukBlandetKjoring: sanitizeNum(
-      safe(() => forbruk?.forbrukBlandetKjoring),
-    ),
-    noxUtslippMgKm: sanitizeNum(safe(() => forbruk?.utslippNOxMgPrKm)),
-    partikkelfilter: sanitizeBool(
-      safe(() => forbruk?.partikkelfilterFabrikkmontert),
-    ),
-    rekkeviddeKm: sanitizeNum(safe(() => forbruk?.rekkeviddeKm)),
-    stoynivaaDb: sanitizeNum(safe(() => miljoGruppe?.lyd?.standstoy)),
-  };
-}
-
-/** Build the Mål & Vekt section of the vehicle data response */
-function buildMalOgVekt(
-  dimensjoner: Dimensjoner | null,
-  vekter: Vekter | null,
-  persontall: Persontall | null,
-  karosseri: KarosseriOgLasteplan | null,
-): IMalOgVekt {
-  return {
-    lengdeMm: sanitizeNum(safe(() => dimensjoner?.lengde)),
-    breddeMm: sanitizeNum(safe(() => dimensjoner?.bredde)),
-    hoydeMm: sanitizeNum(safe(() => dimensjoner?.hoyde)),
-    egenvektKg: sanitizeNum(safe(() => vekter?.egenvekt)),
-    nyttelastKg: sanitizeNum(safe(() => vekter?.nyttelast)),
-    tillattTotalvektKg: sanitizeNum(safe(() => vekter?.tillattTotalvekt)),
-    tillattTaklastKg: sanitizeNum(safe(() => vekter?.tillattTaklast)),
-    tillattTilhengervektMedBremsKg: sanitizeNum(
-      safe(() => vekter?.tillattTilhengervektMedBrems),
-    ),
-    tillattTilhengervektUtenBremsKg: sanitizeNum(
-      safe(() => vekter?.tillattTilhengervektUtenBrems),
-    ),
-    tillattVogntogvektKg: sanitizeNum(safe(() => vekter?.tillattVogntogvekt)),
-    sitteplasserTotalt: sanitizeNum(safe(() => persontall?.sitteplasserTotalt)),
-    sitteplasserForan: sanitizeNum(safe(() => persontall?.sitteplasserForan)),
-    antallDorer: sanitizeNum(safe(() => karosseri?.antallDorer?.[0])),
-    kjoreSide: sanitizeStr(safe(() => karosseri?.kjoringSide)),
-  };
-}
-
-/** Build the Teknisk section of the vehicle data response */
-function buildTeknisk(
-  akslinger: Akslinger | null,
-  dekkForan: AkselDekkOgFelg | null,
-  dekkBak: AkselDekkOgFelg | null,
-  akselForan: Aksel | null,
-  akselBak: Aksel | null,
-  tilhengerkopling: Tilhengerkopling | null,
-): ITeknisk {
-  return {
-    antallAksler: sanitizeNum(safe(() => akslinger?.antallAksler)),
-    dekkdimensjonForan: sanitizeStr(safe(() => dekkForan?.dekkdimensjon)),
-    felgdimensjonForan: sanitizeStr(safe(() => dekkForan?.felgdimensjon)),
-    hastighetsKodeDekkForan: sanitizeStr(
-      safe(() => dekkForan?.hastighetskodeDekk),
-    ),
-    dekkdimensjonBak: sanitizeStr(safe(() => dekkBak?.dekkdimensjon)),
-    felgdimensjonBak: sanitizeStr(safe(() => dekkBak?.felgdimensjon)),
-    hastighetsKodeDekkBak: sanitizeStr(
-      safe(() => dekkBak?.hastighetskodeDekk),
-    ),
-    sporviddeFoyanMm: sanitizeNum(safe(() => akselForan?.sporvidde)),
-    sporviddeBakMm: sanitizeNum(safe(() => akselBak?.sporvidde)),
-    tilhengerkopling: sanitizeStr(
-      safe(() => {
-        const kop = tilhengerkopling?.kopling?.[0];
-        if (!kop) return null;
-        return (
-          kop.koplingBeskrivelse ||
-          kop.koplingType?.kodeBeskrivelse ||
-          kop.koplingType?.kodeNavn ||
-          null
-        );
-      }),
-    ),
-  };
-}
 
 export default async function handler(
   req: VercelRequest,
@@ -269,11 +39,9 @@ export default async function handler(
       const kjoretoy = response.data?.kjoretoydataListe?.[0];
 
       if (!kjoretoy) {
-        res
-          .status(404)
-          .json({
-            melding: "Ingen data funnet for dette registreringsnummeret",
-          });
+        res.status(404).json({
+          melding: "Ingen data funnet for dette registreringsnummeret",
+        });
         return;
       }
 
@@ -296,9 +64,7 @@ export default async function handler(
       const motor = safe(() => motorOgDrivverk?.motor?.[0]);
       const miljoGruppe = safe(() => miljodata?.miljoOgdrivstoffGruppe?.[0]);
       const forbruk = safe(() => miljoGruppe?.forbrukOgUtslipp?.[0]);
-      const dekkKomb = safe(
-        () => dekkOgFelg?.akselDekkOgFelgKombinasjon?.[0],
-      );
+      const dekkKomb = safe(() => dekkOgFelg?.akselDekkOgFelgKombinasjon?.[0]);
       const dekkForan = safe(() => dekkKomb?.akselDekkOgFelg?.[0]);
       const dekkBak = safe(() => dekkKomb?.akselDekkOgFelg?.[1]);
       const akselForan = safe(
@@ -310,10 +76,28 @@ export default async function handler(
 
       // Build the structured response
       const vehicleData: IVehicleData = {
-        oversikt: buildOversikt(kjoretoy, generelt, karosseri, tekniskGodkjenning),
-        motorOgYtelse: buildMotorOgYtelse(motor, motorOgDrivverk, miljodata, miljoGruppe, forbruk),
+        oversikt: buildOversikt(
+          kjoretoy,
+          generelt,
+          karosseri,
+          tekniskGodkjenning,
+        ),
+        motorOgYtelse: buildMotorOgYtelse(
+          motor,
+          motorOgDrivverk,
+          miljodata,
+          miljoGruppe,
+          forbruk,
+        ),
         malOgVekt: buildMalOgVekt(dimensjoner, vekter, persontall, karosseri),
-        teknisk: buildTeknisk(akslinger, dekkForan, dekkBak, akselForan, akselBak, tilhengerkopling),
+        teknisk: buildTeknisk(
+          akslinger,
+          dekkForan,
+          dekkBak,
+          akselForan,
+          akselBak,
+          tilhengerkopling,
+        ),
       };
 
       res.status(200).json(vehicleData);
