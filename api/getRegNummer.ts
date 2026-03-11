@@ -1,12 +1,12 @@
 import axios from "axios";
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import { safe } from "./utils/sanitize";
+import { safe } from "../lib/sanitize";
 import {
   buildOversikt,
   buildMotorOgYtelse,
   buildMalOgVekt,
   buildTeknisk,
-} from "./utils/vehicleDataBuilders";
+} from "../lib/vehicleDataBuilders";
 import type {
   IStatensVegvesenFullData,
   IVehicleData,
