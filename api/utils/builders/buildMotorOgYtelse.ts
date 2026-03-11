@@ -1,4 +1,4 @@
-import { safe, sanitizeStr, sanitizeNum, sanitizeBool, sanitizeKode } from "../sanitize";
+import { safe, sanitizeNum, sanitizeBool, sanitizeKode } from "../sanitize";
 import type {
   IMotorOgYtelse,
   Motor,
