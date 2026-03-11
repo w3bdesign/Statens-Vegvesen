@@ -1,4 +1,4 @@
-import { safe, sanitizeStr, sanitizeKode } from "../sanitize";
+import { buildSection, FieldDescriptor } from "./buildFields";
 import type {
   IOversikt,
   KjoretoydataListe,
@@ -7,6 +7,30 @@ import type {
   TekniskGodkjenning,
 } from "../../../scripts/types/typeDefinitions";
 
+/** Source bundle passed into each field accessor */
+interface OversiktSources {
+  kjoretoy: KjoretoydataListe;
+  generelt: Generelt | null;
+  karosseri: KarosseriOgLasteplan | null;
+  tekniskGodkjenning: TekniskGodkjenning | null;
+}
+
+/** Declarative field definitions for the Oversikt section */
+const oversiktFields: ReadonlyArray<FieldDescriptor<OversiktSources>> = [
+  { key: "kjennemerke", type: "str", get: (s) => s.kjoretoy.kjoretoyId.kjennemerke },
+  { key: "understellsnummer", type: "str", get: (s) => s.kjoretoy.kjoretoyId.understellsnummer },
+  { key: "merke", type: "str", get: (s) => s.generelt?.merke?.[0]?.merke },
+  { key: "modell", type: "str", get: (s) => s.generelt?.handelsbetegnelse?.[0] },
+  { key: "typebetegnelse", type: "str", get: (s) => s.generelt?.typebetegnelse },
+  { key: "farge", type: "kode", get: (s) => s.karosseri?.rFarge?.[0] },
+  { key: "kjoretoyKlasse", type: "str", get: (s) => s.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse },
+  { key: "forstegangsregistrering", type: "str", get: (s) => s.kjoretoy.forstegangsregistrering?.registrertForstegangNorgeDato },
+  { key: "registreringsstatus", type: "kode", get: (s) => s.kjoretoy.registrering?.registreringsstatus },
+  { key: "kjoringensArt", type: "kode", get: (s) => s.kjoretoy.registrering?.kjoringensArt },
+  { key: "nesteEuKontroll", type: "str", get: (s) => s.kjoretoy.periodiskKjoretoyKontroll?.kontrollfrist },
+  { key: "sistGodkjentEuKontroll", type: "str", get: (s) => s.kjoretoy.periodiskKjoretoyKontroll?.sistGodkjent },
+];
+
 /** Build the Oversikt section of the vehicle data response */
 export function buildOversikt(
   kjoretoy: KjoretoydataListe,
@@ -14,34 +38,8 @@ export function buildOversikt(
   karosseri: KarosseriOgLasteplan | null,
   tekniskGodkjenning: TekniskGodkjenning | null,
 ): IOversikt {
-  return {
-    kjennemerke: sanitizeStr(safe(() => kjoretoy.kjoretoyId.kjennemerke)),
-    understellsnummer: sanitizeStr(
-      safe(() => kjoretoy.kjoretoyId.understellsnummer),
-    ),
-    merke: sanitizeStr(safe(() => generelt?.merke?.[0]?.merke)),
-    modell: sanitizeStr(safe(() => generelt?.handelsbetegnelse?.[0])),
-    typebetegnelse: sanitizeStr(safe(() => generelt?.typebetegnelse)),
-    farge: sanitizeKode(safe(() => karosseri?.rFarge?.[0])),
-    kjoretoyKlasse: sanitizeStr(
-      safe(() => tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse),
-    ),
-    forstegangsregistrering: sanitizeStr(
-      safe(
-        () => kjoretoy.forstegangsregistrering?.registrertForstegangNorgeDato,
-      ),
-    ),
-    registreringsstatus: sanitizeKode(
-      safe(() => kjoretoy.registrering?.registreringsstatus),
-    ),
-    kjoringensArt: sanitizeKode(
-      safe(() => kjoretoy.registrering?.kjoringensArt),
-    ),
-    nesteEuKontroll: sanitizeStr(
-      safe(() => kjoretoy.periodiskKjoretoyKontroll?.kontrollfrist),
-    ),
-    sistGodkjentEuKontroll: sanitizeStr(
-      safe(() => kjoretoy.periodiskKjoretoyKontroll?.sistGodkjent),
-    ),
-  };
+  return buildSection<OversiktSources, IOversikt>(
+    { kjoretoy, generelt, karosseri, tekniskGodkjenning },
+    oversiktFields,
+  );
 }
