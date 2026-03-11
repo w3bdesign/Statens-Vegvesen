@@ -1,4 +1,4 @@
-import { safe, sanitizeStr, sanitizeNum } from "../sanitize";
+import { buildSection, FieldDescriptor } from "./buildFields";
 import type {
   IMalOgVekt,
   Dimensjoner,
@@ -7,6 +7,32 @@ import type {
   KarosseriOgLasteplan,
 } from "../../../scripts/types/typeDefinitions";
 
+/** Source bundle passed into each field accessor */
+interface MalOgVektSources {
+  dimensjoner: Dimensjoner | null;
+  vekter: Vekter | null;
+  persontall: Persontall | null;
+  karosseri: KarosseriOgLasteplan | null;
+}
+
+/** Declarative field definitions for the Mål & Vekt section */
+const malOgVektFields: ReadonlyArray<FieldDescriptor<MalOgVektSources>> = [
+  { key: "lengdeMm", type: "num", get: (s) => s.dimensjoner?.lengde },
+  { key: "breddeMm", type: "num", get: (s) => s.dimensjoner?.bredde },
+  { key: "hoydeMm", type: "num", get: (s) => s.dimensjoner?.hoyde },
+  { key: "egenvektKg", type: "num", get: (s) => s.vekter?.egenvekt },
+  { key: "nyttelastKg", type: "num", get: (s) => s.vekter?.nyttelast },
+  { key: "tillattTotalvektKg", type: "num", get: (s) => s.vekter?.tillattTotalvekt },
+  { key: "tillattTaklastKg", type: "num", get: (s) => s.vekter?.tillattTaklast },
+  { key: "tillattTilhengervektMedBremsKg", type: "num", get: (s) => s.vekter?.tillattTilhengervektMedBrems },
+  { key: "tillattTilhengervektUtenBremsKg", type: "num", get: (s) => s.vekter?.tillattTilhengervektUtenBrems },
+  { key: "tillattVogntogvektKg", type: "num", get: (s) => s.vekter?.tillattVogntogvekt },
+  { key: "sitteplasserTotalt", type: "num", get: (s) => s.persontall?.sitteplasserTotalt },
+  { key: "sitteplasserForan", type: "num", get: (s) => s.persontall?.sitteplasserForan },
+  { key: "antallDorer", type: "num", get: (s) => s.karosseri?.antallDorer?.[0] },
+  { key: "kjoreSide", type: "str", get: (s) => s.karosseri?.kjoringSide },
+];
+
 /** Build the Mål & Vekt section of the vehicle data response */
 export function buildMalOgVekt(
   dimensjoner: Dimensjoner | null,
@@ -14,24 +40,8 @@ export function buildMalOgVekt(
   persontall: Persontall | null,
   karosseri: KarosseriOgLasteplan | null,
 ): IMalOgVekt {
-  return {
-    lengdeMm: sanitizeNum(safe(() => dimensjoner?.lengde)),
-    breddeMm: sanitizeNum(safe(() => dimensjoner?.bredde)),
-    hoydeMm: sanitizeNum(safe(() => dimensjoner?.hoyde)),
-    egenvektKg: sanitizeNum(safe(() => vekter?.egenvekt)),
-    nyttelastKg: sanitizeNum(safe(() => vekter?.nyttelast)),
-    tillattTotalvektKg: sanitizeNum(safe(() => vekter?.tillattTotalvekt)),
-    tillattTaklastKg: sanitizeNum(safe(() => vekter?.tillattTaklast)),
-    tillattTilhengervektMedBremsKg: sanitizeNum(
-      safe(() => vekter?.tillattTilhengervektMedBrems),
-    ),
-    tillattTilhengervektUtenBremsKg: sanitizeNum(
-      safe(() => vekter?.tillattTilhengervektUtenBrems),
-    ),
-    tillattVogntogvektKg: sanitizeNum(safe(() => vekter?.tillattVogntogvekt)),
-    sitteplasserTotalt: sanitizeNum(safe(() => persontall?.sitteplasserTotalt)),
-    sitteplasserForan: sanitizeNum(safe(() => persontall?.sitteplasserForan)),
-    antallDorer: sanitizeNum(safe(() => karosseri?.antallDorer?.[0])),
-    kjoreSide: sanitizeStr(safe(() => karosseri?.kjoringSide)),
-  };
+  return buildSection<MalOgVektSources, IMalOgVekt>(
+    { dimensjoner, vekter, persontall, karosseri },
+    malOgVektFields,
+  );
 }
