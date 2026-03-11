@@ -1,35 +1,13 @@
-import { buildSection, FieldDescriptor } from "./buildFields";
+import { buildSection } from "./buildFields";
+import { oversiktFields } from "./fields/oversiktFields";
+import type { OversiktSources } from "./sources";
 import type {
   IOversikt,
-  KjoretoydataListe,
   Generelt,
   KarosseriOgLasteplan,
+  KjoretoydataListe,
   TekniskGodkjenning,
 } from "../../../scripts/types/typeDefinitions";
-
-/** Source bundle passed into each field accessor */
-interface OversiktSources {
-  kjoretoy: KjoretoydataListe;
-  generelt: Generelt | null;
-  karosseri: KarosseriOgLasteplan | null;
-  tekniskGodkjenning: TekniskGodkjenning | null;
-}
-
-/** Declarative field definitions for the Oversikt section */
-const oversiktFields: ReadonlyArray<FieldDescriptor<OversiktSources>> = [
-  { key: "kjennemerke", type: "str", get: (s) => s.kjoretoy.kjoretoyId.kjennemerke },
-  { key: "understellsnummer", type: "str", get: (s) => s.kjoretoy.kjoretoyId.understellsnummer },
-  { key: "merke", type: "str", get: (s) => s.generelt?.merke?.[0]?.merke },
-  { key: "modell", type: "str", get: (s) => s.generelt?.handelsbetegnelse?.[0] },
-  { key: "typebetegnelse", type: "str", get: (s) => s.generelt?.typebetegnelse },
-  { key: "farge", type: "kode", get: (s) => s.karosseri?.rFarge?.[0] },
-  { key: "kjoretoyKlasse", type: "str", get: (s) => s.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse },
-  { key: "forstegangsregistrering", type: "str", get: (s) => s.kjoretoy.forstegangsregistrering?.registrertForstegangNorgeDato },
-  { key: "registreringsstatus", type: "kode", get: (s) => s.kjoretoy.registrering?.registreringsstatus },
-  { key: "kjoringensArt", type: "kode", get: (s) => s.kjoretoy.registrering?.kjoringensArt },
-  { key: "nesteEuKontroll", type: "str", get: (s) => s.kjoretoy.periodiskKjoretoyKontroll?.kontrollfrist },
-  { key: "sistGodkjentEuKontroll", type: "str", get: (s) => s.kjoretoy.periodiskKjoretoyKontroll?.sistGodkjent },
-];
 
 /** Build the Oversikt section of the vehicle data response */
 export function buildOversikt(
@@ -38,8 +16,6 @@ export function buildOversikt(
   karosseri: KarosseriOgLasteplan | null,
   tekniskGodkjenning: TekniskGodkjenning | null,
 ): IOversikt {
-  return buildSection<OversiktSources, IOversikt>(
-    { kjoretoy, generelt, karosseri, tekniskGodkjenning },
-    oversiktFields,
-  );
+  const sources: OversiktSources = { kjoretoy, generelt, karosseri, tekniskGodkjenning };
+  return buildSection<OversiktSources, IOversikt>(sources, oversiktFields);
 }

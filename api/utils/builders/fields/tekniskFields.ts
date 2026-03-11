@@ -1,5 +1,6 @@
 import type { FieldDescriptor } from "../buildFields";
-import type { TekniskSources } from "../sources";
+import { TekniskSources } from "../sources";
+
 
 /** Resolve the best available tilhengerkopling description */
 function resolveTilhengerkoplingLabel(s: TekniskSources): string | null {
