@@ -1,22 +1,8 @@
-import { buildSection, FieldDescriptor } from "./buildFields";
-import type {
-  IOversikt,
-  KjoretoydataListe,
-  Generelt,
-  KarosseriOgLasteplan,
-  TekniskGodkjenning,
-} from "../../../scripts/types/typeDefinitions";
-
-/** Source bundle passed into each field accessor */
-interface OversiktSources {
-  kjoretoy: KjoretoydataListe;
-  generelt: Generelt | null;
-  karosseri: KarosseriOgLasteplan | null;
-  tekniskGodkjenning: TekniskGodkjenning | null;
-}
+import type { FieldDescriptor } from "../buildFields";
+import type { OversiktSources } from "../sources";
 
 /** Declarative field definitions for the Oversikt section */
-const oversiktFields: ReadonlyArray<FieldDescriptor<OversiktSources>> = [
+export const oversiktFields: ReadonlyArray<FieldDescriptor<OversiktSources>> = [
   { key: "kjennemerke", type: "str", get: (s) => s.kjoretoy.kjoretoyId.kjennemerke },
   { key: "understellsnummer", type: "str", get: (s) => s.kjoretoy.kjoretoyId.understellsnummer },
   { key: "merke", type: "str", get: (s) => s.generelt?.merke?.[0]?.merke },
@@ -30,16 +16,3 @@ const oversiktFields: ReadonlyArray<FieldDescriptor<OversiktSources>> = [
   { key: "nesteEuKontroll", type: "str", get: (s) => s.kjoretoy.periodiskKjoretoyKontroll?.kontrollfrist },
   { key: "sistGodkjentEuKontroll", type: "str", get: (s) => s.kjoretoy.periodiskKjoretoyKontroll?.sistGodkjent },
 ];
-
-/** Build the Oversikt section of the vehicle data response */
-export function buildOversikt(
-  kjoretoy: KjoretoydataListe,
-  generelt: Generelt | null,
-  karosseri: KarosseriOgLasteplan | null,
-  tekniskGodkjenning: TekniskGodkjenning | null,
-): IOversikt {
-  return buildSection<OversiktSources, IOversikt>(
-    { kjoretoy, generelt, karosseri, tekniskGodkjenning },
-    oversiktFields,
-  );
-}
