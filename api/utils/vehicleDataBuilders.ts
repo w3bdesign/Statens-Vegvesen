@@ -1,4 +1,4 @@
-import { safe, sanitizeStr, sanitizeNum, sanitizeBool } from "./sanitize";
+import { safe, sanitizeStr, sanitizeNum, sanitizeBool, sanitizeKode } from "./sanitize";
 import type {
   IOversikt,
   IMotorOgYtelse,
@@ -37,13 +37,7 @@ export function buildOversikt(
     merke: sanitizeStr(safe(() => generelt?.merke?.[0]?.merke)),
     modell: sanitizeStr(safe(() => generelt?.handelsbetegnelse?.[0])),
     typebetegnelse: sanitizeStr(safe(() => generelt?.typebetegnelse)),
-    farge: sanitizeStr(
-      safe(
-        () =>
-          karosseri?.rFarge?.[0]?.kodeBeskrivelse ||
-          karosseri?.rFarge?.[0]?.kodeNavn,
-      ),
-    ),
+    farge: sanitizeKode(safe(() => karosseri?.rFarge?.[0])),
     kjoretoyKlasse: sanitizeStr(
       safe(() => tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse),
     ),
@@ -52,19 +46,11 @@ export function buildOversikt(
         () => kjoretoy.forstegangsregistrering?.registrertForstegangNorgeDato,
       ),
     ),
-    registreringsstatus: sanitizeStr(
-      safe(
-        () =>
-          kjoretoy.registrering?.registreringsstatus?.kodeBeskrivelse ||
-          kjoretoy.registrering?.registreringsstatus?.kodeNavn,
-      ),
+    registreringsstatus: sanitizeKode(
+      safe(() => kjoretoy.registrering?.registreringsstatus),
     ),
-    kjoringensArt: sanitizeStr(
-      safe(
-        () =>
-          kjoretoy.registrering?.kjoringensArt?.kodeBeskrivelse ||
-          kjoretoy.registrering?.kjoringensArt?.kodeNavn,
-      ),
+    kjoringensArt: sanitizeKode(
+      safe(() => kjoretoy.registrering?.kjoringensArt),
     ),
     nesteEuKontroll: sanitizeStr(
       safe(() => kjoretoy.periodiskKjoretoyKontroll?.kontrollfrist),
@@ -84,43 +70,21 @@ export function buildMotorOgYtelse(
   forbruk: ForbrukOgUtslipp | null,
 ): IMotorOgYtelse {
   return {
-    drivstofftype: sanitizeStr(
-      safe(
-        () =>
-          miljoGruppe?.drivstoffKodeMiljodata?.kodeBeskrivelse ||
-          miljoGruppe?.drivstoffKodeMiljodata?.kodeNavn,
-      ),
+    drivstofftype: sanitizeKode(
+      safe(() => miljoGruppe?.drivstoffKodeMiljodata),
     ),
     motoreffektKw: sanitizeNum(
       safe(() => motor?.drivstoff?.[0]?.maksNettoEffekt),
     ),
     slagvolumCc: sanitizeNum(safe(() => motor?.slagvolum)),
     antallSylindre: sanitizeNum(safe(() => motor?.antallSylindre)),
-    girkassetype: sanitizeStr(
-      safe(
-        () =>
-          motorOgDrivverk?.girkassetype?.kodeBeskrivelse ||
-          motorOgDrivverk?.girkassetype?.kodeNavn,
-      ),
-    ),
+    girkassetype: sanitizeKode(safe(() => motorOgDrivverk?.girkassetype)),
     antallGir: sanitizeNum(safe(() => motorOgDrivverk?.antallGir)),
-    hybridKategori: sanitizeStr(
-      safe(
-        () =>
-          motorOgDrivverk?.hybridKategori?.kodeBeskrivelse ||
-          motorOgDrivverk?.hybridKategori?.kodeNavn,
-      ),
-    ),
+    hybridKategori: sanitizeKode(safe(() => motorOgDrivverk?.hybridKategori)),
     maksHastighetKmT: sanitizeNum(
       safe(() => motorOgDrivverk?.maksimumHastighet?.[0]),
     ),
-    euroKlasse: sanitizeStr(
-      safe(
-        () =>
-          miljodata?.euroKlasse?.kodeBeskrivelse ||
-          miljodata?.euroKlasse?.kodeNavn,
-      ),
-    ),
+    euroKlasse: sanitizeKode(safe(() => miljodata?.euroKlasse)),
     co2BlandetKjoring: sanitizeNum(safe(() => forbruk?.co2BlandetKjoring)),
     forbrukBlandetKjoring: sanitizeNum(
       safe(() => forbruk?.forbrukBlandetKjoring),

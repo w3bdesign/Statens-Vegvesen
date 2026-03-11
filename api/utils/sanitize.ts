@@ -36,3 +36,10 @@ export function sanitizeBool(val: boolean | null | undefined): boolean | null {
   if (val === null || val === undefined) return null;
   return Boolean(val);
 }
+
+/** Extract kodeBeskrivelse or kodeNavn from a KjoringensArt-like object, or return null */
+export function sanitizeKode(
+  obj: { kodeBeskrivelse?: string; kodeNavn?: string } | null | undefined,
+): string | null {
+  return sanitizeStr(safe(() => obj?.kodeBeskrivelse || obj?.kodeNavn));
+}
