@@ -1,18 +1,25 @@
 import axios from "axios";
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import { safe } from "../lib/sanitize";
-import {
-  buildOversikt,
-  buildMotorOgYtelse,
-  buildMalOgVekt,
-  buildTeknisk,
-} from "../lib/vehicleDataBuilders";
-import type {
-  IStatensVegvesenFullData,
-  IVehicleData,
-} from "../scripts/types/typeDefinitions";
+import { buildVehicleData } from "../lib/buildVehicleData";
+import type { IStatensVegvesenFullData } from "../scripts/types/typeDefinitions";
 
 // https://autosys-kjoretoy-api.atlas.vegvesen.no/api-ui/index-enkeltoppslag.html
+
+const SVV_BASE_URL =
+  "https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata";
+
+/** Fetch vehicle data from the Statens Vegvesen API */
+function fetchVehicle(regNummer: string) {
+  return axios.get<IStatensVegvesenFullData>(
+    `${SVV_BASE_URL}?kjennemerke=${regNummer}`,
+    {
+      headers: {
+        "SVV-Authorization": `Apikey ${process.env.SVV_API_KEY}`,
+        "X-Client-Identifier": "my-app",
+      },
+    },
+  );
+}
 
 export default async function handler(
   req: VercelRequest,
@@ -25,87 +32,26 @@ export default async function handler(
     return;
   }
 
-  const urlToFetch = `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${regNummer}`;
-
   try {
-    const response = await axios.get<IStatensVegvesenFullData>(urlToFetch, {
-      headers: {
-        "SVV-Authorization": `Apikey ${process.env.SVV_API_KEY}`,
-        "X-Client-Identifier": "my-app",
-      },
-    });
+    const response = await fetchVehicle(String(regNummer));
 
-    if (response.status === 200) {
-      const kjoretoy = response.data?.kjoretoydataListe?.[0];
-
-      if (!kjoretoy) {
-        res.status(404).json({
-          melding: "Ingen data funnet for dette registreringsnummeret",
-        });
-        return;
-      }
-
-      // Extract nested data safely
-      const tekniskGodkjenning = safe(
-        () => kjoretoy.godkjenning.tekniskGodkjenning,
-      );
-      const tekniskeData = safe(() => tekniskGodkjenning?.tekniskeData);
-      const generelt = safe(() => tekniskeData?.generelt);
-      const motorOgDrivverk = safe(() => tekniskeData?.motorOgDrivverk);
-      const miljodata = safe(() => tekniskeData?.miljodata);
-      const dimensjoner = safe(() => tekniskeData?.dimensjoner);
-      const vekter = safe(() => tekniskeData?.vekter);
-      const persontall = safe(() => tekniskeData?.persontall);
-      const karosseri = safe(() => tekniskeData?.karosseriOgLasteplan);
-      const akslinger = safe(() => tekniskeData?.akslinger);
-      const dekkOgFelg = safe(() => tekniskeData?.dekkOgFelg);
-      const tilhengerkopling = safe(() => tekniskeData?.tilhengerkopling);
-
-      const motor = safe(() => motorOgDrivverk?.motor?.[0]);
-      const miljoGruppe = safe(() => miljodata?.miljoOgdrivstoffGruppe?.[0]);
-      const forbruk = safe(() => miljoGruppe?.forbrukOgUtslipp?.[0]);
-      const dekkKomb = safe(() => dekkOgFelg?.akselDekkOgFelgKombinasjon?.[0]);
-      const dekkForan = safe(() => dekkKomb?.akselDekkOgFelg?.[0]);
-      const dekkBak = safe(() => dekkKomb?.akselDekkOgFelg?.[1]);
-      const akselForan = safe(
-        () => akslinger?.akselGruppe?.[0]?.akselListe?.aksel?.[0],
-      );
-      const akselBak = safe(
-        () => akslinger?.akselGruppe?.[1]?.akselListe?.aksel?.[0],
-      );
-
-      // Build the structured response
-      const vehicleData: IVehicleData = {
-        oversikt: buildOversikt(
-          kjoretoy,
-          generelt,
-          karosseri,
-          tekniskGodkjenning,
-        ),
-        motorOgYtelse: buildMotorOgYtelse(
-          motor,
-          motorOgDrivverk,
-          miljodata,
-          miljoGruppe,
-          forbruk,
-        ),
-        malOgVekt: buildMalOgVekt(dimensjoner, vekter, persontall, karosseri),
-        teknisk: buildTeknisk(
-          akslinger,
-          dekkForan,
-          dekkBak,
-          akselForan,
-          akselBak,
-          tilhengerkopling,
-        ),
-      };
-
-      res.status(200).json(vehicleData);
-    } else {
+    if (response.status !== 200) {
       res
         .status(500)
         .json({ error: `Feil under henting av data - ${response}` });
+      return;
     }
+
+    const kjoretoy = response.data?.kjoretoydataListe?.[0];
+
+    if (!kjoretoy) {
+      res.status(404).json({
+        melding: "Ingen data funnet for dette registreringsnummeret",
+      });
+      return;
+    }
+
+    res.status(200).json(buildVehicleData(kjoretoy));
   } catch (error) {
     res.status(500).json({ error: `Feil under henting av data - ${error}` });
   }
