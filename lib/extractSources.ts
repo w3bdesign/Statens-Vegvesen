@@ -17,6 +17,8 @@ import type {
   TekniskGodkjenning,
   Akslinger,
   Aksel,
+  MotorOgDrivverk,
+  Miljodata,
 } from "../scripts/types/typeDefinitions";
 
 /** All four source bundles grouped together */
@@ -47,15 +49,26 @@ function extractOversiktSources(
   return { kjoretoy, generelt, karosseri, tekniskGodkjenning };
 }
 
+/** Extract the primary motor from a drivverk section */
+function extractMotor(motorOgDrivverk: MotorOgDrivverk | null) {
+  return safe(() => motorOgDrivverk?.motor?.[0]);
+}
+
+/** Extract the first miljø group and its forbruk entry */
+function extractMiljoForbruk(miljodata: Miljodata | null) {
+  const miljoGruppe = safe(() => miljodata?.miljoOgdrivstoffGruppe?.[0]);
+  const forbruk = safe(() => miljoGruppe?.forbrukOgUtslipp?.[0]);
+  return { miljoGruppe, forbruk };
+}
+
 /** Extract sources for the Motor og Ytelse section */
 function extractMotorOgYtelseSources(
   tekniskeData: TekniskeData | null,
 ): MotorOgYtelseSources {
   const motorOgDrivverk = safe(() => tekniskeData?.motorOgDrivverk);
   const miljodata = safe(() => tekniskeData?.miljodata);
-  const motor = safe(() => motorOgDrivverk?.motor?.[0]);
-  const miljoGruppe = safe(() => miljodata?.miljoOgdrivstoffGruppe?.[0]);
-  const forbruk = safe(() => miljoGruppe?.forbrukOgUtslipp?.[0]);
+  const motor = extractMotor(motorOgDrivverk);
+  const { miljoGruppe, forbruk } = extractMiljoForbruk(miljodata);
   return { motor, motorOgDrivverk, miljodata, miljoGruppe, forbruk };
 }
 
