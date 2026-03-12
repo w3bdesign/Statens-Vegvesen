@@ -15,6 +15,8 @@ import type {
   KjoretoydataListe,
   TekniskeData,
   TekniskGodkjenning,
+  Akslinger,
+  Aksel,
 } from "../scripts/types/typeDefinitions";
 
 /** All four source bundles grouped together */
@@ -77,15 +79,20 @@ function extractDekkData(tekniskeData: TekniskeData | null) {
   return { dekkForan, dekkBak };
 }
 
+/** Retrieve the first aksel from a specific akselGruppe by index */
+function extractAkselAtGroup(
+  akslinger: Akslinger | null,
+  groupIndex: number,
+): Aksel | null {
+  const gruppe = safe(() => akslinger?.akselGruppe?.[groupIndex]);
+  return safe(() => gruppe?.akselListe?.aksel?.[0]);
+}
+
 /** Extract aksel (axle) data from the raw tekniske data */
 function extractAkselData(tekniskeData: TekniskeData | null) {
   const akslinger = safe(() => tekniskeData?.akslinger);
-  const akselForan = safe(
-    () => akslinger?.akselGruppe?.[0]?.akselListe?.aksel?.[0],
-  );
-  const akselBak = safe(
-    () => akslinger?.akselGruppe?.[1]?.akselListe?.aksel?.[0],
-  );
+  const akselForan = extractAkselAtGroup(akslinger, 0);
+  const akselBak = extractAkselAtGroup(akslinger, 1);
   return { akslinger, akselForan, akselBak };
 }
 
