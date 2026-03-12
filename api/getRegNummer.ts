@@ -9,7 +9,7 @@ const SVV_BASE_URL =
   "https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata";
 
 /** Fetch vehicle data from the Statens Vegvesen API */
-async function fetchVehicle(regNummer: string) {
+function fetchVehicle(regNummer: string) {
   return axios.get<IStatensVegvesenFullData>(
     `${SVV_BASE_URL}?kjennemerke=${regNummer}`,
     {
