@@ -19,6 +19,8 @@ import type {
   Aksel,
   MotorOgDrivverk,
   Miljodata,
+  AkselDekkOgFelgKombinasjon,
+  AkselDekkOgFelg,
 } from "../scripts/types/typeDefinitions";
 
 /** All four source bundles grouped together */
@@ -83,12 +85,20 @@ function extractMalOgVektSources(
   return { dimensjoner, vekter, persontall, karosseri };
 }
 
+/** Retrieve a specific dekk entry by index from a combination */
+function extractDekkAtIndex(
+  dekkKomb: AkselDekkOgFelgKombinasjon | null,
+  index: number,
+): AkselDekkOgFelg | null {
+  return safe(() => dekkKomb?.akselDekkOgFelg?.[index]);
+}
+
 /** Extract dekk (tyre) data from the raw tekniske data */
 function extractDekkData(tekniskeData: TekniskeData | null) {
   const dekkOgFelg = safe(() => tekniskeData?.dekkOgFelg);
   const dekkKomb = safe(() => dekkOgFelg?.akselDekkOgFelgKombinasjon?.[0]);
-  const dekkForan = safe(() => dekkKomb?.akselDekkOgFelg?.[0]);
-  const dekkBak = safe(() => dekkKomb?.akselDekkOgFelg?.[1]);
+  const dekkForan = extractDekkAtIndex(dekkKomb, 0);
+  const dekkBak = extractDekkAtIndex(dekkKomb, 1);
   return { dekkForan, dekkBak };
 }
 
