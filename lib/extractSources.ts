@@ -2,7 +2,7 @@
  * Extracts and safely navigates all nested data sources from a raw
  * KjoretoydataListe record returned by the Statens Vegvesen API.
  *
- * Centralises every `safe()` call so the handler stays thin.
+ * Each section has its own focused extraction function to keep complexity low.
  */
 import { safe } from "./sanitize";
 import type {
@@ -11,7 +11,11 @@ import type {
   MalOgVektSources,
   TekniskSources,
 } from "./builders/sources";
-import type { KjoretoydataListe } from "../scripts/types/typeDefinitions";
+import type {
+  KjoretoydataListe,
+  TekniskeData,
+  TekniskGodkjenning,
+} from "../scripts/types/typeDefinitions";
 
 /** All four source bundles grouped together */
 export interface AllSources {
@@ -21,51 +25,88 @@ export interface AllSources {
   teknisk: TekniskSources;
 }
 
-/** Extract every source bundle a builder needs from a single vehicle record */
-export function extractSources(kjoretoy: KjoretoydataListe): AllSources {
-  // Top-level technical data
+/** Resolve the top-level teknisk godkjenning and tekniske data from a vehicle record */
+function extractTekniskeData(kjoretoy: KjoretoydataListe) {
   const tekniskGodkjenning = safe(
     () => kjoretoy.godkjenning.tekniskGodkjenning,
   );
   const tekniskeData = safe(() => tekniskGodkjenning?.tekniskeData);
+  return { tekniskGodkjenning, tekniskeData };
+}
 
-  // First-level sections
+/** Extract sources for the Oversikt section */
+function extractOversiktSources(
+  kjoretoy: KjoretoydataListe,
+  tekniskeData: TekniskeData | null,
+  tekniskGodkjenning: TekniskGodkjenning | null,
+): OversiktSources {
   const generelt = safe(() => tekniskeData?.generelt);
+  const karosseri = safe(() => tekniskeData?.karosseriOgLasteplan);
+  return { kjoretoy, generelt, karosseri, tekniskGodkjenning };
+}
+
+/** Extract sources for the Motor og Ytelse section */
+function extractMotorOgYtelseSources(
+  tekniskeData: TekniskeData | null,
+): MotorOgYtelseSources {
   const motorOgDrivverk = safe(() => tekniskeData?.motorOgDrivverk);
   const miljodata = safe(() => tekniskeData?.miljodata);
+  const motor = safe(() => motorOgDrivverk?.motor?.[0]);
+  const miljoGruppe = safe(() => miljodata?.miljoOgdrivstoffGruppe?.[0]);
+  const forbruk = safe(() => miljoGruppe?.forbrukOgUtslipp?.[0]);
+  return { motor, motorOgDrivverk, miljodata, miljoGruppe, forbruk };
+}
+
+/** Extract sources for the Mål og Vekt section */
+function extractMalOgVektSources(
+  tekniskeData: TekniskeData | null,
+): MalOgVektSources {
   const dimensjoner = safe(() => tekniskeData?.dimensjoner);
   const vekter = safe(() => tekniskeData?.vekter);
   const persontall = safe(() => tekniskeData?.persontall);
   const karosseri = safe(() => tekniskeData?.karosseriOgLasteplan);
-  const akslinger = safe(() => tekniskeData?.akslinger);
-  const dekkOgFelg = safe(() => tekniskeData?.dekkOgFelg);
-  const tilhengerkopling = safe(() => tekniskeData?.tilhengerkopling);
+  return { dimensjoner, vekter, persontall, karosseri };
+}
 
-  // Deeper nested elements
-  const motor = safe(() => motorOgDrivverk?.motor?.[0]);
-  const miljoGruppe = safe(() => miljodata?.miljoOgdrivstoffGruppe?.[0]);
-  const forbruk = safe(() => miljoGruppe?.forbrukOgUtslipp?.[0]);
+/** Extract dekk (tyre) data from the raw tekniske data */
+function extractDekkData(tekniskeData: TekniskeData | null) {
+  const dekkOgFelg = safe(() => tekniskeData?.dekkOgFelg);
   const dekkKomb = safe(() => dekkOgFelg?.akselDekkOgFelgKombinasjon?.[0]);
   const dekkForan = safe(() => dekkKomb?.akselDekkOgFelg?.[0]);
   const dekkBak = safe(() => dekkKomb?.akselDekkOgFelg?.[1]);
+  return { dekkForan, dekkBak };
+}
+
+/** Extract aksel (axle) data from the raw tekniske data */
+function extractAkselData(tekniskeData: TekniskeData | null) {
+  const akslinger = safe(() => tekniskeData?.akslinger);
   const akselForan = safe(
     () => akslinger?.akselGruppe?.[0]?.akselListe?.aksel?.[0],
   );
   const akselBak = safe(
     () => akslinger?.akselGruppe?.[1]?.akselListe?.aksel?.[0],
   );
+  return { akslinger, akselForan, akselBak };
+}
+
+/** Extract sources for the Teknisk section */
+function extractTekniskSources(
+  tekniskeData: TekniskeData | null,
+): TekniskSources {
+  const tilhengerkopling = safe(() => tekniskeData?.tilhengerkopling);
+  const { dekkForan, dekkBak } = extractDekkData(tekniskeData);
+  const { akslinger, akselForan, akselBak } = extractAkselData(tekniskeData);
+  return { akslinger, dekkForan, dekkBak, akselForan, akselBak, tilhengerkopling };
+}
+
+/** Extract every source bundle a builder needs from a single vehicle record */
+export function extractSources(kjoretoy: KjoretoydataListe): AllSources {
+  const { tekniskGodkjenning, tekniskeData } = extractTekniskeData(kjoretoy);
 
   return {
-    oversikt: { kjoretoy, generelt, karosseri, tekniskGodkjenning },
-    motorOgYtelse: { motor, motorOgDrivverk, miljodata, miljoGruppe, forbruk },
-    malOgVekt: { dimensjoner, vekter, persontall, karosseri },
-    teknisk: {
-      akslinger,
-      dekkForan,
-      dekkBak,
-      akselForan,
-      akselBak,
-      tilhengerkopling,
-    },
+    oversikt: extractOversiktSources(kjoretoy, tekniskeData, tekniskGodkjenning),
+    motorOgYtelse: extractMotorOgYtelseSources(tekniskeData),
+    malOgVekt: extractMalOgVektSources(tekniskeData),
+    teknisk: extractTekniskSources(tekniskeData),
   };
 }
