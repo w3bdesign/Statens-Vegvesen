@@ -27,7 +27,7 @@
     "@vercel/node": "^5.7.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.8",
-    "axios": "1.14.0",
+    "axios": "1.15.0",
     "node-forge": "1.4.0",
     "prettier": "3.8.1",
     "sass": "^1.99.0",
