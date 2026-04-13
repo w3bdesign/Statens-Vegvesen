@@ -29,7 +29,7 @@
     "bootstrap": "^5.3.8",
     "axios": "1.15.0",
     "node-forge": "1.4.0",
-    "prettier": "3.8.1",
+    "prettier": "3.8.2",
     "sass": "^1.99.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.8"
