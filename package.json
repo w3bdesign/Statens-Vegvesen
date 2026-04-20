@@ -31,7 +31,7 @@
     "node-forge": "1.4.0",
     "prettier": "3.8.3",
     "sass": "^1.99.0",
-    "typescript": "^6.0.2",
+    "typescript": "^6.0.3",
     "vite": "^8.0.8"
   },  
   "browserslist": "> 0.5%, last 3 versions, not dead",
