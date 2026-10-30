@@ -28,7 +28,7 @@
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.8",
     "axios": "1.21.0",
-    "node-forge": "1.4.0",
+    "node-forge": "1.4.2",
     "prettier": "3.9.10",
     "sass": "^1.106.1",
     "typescript": "^7.0.2",
@@ -36,7 +36,7 @@
   },  
   "browserslist": "> 0.5%, last 3 versions, not dead",
   "resolutions": {
-    "node-forge": "1.4.0"
+    "node-forge": "1.4.2"
   },
   "dependencies": {}
 }
